@@ -15,11 +15,11 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF1A2332),
       appBar: AppBar(
-        title: const Text(
+        title:  Text(
           '个人资料',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 18,
+            fontSize: 18.sp,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -59,9 +59,9 @@ class ProfilePage extends StatelessWidget {
             children: [
               Text(
                 '头像',
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -95,9 +95,9 @@ class ProfilePage extends StatelessWidget {
               children: [
                 Text(
                   '用户昵称',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -108,9 +108,9 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       Text(
                         state.nickname.value,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -128,9 +128,9 @@ class ProfilePage extends StatelessWidget {
               children: [
                 Text(
                   '用户名ID',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -141,9 +141,9 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       Text(
                         state.userId.value,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -176,9 +176,9 @@ class ProfilePage extends StatelessWidget {
               children: [
                 Text(
                   '生日',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -189,9 +189,9 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       Text(
                         state.birthday.value,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Color(0xFFB3BEC1),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -208,9 +208,9 @@ class ProfilePage extends StatelessWidget {
             children: [
               Text(
                 '性别',
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -278,7 +278,7 @@ class ProfilePage extends StatelessWidget {
             title,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 14,
+              fontSize: 14.sp,
               fontWeight: FontWeight.bold,
             ),
           ),

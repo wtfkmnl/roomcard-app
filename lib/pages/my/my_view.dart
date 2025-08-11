@@ -157,7 +157,11 @@ class MyPage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: logic.onProfileTap,
-                child: Image.asset(R.assetsIconArrowNext, width: 28.w, height: 28.h),
+                child: Image.asset(
+                  R.assetsIconArrowNext,
+                  width: 28.w,
+                  height: 28.h,
+                ),
               ),
               // 操作按钮
               14.verticalSpace,

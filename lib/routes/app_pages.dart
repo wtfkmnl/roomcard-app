@@ -1,5 +1,6 @@
 import 'package:roomcard/pages/main/main_binding.dart';
 import 'package:roomcard/pages/main/main_view.dart';
+import 'package:roomcard/pages/my/about/about_view.dart';
 import 'package:roomcard/pages/my/business/business_view.dart';
 import 'package:roomcard/pages/my/profile/profile_binding.dart';
 import 'package:roomcard/pages/my/profile/profile_view.dart';
@@ -39,6 +40,10 @@ class AppPages {
       name: AppRouter.mineProfile.path,
       page: () => const ProfilePage(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: AppRouter.mineAbout.path,
+      page: () => const AboutPage(),
     ),
   ];
 

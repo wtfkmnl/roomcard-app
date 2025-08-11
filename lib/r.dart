@@ -22,4 +22,6 @@ class R {
   static const String assetsIconSettingMenuLanguage = 'assets/images/iconSettingMenuLanguage.png';
   static const String assetsIconSettingMenuAccount = 'assets/images/iconSettingMenuAccount.png';
   static const String assetsIconTextCopy = 'assets/images/iconTextCopy.png';
+  static const String assetsIconAboutUsLogo = 'assets/images/iconAboutUsLogo.png';
+  static const String assetsIconGreenSelect = 'assets/images/iconGreenSelect.png';
 }

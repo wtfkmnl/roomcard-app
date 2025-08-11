@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:roomcard/base/base_controller.dart';
+import '../../../routes/app_router.dart';
 import 'setting_state.dart';
 
 class SettingLogic extends BaseController<SettingState> {
@@ -44,6 +46,7 @@ class SettingLogic extends BaseController<SettingState> {
   /// 关于我们点击
   void onAboutUsTap() {
     print('关于我们');
+    Get.toNamed(AppRouter.mineAbout.path);
   }
 
   /// 版本号点击

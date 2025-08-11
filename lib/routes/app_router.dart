@@ -13,7 +13,9 @@ enum AppRouter<T> {
   ///设置
   mineSetting('/mine_setting'),
   ///个人资料
-  mineProfile('/mine_profile');
+  mineProfile('/mine_profile'),
+  ///关于我们
+  mineAbout('/mine_about');
  ///路由路劲
   final String path;
 
