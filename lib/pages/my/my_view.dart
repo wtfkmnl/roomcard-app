@@ -32,7 +32,7 @@ class MyPage extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(bottom: 20.h), // 添加底部内边距
+        padding: EdgeInsets.only(bottom: 100.h),
         child: Column(
           children: [
             // 用户信息卡片
