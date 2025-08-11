@@ -43,6 +43,7 @@ class MyLogic extends BaseController<MyState> {
   /// 设置点击
   void onSettingsTap() {
     print('设置');
+    Get.toNamed(AppRouter.mineSetting.path);
   }
 
   /// 提现点击

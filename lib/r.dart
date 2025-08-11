@@ -13,4 +13,12 @@ class R {
   static const String assetsIconMineMenuBusiness = 'assets/images/iconMineMenuBusiness.png';
   static const String assetsIconMineMenuSetting = 'assets/images/iconMineMenuSetting.png';
   static const String assetsIconMineTopBg = 'assets/images/iconMineTopBg.png';
+  static const String assetsIconSettingMenuVersion = 'assets/images/iconSettingMenuVersion.png';
+  static const String assetsIconSettingMenuAbout = 'assets/images/iconSettingMenuAbout.png';
+  static const String assetsIconSettingMenuVibrate = 'assets/images/iconSettingMenuVibrate.png';
+  static const String assetsIconSettingMenuMessageVoice = 'assets/images/iconSettingMenuMessageVoice.png';
+  static const String assetsIconSettingMenuGameVoice = 'assets/images/iconSettingMenuGameVoice.png';
+  static const String assetsIconSettingMenuSafe = 'assets/images/iconSettingMenuSafe.png';
+  static const String assetsIconSettingMenuLanguage = 'assets/images/iconSettingMenuLanguage.png';
+  static const String assetsIconSettingMenuAccount = 'assets/images/iconSettingMenuAccount.png';
 }

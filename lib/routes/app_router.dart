@@ -11,7 +11,9 @@ enum AppRouter<T> {
   ///欢迎页面
   welcome('/welcome'),
   ///商务合作
-  mineBusiness('/mine_business');
+  mineBusiness('/mine_business'),
+  ///设置
+  mineSetting('/mine_setting');
  ///路由路劲
   final String path;
 
