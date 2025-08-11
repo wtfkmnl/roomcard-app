@@ -9,7 +9,9 @@ enum AppRouter<T> {
   main<void>('/main'),
 
   ///欢迎页面
-  welcome('/welcome');
+  welcome('/welcome'),
+  ///商务合作
+  mineBusiness('/mine_business');
  ///路由路劲
   final String path;
 

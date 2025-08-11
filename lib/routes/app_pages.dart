@@ -1,5 +1,6 @@
 import 'package:roomcard/pages/main/main_binding.dart';
 import 'package:roomcard/pages/main/main_view.dart';
+import 'package:roomcard/pages/my/business/business_view.dart';
 import 'package:roomcard/pages/unknown/unknown_binding.dart';
 import 'package:roomcard/pages/unknown/unknown_view.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ import 'package:roomcard/routes/app_router.dart';
 class AppPages {
   ///所有页面
   static List<GetPage> pages = [
-      GetPage(
+    GetPage(
       name: AppRouter.welcome.path,
       page: () => const WelcomePage(),
       bindings: [WelcomeBinding()],
@@ -20,6 +21,10 @@ class AppPages {
       name: '/main',
       page: () => const MainPage(),
       binding: MainBinding(),
+    ),
+    GetPage(
+      name: AppRouter.mineBusiness.path,
+      page: () => const BusinessPage(),
     ),
   ];
 

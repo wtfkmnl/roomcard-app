@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:roomcard/base/base_controller.dart';
+import '../../routes/app_router.dart';
 import 'my_state.dart';
 
 class MyLogic extends BaseController<MyState> {
@@ -35,6 +37,7 @@ class MyLogic extends BaseController<MyState> {
   /// 商务合作点击
   void onBusinessTap() {
     print('商务合作');
+    Get.toNamed(AppRouter.mineBusiness.path);
   }
 
   /// 设置点击
