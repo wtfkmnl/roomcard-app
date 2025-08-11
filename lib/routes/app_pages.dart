@@ -4,6 +4,8 @@ import 'package:roomcard/pages/my/about/about_view.dart';
 import 'package:roomcard/pages/my/business/business_view.dart';
 import 'package:roomcard/pages/my/profile/profile_binding.dart';
 import 'package:roomcard/pages/my/profile/profile_view.dart';
+import 'package:roomcard/pages/my/safe_manager/safe_manager_binding.dart';
+import 'package:roomcard/pages/my/safe_manager/safe_manager_view.dart';
 import 'package:roomcard/pages/my/setting/setting_binding.dart';
 import 'package:roomcard/pages/my/setting/setting_view.dart';
 import 'package:roomcard/pages/unknown/unknown_binding.dart';
@@ -41,9 +43,11 @@ class AppPages {
       page: () => const ProfilePage(),
       binding: ProfileBinding(),
     ),
+    GetPage(name: AppRouter.mineAbout.path, page: () => const AboutPage()),
     GetPage(
-      name: AppRouter.mineAbout.path,
-      page: () => const AboutPage(),
+      name: AppRouter.mineSafeManager.path,
+      page: () => SafeManagerPage(),
+      binding: SafeManagerBinding(),
     ),
   ];
 

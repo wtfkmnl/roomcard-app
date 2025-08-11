@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../r.dart';
+import '../../../widgets/custom_switch.dart';
 import 'setting_logic.dart';
 
 class SettingPage extends StatelessWidget {
@@ -229,12 +230,9 @@ class SettingPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        trailing: Switch(
+        trailing: CustomSwitch(
           value: value,
           onChanged: onChanged,
-          activeColor: const Color(0xFF4CAF50),
-          inactiveThumbColor: Colors.white54,
-          inactiveTrackColor: Colors.white24,
         ),
       ),
     );

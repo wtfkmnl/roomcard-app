@@ -23,6 +23,7 @@ class SettingLogic extends BaseController<SettingState> {
   /// 安全管理点击
   void onSecurityTap() {
     print('安全管理');
+    AppRouter.mineSafeManager.toPage();
   }
 
   /// 游戏音效开关切换
