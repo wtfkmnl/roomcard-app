@@ -9,6 +9,12 @@ class MyLogic extends BaseController<MyState> {
     return MyState();
   }
 
+  /// 个人资料点击
+  void onProfileTap() {
+    print('个人资料');
+    Get.toNamed(AppRouter.mineProfile.path);
+  }
+
   /// 好友转账点击
   void onFriendTransferTap() {
     print('好友转账');

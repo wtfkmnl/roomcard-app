@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:roomcard/manager/app_manager.dart';
 
 enum AppRouter<T> {
-
-
   ///主页
   main<void>('/main'),
 
@@ -13,7 +11,9 @@ enum AppRouter<T> {
   ///商务合作
   mineBusiness('/mine_business'),
   ///设置
-  mineSetting('/mine_setting');
+  mineSetting('/mine_setting'),
+  ///个人资料
+  mineProfile('/mine_profile');
  ///路由路劲
   final String path;
 

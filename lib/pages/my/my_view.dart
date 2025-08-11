@@ -155,7 +155,10 @@ class MyPage extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Image.asset(R.assetsIconArrowNext, width: 28.w, height: 28.h),
+              GestureDetector(
+                onTap: logic.onProfileTap,
+                child: Image.asset(R.assetsIconArrowNext, width: 28.w, height: 28.h),
+              ),
               // 操作按钮
               14.verticalSpace,
               Row(
