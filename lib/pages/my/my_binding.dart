@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
+import 'my_logic.dart';
 
 class MyBinding extends Bindings {
   @override
   void dependencies() {
-    ///main 管理
-    // Get.lazyPut(() => MyLogic());
+    /// 注册MyLogic控制器
+    Get.lazyPut(() => MyLogic());
   }
 }
