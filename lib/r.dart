@@ -12,4 +12,5 @@ class R {
   static const String assetsIconMineMenuNews = 'assets/images/iconMineMenuNews.png';
   static const String assetsIconMineMenuBusiness = 'assets/images/iconMineMenuBusiness.png';
   static const String assetsIconMineMenuSetting = 'assets/images/iconMineMenuSetting.png';
+  static const String assetsIconMineTopBg = 'assets/images/iconMineTopBg.png';
 }

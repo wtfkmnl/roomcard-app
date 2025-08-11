@@ -13,7 +13,7 @@ class MyPage extends StatelessWidget {
     final state = logic.state;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF1A2332),
+      backgroundColor: const Color(0xFF1C2C36),
       appBar: AppBar(
         title: const Text(
           '我的',
@@ -23,7 +23,7 @@ class MyPage extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        backgroundColor: const Color(0xFF1A2332),
+        backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
@@ -31,17 +31,40 @@ class MyPage extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(bottom: 100.h),
-        child: Column(
-          children: [
-            // 用户信息卡片
-            _buildUserInfoCard(logic, state),
-            const SizedBox(height: 20),
-            // 功能菜单列表
-            _buildMenuList(logic),
-          ],
-        ),
+      extendBodyBehindAppBar: true,
+      body: Stack(
+        children: [
+          // 背景图层
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 450.h,
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(R.assetsIconMineTopBg),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            padding: EdgeInsets.only(
+              top: kToolbarHeight + MediaQuery.of(context).padding.top + 20.h,
+              bottom: 100.h,
+            ),
+            child: Column(
+              children: [
+                // 用户信息卡片
+                _buildUserInfoCard(logic, state),
+                const SizedBox(height: 20),
+                // 功能菜单列表
+                _buildMenuList(logic),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
