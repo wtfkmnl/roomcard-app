@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSON to Dart Model</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/dart.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #cceeff, #e6f7ff);
+      color: #003366;
+    }
+    header {
+      background-color: #3399ff;
+      padding: 15px;
+      color: white;
+      text-align: center;
+      font-size: 26px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .top-controls {
+      padding: 10px 20px;
+      background-color: #e6f7ff;
+    }
+    .container {
+      display: flex;
+      height: calc(100vh - 130px);
+    }
+    .panel {
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    #jsonInput {
+      width: 100%;
+      height: calc(100% - 60px);
+      box-sizing: border-box;
+      padding: 12px;
+      font-family: 'Courier New', monospace;
+      border: 1px solid #99ccff;
+      border-radius: 8px;
+      resize: none;
+      background-color: #ffffff;
+      color: #003366;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .code-output {
+      width: 100%;
+      height: calc(100% - 60px);
+      overflow: auto;
+      background-color: #f4faff;
+      border: 1px solid #99ccff;
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+    pre code {
+      display: block;
+      white-space: pre;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .left {
+      width: 50%;
+      border-right: 2px solid #cce0ff;
+    }
+    .right {
+      width: 50%;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #66b3ff;
+      border-radius: 6px;
+      outline: none;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    input[type="text"]:focus {
+      border-color: #3399ff;
+    }
+    .buttons {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #3399ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover {
+      background-color: #267acc;
+    }
+  </style>
+</head>
+<body>
+  <header>JSON to Dart Model Generator</header>
+  <div class="top-controls">
+    <input type="text" id="className" value="RootModel" placeholder="Enter Dart class name">
+  </div>
+  <div class="container">
+    <div class="panel left">
+      <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+    </div>
+    <div class="panel right">
+      <div class="code-output">
+        <pre><code id="dartOutput" class="language-dart"></code></pre>
+      </div>
+      <div class="buttons">
+        <button onclick="copyToClipboard()">Copy</button>
+        <button onclick="downloadDartFile()">Download</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const jsonInput = document.getElementById('jsonInput');
+    const dartOutput = document.getElementById('dartOutput');
+    const classNameInput = document.getElementById('className');
+
+    jsonInput.addEventListener('input', updateDartModel);
+    classNameInput.addEventListener('input', updateDartModel);
+
+    function updateDartModel() {
+      try {
+        const json = JSON.parse(jsonInput.value);
+        const className = classNameInput.value || 'RootModel';
+        const dartCode = generateDartModel(json, className);
+        dartOutput.textContent = dartCode;
+        hljs.highlightElement(dartOutput);
+      } catch (e) {
+        dartOutput.textContent = '// Invalid JSON';
+        hljs.highlightElement(dartOutput);
+      }
+    }
+
+    function generateDartModel(obj, className, indent = '  ') {
+      let classes = [];
+
+      function formatValue(value, key) {
+        if (typeof value === 'number') {
+          if (Number.isInteger(value)) {
+            return `int.tryParse(json['${key}']?.toString() ?? '')`;
+          } else {
+            return `double.tryParse(json['${key}']?.toString() ?? '')`;
+          }
+        } else if (typeof value === 'boolean') {
+          return `bool.tryParse(json['${key}']?.toString() ?? '')`;
+        } else if (typeof value === 'string') {
+          return `json['${key}']?.toString()`;
+        } else {
+          return `json['${key}']`;
+        }
+      }
+
+      function buildClass(obj, className) {
+        let fields = '';
+        let constructor = '';
+        let fromJson = '';
+        let toJson = '';
+
+        for (const key in obj) {
+          const value = obj[key];
+          let type = 'String';
+          let parse = formatValue(value, key);
+
+          if (Array.isArray(value)) {
+            if (value.length > 0 && typeof value[0] === 'object') {
+              const childClassName = capitalize(key);
+              type = `List<${childClassName}>`;
+              parse = `(json['${key}'] as List?)?.map((e) => ${childClassName}.fromJson(e)).toList()`;
+              classes.push(buildClass(value[0], childClassName));
+            } else {
+              type = 'List<String>';
+              parse = `(json['${key}'] as List?)?.map((e) => e.toString()).toList()`;
+            }
+          } else if (typeof value === 'object' && value !== null) {
+            const childClassName = capitalize(key);
+            type = childClassName;
+            parse = `json['${key}'] != null ? ${childClassName}.fromJson(json['${key}']) : null`;
+            classes.push(buildClass(value, childClassName));
+          } else if (typeof value === 'number') {
+            type = Number.isInteger(value) ? 'int' : 'double';
+          } else if (typeof value === 'boolean') {
+            type = 'bool';
+          }
+
+          fields += `${indent}final ${type}? ${key};\n`;
+          constructor += `${indent}this.${key},\n`;
+          fromJson += `${indent}${key}: ${parse},\n`;
+          toJson += `${indent}'${key}': ${key},\n`;
+        }
+
+        return `class ${className} {\n${fields}\n${indent}${className}({\n${constructor}${indent}});\n\n${indent}factory ${className}.fromJson(Map<String, dynamic> json) => ${className}(\n${fromJson}${indent});\n\n${indent}Map<String, dynamic> toJson() => {\n${toJson}${indent}};\n}\n`;
+      }
+
+      function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
+
+      const mainClass = buildClass(obj, className);
+      return [mainClass, ...classes].join('\n');
+    }
+
+    function copyToClipboard() {
+      navigator.clipboard.writeText(dartOutput.textContent).then(() => {
+        alert('Copied to clipboard!');
+      });
+    }
+
+    function toSnakeCase(str) {
+      return str.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
+    }
+
+    function downloadDartFile() {
+      const filename = toSnakeCase(classNameInput.value || 'RootModel') + '.dart';
+      const blob = new Blob([dartOutput.textContent], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = URL.createObjectURL(blob);
+      link.click();
+    }
+
+    hljs.highlightAll();
+  </script>
+</body>
+</html>
