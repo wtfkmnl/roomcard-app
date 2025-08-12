@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'main_logic.dart';
 import 'widgets/custom_bottom_nav_bar.dart';
+import 'widgets/app_drawer.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -18,6 +19,10 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+      drawerScrimColor: Colors.transparent,
+      drawer: AppDrawer(
+        onSelectTab: logic.onTapBottom,
+      ),
       body: Column(
         children: [
           Expanded(

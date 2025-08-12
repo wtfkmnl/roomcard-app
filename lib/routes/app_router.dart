@@ -9,7 +9,16 @@ enum AppRouter<T> {
   main<void>('/main'),
 
   ///欢迎页面
-  welcome('/welcome');
+  welcome('/welcome'),
+
+  ///创建牌局页面
+  createRoom('/create-room'),
+  
+  ///创建俱乐部页面
+  createClub('/create-club'),
+  
+  ///加入俱乐部页面
+  joinClub('/join-club');
  ///路由路劲
   final String path;
 

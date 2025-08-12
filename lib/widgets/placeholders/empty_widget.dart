@@ -14,10 +14,10 @@ class EmptyWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        SvgUtil.asset(
-          'assets/images/public/暂无数据.svg',
-          width: 300.pxw,
-          height: 300.pxh,
+        Image.asset(
+          'assets/images/home/club_main_not_icon.png',
+          width: 360.pxw,
+          height: 348.pxh,
         ),
         Gap(30.pxh),
         Text(
