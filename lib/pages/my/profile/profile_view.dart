@@ -35,7 +35,7 @@ class ProfilePage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: [
           // 头像、用户昵称、用户名ID
-          _buildUserInfoGroup(logic, state),
+          _buildUserInfoGroup(context, logic, state),
           16.verticalSpace,
           // 生日、性别
           _buildPersonalInfoGroup(logic, state),
@@ -45,7 +45,7 @@ class ProfilePage extends StatelessWidget {
   }
 
   /// 头像、昵称、用户ID
-  Widget _buildUserInfoGroup(ProfileLogic logic, state) {
+  Widget _buildUserInfoGroup(BuildContext context, ProfileLogic logic, state) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -55,20 +55,21 @@ class ProfilePage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Row(
-            children: [
-              Text(
-                '头像',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
+          GestureDetector(
+            onTap: () => logic.onAvatarTap(context),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    '头像',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
-              Spacer(),
-              GestureDetector(
-                onTap: logic.onAvatarTap,
-                child: Row(
+                Row(
                   children: [
                     Container(
                       width: 34.w,
@@ -86,8 +87,8 @@ class ProfilePage extends StatelessWidget {
                     Image.asset(R.assetsIconArrowNext, width: 20.w),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           24.verticalSpace,
           Obx(

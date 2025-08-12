@@ -16,6 +16,13 @@ extension StringExtension on String {
     return hexColor;
   }
 
+  ///md5
+  String md5Value() {
+    var bytes = utf8.encode(this); // 将输入字符串转换为字节数组
+    var digest = md5.convert(bytes); // 计算 MD5 哈希值
+    return digest.toString(); // 返回十六进制表示的哈希值
+  }
+
   double toDouble() => double.parse(this);
 
   ///拆分字符(只保留数字)
@@ -34,9 +41,4 @@ extension StringExtension on String {
       return this;
     }
   }
-
-
-
-
-
 }
