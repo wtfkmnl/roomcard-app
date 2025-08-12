@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:roomcard/base/base_controller.dart';
+import '../../../routes/app_router.dart';
 import 'profile_state.dart';
 
 class ProfileLogic extends BaseController<ProfileState> {
@@ -31,6 +32,7 @@ class ProfileLogic extends BaseController<ProfileState> {
   /// 点击昵称
   void onNicknameTap() {
     print('点击昵称');
+    AppRouter.mineNameEdit.toPage();
   }
 
   /// 点击用户ID

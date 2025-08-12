@@ -26,7 +26,9 @@ enum AppRouter<T> {
   ///关于我们
   mineAbout('/mine_about'),
   ///安全管理
-  mineSafeManager('/mine_safe_manager');
+  mineSafeManager('/mine_safe_manager'),
+  ///昵称编辑
+  mineNameEdit('/mine_name_edit');
  ///路由路劲
   final String path;
 

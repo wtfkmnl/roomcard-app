@@ -15,7 +15,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF1A2332),
       appBar: AppBar(
-        title:  Text(
+        title: Text(
           '个人资料',
           style: TextStyle(
             color: Colors.white,
@@ -91,20 +91,21 @@ class ProfilePage extends StatelessWidget {
           ),
           24.verticalSpace,
           Obx(
-            () => Row(
-              children: [
-                Text(
-                  '用户昵称',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
+            () => GestureDetector(
+              onTap: logic.onNicknameTap,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      '用户昵称',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
-                Spacer(),
-                GestureDetector(
-                  onTap: logic.onNicknameTap,
-                  child: Row(
+                  Row(
                     children: [
                       Text(
                         state.nickname.value,
@@ -118,8 +119,8 @@ class ProfilePage extends StatelessWidget {
                       Image.asset(R.assetsIconArrowNext, width: 20.w),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           24.verticalSpace,

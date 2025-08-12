@@ -2,6 +2,8 @@ import 'package:roomcard/pages/main/main_binding.dart';
 import 'package:roomcard/pages/main/main_view.dart';
 import 'package:roomcard/pages/my/about/about_view.dart';
 import 'package:roomcard/pages/my/business/business_view.dart';
+import 'package:roomcard/pages/my/name_edit/name_edit_binding.dart';
+import 'package:roomcard/pages/my/name_edit/name_edit_view.dart';
 import 'package:roomcard/pages/my/profile/profile_binding.dart';
 import 'package:roomcard/pages/my/profile/profile_view.dart';
 import 'package:roomcard/pages/my/safe_manager/safe_manager_binding.dart';
@@ -73,6 +75,11 @@ class AppPages {
       name: AppRouter.mineSafeManager.path,
       page: () => SafeManagerPage(),
       binding: SafeManagerBinding(),
+    ),
+    GetPage(
+      name: AppRouter.mineNameEdit.path,
+      page: () => const NameEditPage(),
+      binding: NameEditBinding(),
     ),
   ];
 
