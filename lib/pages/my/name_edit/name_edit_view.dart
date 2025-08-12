@@ -57,8 +57,8 @@ class NameEditPage extends StatelessWidget {
                           color: state.canSave.value
                               ? const Color(0xFF703E00)
                               : const Color(0xFFB3BEC1),
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -93,15 +93,15 @@ class NameEditPage extends StatelessWidget {
                       focusNode: state.nicknameFocusNode,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
                       ),
                       decoration: InputDecoration(
                         hintText: '请输入昵称',
                         hintStyle: TextStyle(
                           color: const Color(0xFF57646D),
                           fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.bold,
                         ),
                         border: InputBorder.none,
                       ),
