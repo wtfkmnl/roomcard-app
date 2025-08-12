@@ -50,4 +50,5 @@ class R {
   static const String assetsIconApokerLoginOpenEyes =
       'assets/images/apoker_login_open_eyes';
   static const String assetsIconNameEdit = 'assets/images/iconNameEdit.png';
+  static const String assetsIconAddAccount = 'assets/images/iconAddAccount.png';
 }

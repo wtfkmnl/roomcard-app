@@ -12,6 +12,7 @@ class SettingLogic extends BaseController<SettingState> {
   /// 切换账号点击
   void onSwitchAccountTap() {
     print('切换账号');
+    AppRouter.mineChangeAccount.toPage();
   }
 
   /// 多语言点击

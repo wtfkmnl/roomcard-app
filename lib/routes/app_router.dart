@@ -30,7 +30,9 @@ enum AppRouter<T> {
   ///昵称编辑
   mineNameEdit('/mine_name_edit'),
   ///多语言设置
-  mineLanguage('/mine_language');
+  mineLanguage('/mine_language'),
+  ///切换账号
+  mineChangeAccount('/mine_change_account');
  ///路由路劲
   final String path;
 
