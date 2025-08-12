@@ -16,7 +16,7 @@ enum AppRouter<T> {
   createClub('/create-club'),
   
   ///加入俱乐部页面
-  joinClub('/join-club');
+  joinClub('/join-club'),
   ///商务合作
   mineBusiness('/mine_business'),
   ///设置

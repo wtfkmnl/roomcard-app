@@ -53,6 +53,8 @@ class AppPages {
       binding: BindingsBuilder(() {
         Get.lazyPut<JoinClubLogic>(() => JoinClubLogic());
       }),
+    ),
+    GetPage(
       name: AppRouter.mineBusiness.path,
       page: () => const BusinessPage(),
     ),
