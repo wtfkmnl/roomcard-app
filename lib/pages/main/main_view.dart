@@ -22,6 +22,7 @@ class _MainPageState extends State<MainPage> {
       drawerScrimColor: Colors.transparent,
       drawer: AppDrawer(
         onSelectTab: logic.onTapBottom,
+        currentIndex: state.navIndex.value,
       ),
       body: Column(
         children: [

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:roomcard/utils/num_px.dart';
 import 'package:roomcard/theme/app_theme.dart';
 import 'empty_state_widget.dart';
@@ -17,19 +19,7 @@ class GameCardData {
   final int currentPlayers;
   final int maxPlayers;
 
-  GameCardData({
-    required this.title,
-    required this.subtitle,
-    required this.gameType,
-    required this.prizeMoney,
-    required this.entryFee,
-    required this.participants,
-    required this.gameMode,
-    required this.timeInfo,
-    required this.status,
-    required this.currentPlayers,
-    required this.maxPlayers,
-  });
+  GameCardData({required this.title, required this.subtitle, required this.gameType, required this.prizeMoney, required this.entryFee, required this.participants, required this.gameMode, required this.timeInfo, required this.status, required this.currentPlayers, required this.maxPlayers});
 }
 
 /// 游戏卡片列表组件
@@ -79,10 +69,7 @@ class GameCardListWidget extends StatelessWidget {
   Widget _buildNormalContent(GameCardData game) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/home/Home_content_list_bg.png'),
-          fit: BoxFit.contain,
-        ),
+        image: DecorationImage(image: AssetImage('assets/images/home/Home_content_list_bg.png'), fit: BoxFit.contain),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,38 +82,23 @@ class GameCardListWidget extends StatelessWidget {
               SizedBox(width: 10.pxw),
               Text(
                 game.gameType,
-                style: TextStyle(
-                  color: AppTheme().current.textColor4,
-                  fontSize: 14.pxSp,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextStyle(color: AppTheme().current.textColor4, fontSize: 14.pxSp, fontWeight: FontWeight.w500),
               ),
               const Spacer(),
               // 主标题
               Text(
                 game.title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.pxSp,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: TextStyle(color: Colors.white, fontSize: 16.pxSp, fontWeight: FontWeight.w600),
               ),
               const Spacer(),
               Container(
                 width: 50.pxw,
                 height: 16.pxh,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Color(0xFFDFA75B),
-                  borderRadius: BorderRadius.all(Radius.circular(20.pxh))
-                ),
+                decoration: BoxDecoration(color: Color(0xFFDFA75B), borderRadius: BorderRadius.all(Radius.circular(20.pxh))),
                 child: Text(
                   '实物赛',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10.pxSp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyle(color: Colors.white, fontSize: 10.pxSp, fontWeight: FontWeight.w600),
                 ),
               ),
               SizedBox(width: 10.pxw),
@@ -135,226 +107,179 @@ class GameCardListWidget extends StatelessWidget {
 
           SizedBox(height: 8.pxh),
 
-Container(
-  width: 335.pxw,
-  height: 130.pxh,
-  decoration: BoxDecoration(
-    image: DecorationImage(
-      image: AssetImage('assets/images/home/Home_content_list_bg1.png'),
-      fit: BoxFit.cover,
-    ),
-  ),
-  child: Column(
-
-
-    children: [
-      // 游戏信息行
-      Row(
-        children: [
-          // 左侧游戏图标
           Container(
-            width: 48.pxw,
-            height: 48.pxh,
+            padding: EdgeInsets.only(top: 20.pxh, left: 11.pxw,right: 11.pxw ),
+            width: 335.pxw,
+            height: 130.pxh,
             decoration: BoxDecoration(
-              color: const Color(0xFF2A3A4A),
-              borderRadius: BorderRadius.circular(8.pxw),
+              image: DecorationImage(image: AssetImage('assets/images/home/Home_content_list_bg1.png'), fit: BoxFit.cover),
             ),
-            child: Icon(
-              Icons.casino,
-              color: Colors.white,
-              size: 24.pxw,
-            ),
-          ),
-
-          SizedBox(width: 12.pxw),
-
-          // 中间游戏信息
-          Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildInfoRow('奖金', '${game.prizeMoney.toStringAsFixed(2)}'),
-                SizedBox(height: 4.pxh),
-                _buildInfoRow('报名费', '${game.entryFee.toStringAsFixed(1)}'),
-                SizedBox(height: 4.pxh),
-                _buildInfoRow('报名人数', '${game.participants}'),
+                // 游戏信息行
+                Row(
+                  children: [
+                    // 左侧游戏图标
+                    Container(width: 74.pxw, height: 56.pxh, child: Image.asset('assets/images/game/game1.png')),
+
+                    SizedBox(width: 12.pxw),
+
+                    // 中间游戏信息
+                    Expanded(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildInfoRow('奖金', '${game.prizeMoney}'),
+                          SizedBox(width: 20.pxh),
+                          _buildInfoRow('报名费', '${game.entryFee}'),
+                          SizedBox(width: 20.pxh),
+                          _buildInfoRow('报名人数', '${game.participants}'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+Gap(2.pxh),
+                // 底部信息行
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset('assets/images/game/money_icon.png',width: 14.pxw,height:14.pxh),
+                        SizedBox(width: 4.pxw),
+                        Text(
+                          game.gameMode,
+                          style: TextStyle(color: AppTheme().current.textColor4, fontSize: 12.pxSp, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          '即将开赛',
+                          style: TextStyle(color: AppTheme().current.textColor4, fontSize: 12.pxSp, fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(height: 2.pxh),
+                        Text(
+                          '48分钟',
+                          style: TextStyle(color: Color(0xFFF9C678), fontSize: 12.pxSp, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ).paddingOnly(top: 18.pxh),
+                  ],
+                ),
               ],
             ),
           ),
         ],
       ),
-
-
-      // 底部信息行
-      Row(
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.grass,
-                color: const Color(0xFF4CAF50),
-                size: 16.pxw,
-              ),
-              SizedBox(width: 4.pxw),
-              Text(
-                game.gameMode,
-                style: TextStyle(
-                  color: AppTheme().current.textColor4,
-                  fontSize: 12.pxSp,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-          const Spacer(),
-          Text(
-            game.timeInfo,
-            style: TextStyle(
-              color: AppTheme().current.textColor4,
-              fontSize: 12.pxSp,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
-      ),
-    ],
-  ),
-)
-
-
-        ],
-      ),
-    )
-    ;
+    );
   }
 
   /// 构建状态2内容
   Widget _buildStatus2Content(GameCardData game) {
-    return Row(
-      children: [
-        // 左侧游戏图标
-        Container(
-          width: 48.pxw,
-          height: 48.pxh,
-          decoration: BoxDecoration(
-            color: const Color(0xFF2A3A4A),
-            borderRadius: BorderRadius.circular(8.pxw),
-          ),
-          child: Icon(
-            Icons.casino,
-            color: Colors.white,
-            size: 24.pxw,
-          ),
-        ),
-        
-        SizedBox(width: 12.pxw),
-        
-        // 中间游戏信息
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage('assets/images/home/Frame 2120044999.png'), fit: BoxFit.contain),
+      ),
+      child: Column(
+        children: [
+         Container(
+           alignment: Alignment.center,
+           height: 77.pxh,
+           child:  Row(
+             children: [
+               SizedBox(width: 10.pxw),
+               // 左侧游戏图标
+               Container(width: 74.pxw, height: 56.pxh, child: Image.asset('assets/images/game/game1.png')),
+
+               SizedBox(width: 12.pxw),
+
+               // 中间游戏信息
+               Expanded(
+                 child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                     Text(
+                       game.subtitle,
+                       style: TextStyle(color: Colors.white, fontSize: 14.pxSp, fontWeight: FontWeight.w600),
+                     ),
+                     SizedBox(height: 4.pxh),
+                     Text(
+                       '15min/30min',
+                       style: TextStyle(color: AppTheme().current.textColor4, fontSize: 12.pxSp, fontWeight: FontWeight.w500),
+                     ),
+                   ],
+                 ),
+               ),
+
+               // 右侧玩家信息
+               Container(
+                 width: 75.pxh,
+                 height: 35.pxw,
+                 alignment: Alignment.center,
+                 padding: EdgeInsets.only(left: 30.pxw),
+                 decoration: BoxDecoration(
+                   image: DecorationImage(image: AssetImage("assets/images/home/room_number.png"))
+                 ),
+                 child: Text(
+                   '${game.currentPlayers}/${game.maxPlayers}',
+                   style: TextStyle(color: AppTheme().current.textColor1, fontSize: 14.pxSp, fontWeight: FontWeight.w600),
+                 ),
+               ),
+
+
+               SizedBox(width: 10.pxw),
+             ],
+           ),
+         ) ,// 底部信息
+          Expanded(child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(width: 10.pxw),
+              Container(width: 14.pxw, height: 14.pxh, child: Image.asset('assets/images/home/icon_card_logo.png')),
+              SizedBox(width: 4.pxw),
               Text(
-                game.subtitle,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14.pxSp,
-                  fontWeight: FontWeight.w600,
-                ),
+                game.gameMode,
+                style: TextStyle(color: AppTheme().current.textColor4, fontSize: 12.pxSp, fontWeight: FontWeight.w500),
               ),
-              SizedBox(height: 4.pxh),
+             Spacer(),
               Text(
-                '15min/30min',
-                style: TextStyle(
-                  color: AppTheme().current.textColor4,
-                  fontSize: 12.pxSp,
-                  fontWeight: FontWeight.w500,
-                ),
+                game.timeInfo,
+                style: TextStyle(color: AppTheme().current.textColor4, fontSize: 12.pxSp, fontWeight: FontWeight.w500),
               ),
+              SizedBox(width: 10.pxw),
+
             ],
-          ),
-        ),
-        
-        // 右侧玩家信息
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.casino,
-              color: Colors.white,
-              size: 24.pxw,
-            ),
-            SizedBox(height: 4.pxh),
-            Text(
-              '${game.currentPlayers}/${game.maxPlayers}',
-              style: TextStyle(
-                color: AppTheme().current.textColor4,
-                fontSize: 12.pxSp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
-        
-        const Spacer(),
-        
-        // 底部信息
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.grass,
-                  color: const Color(0xFF4CAF50),
-                  size: 16.pxw,
-                ),
-                SizedBox(width: 4.pxw),
-                Text(
-                  game.gameMode,
-                  style: TextStyle(
-                    color: AppTheme().current.textColor4,
-                    fontSize: 12.pxSp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 4.pxh),
-            Text(
-              game.timeInfo,
-              style: TextStyle(
-                color: AppTheme().current.textColor4,
-                fontSize: 12.pxSp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
-      ],
+          )),
+        ],
+      ),
     );
   }
 
   /// 构建信息行
   Widget _buildInfoRow(String label, String value) {
-    return Row(
+    return Column(
       children: [
-        Icon(
-          Icons.attach_money,
-          color: const Color(0xFF4CAF50),
-          size: 16.pxw,
-        ),
-        SizedBox(width: 4.pxw),
         Text(
-          '$label: $value',
-          style: TextStyle(
-            color: AppTheme().current.textColor4,
-            fontSize: 12.pxSp,
-            fontWeight: FontWeight.w500,
-          ),
+          '$label',
+          style: TextStyle(color: AppTheme().current.textColor4, fontSize: 10.pxSp, fontWeight: FontWeight.w400),
         ),
+       Row(
+         children: [
+           Image.asset('assets/images/game/money_icon.png',width: 15.pxw,height:13.pxh),
+          Gap(4.pxh),
+           Text(
+             '$value',
+             style: TextStyle(color: AppTheme().current.textColor1, fontSize: 14.pxSp, fontWeight: FontWeight.w700),
+           ),
+         ],
+       )
+
+
       ],
     );
   }
-} 
+}

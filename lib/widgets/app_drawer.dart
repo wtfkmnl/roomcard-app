@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roomcard/utils/num_px.dart';
 import 'package:roomcard/theme/app_theme.dart';
+import 'dart:ui'; // Added for ImageFilter
 
 /// 游戏类型枚举
 enum GameType {
@@ -44,15 +45,14 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+        backgroundColor:Color(0xE3081B25),
       child: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF1E2A3A),
-        ),
-        child: Column(
+
+        child:Column(
           children: [
             // 顶部标题
             _buildHeader(),
-            
+
             // 菜单项列表
             Expanded(
               child: _buildMenuList(),
@@ -68,9 +68,6 @@ class AppDrawer extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 24.pxw, vertical: 32.pxh),
-      decoration: const BoxDecoration(
-        color: Color(0xFF1E2A3A),
-      ),
       child: Text(
         '菜单',
         style: TextStyle(
@@ -147,43 +144,50 @@ class AppDrawer extends StatelessWidget {
   /// 构建菜单项
   Widget _buildMenuItem(GameTypeItem item) {
     return Container(
+      width: 233.pxw,
+      height: 52.pxh,
       margin: EdgeInsets.only(bottom: 8.pxh),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(14.pxw),
+        gradient: item.isSelected
+            ? const LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Color(0x4AF9C678), // rgba(249, 198, 120, 0.29)
+                  Color(0x00112A37), // rgba(17, 42, 55, 0)
+                ],
+                stops: [0.0, 0.8455],
+              )
+            : null,
+        color: item.isSelected ? null : const Color(0x700B1C26), // #0B1C2670
+      ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: () => onGameTypeSelected(item.type),
-          borderRadius: BorderRadius.circular(12.pxw),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.pxw, vertical: 16.pxh),
-            decoration: BoxDecoration(
-              color: item.isSelected 
-                ? const Color(0xFFFF6B35) 
-                : Colors.transparent,
-              borderRadius: BorderRadius.circular(12.pxw),
-            ),
+          borderRadius: BorderRadius.circular(8.pxw),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.pxw),
             child: Row(
               children: [
                 // 图标
-                Container(
-                  width: 24.pxw,
-                  height: 24.pxh,
-                  child: Icon(
-                    item.icon,
-                    color: Colors.white,
-                    size: 20.pxw,
-                  ),
+                Icon(
+                  item.icon,
+                  color: item.isSelected ? const Color(0xFFF9C678) : Colors.white70,
+                  size: 20.pxw,
                 ),
                 
-                SizedBox(width: 16.pxw),
+                SizedBox(width: 12.pxw),
                 
                 // 菜单名称
                 Expanded(
                   child: Text(
                     item.name,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: item.isSelected ? const Color(0xFFF9C678) : Colors.white,
                       fontSize: 16.pxSp,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: item.isSelected ? FontWeight.w600 : FontWeight.w500,
                     ),
                   ),
                 ),
@@ -191,7 +195,7 @@ class AppDrawer extends StatelessWidget {
                 // 右箭头
                 Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.grey[400],
+                  color: item.isSelected ? const Color(0xFFF9C678) : Colors.grey[400],
                   size: 16.pxw,
                 ),
               ],
