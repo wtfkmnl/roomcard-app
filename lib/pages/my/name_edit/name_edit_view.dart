@@ -76,50 +76,52 @@ class NameEditPage extends StatelessWidget {
           children: [
             // 输入框容器
             Container(
+              height: 48.h,
               decoration: BoxDecoration(
                 color: const Color(0XFF0F212E),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: const Color(0xFF37505E), width: 1),
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 4,
-                ),
-                child: TextField(
-                  controller: state.nicknameController,
-                  focusNode: state.nicknameFocusNode,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: '请输入昵称',
-                    hintStyle: TextStyle(
-                      color: const Color(0xFFB3BEC1),
-                      fontSize: 16.sp,
+              child: Row(
+                children: [
+                  14.horizontalSpace,
+                  Image.asset(R.assetsIconNameEdit),
+                  4.horizontalSpace,
+                  Expanded(
+                    child: TextField(
+                      controller: state.nicknameController,
+                      focusNode: state.nicknameFocusNode,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: '请输入昵称',
+                        hintStyle: TextStyle(
+                          color: const Color(0xFF57646D),
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                      maxLength: 15,
+                      buildCounter:
+                          (
+                            context, {
+                            required currentLength,
+                            required isFocused,
+                            maxLength,
+                          }) {
+                            return null; // 隐藏默认计数器
+                          },
                     ),
-                    border: InputBorder.none,
-                    suffixIcon: Obx(
-                      () => state.inputNickname.value.isNotEmpty
-                          ? IconButton(
-                              icon: Icon(
-                                Icons.clear,
-                                color: const Color(0xFFB3BEC1),
-                                size: 20.w,
-                              ),
-                              onPressed: logic.clearInput,
-                            )
-                          : const SizedBox.shrink(),
-                    ),
                   ),
-                  maxLength: 15,
-                ),
+                ],
               ),
             ),
 
-            16.verticalSpace,
+            6.verticalSpace,
 
             Text(
               '玩家昵称修改后，15日内不能重复修改',

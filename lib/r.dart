@@ -25,4 +25,5 @@ class R {
   static const String assetsIconAboutUsLogo = 'assets/images/iconAboutUsLogo.png';
   static const String assetsIconGreenSelect = 'assets/images/iconGreenSelect.png';
   static const String assetsIconSafeValidate = 'assets/images/iconSafeValidate.png';
+  static const String assetsIconNameEdit = 'assets/images/iconNameEdit.png';
 }
