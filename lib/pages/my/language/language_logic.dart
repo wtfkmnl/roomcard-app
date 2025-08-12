@@ -49,17 +49,6 @@ class LanguageLogic extends BaseController<LanguageState> {
     // 应用语言设置
     _applyLanguageSetting(selectedItem);
 
-    // 显示成功提示
-    Get.snackbar(
-      '提示',
-      '语言设置已更新为${selectedItem.name}',
-      snackPosition: SnackPosition.TOP,
-    );
-
-    // 延迟返回上一页
-    Future.delayed(const Duration(milliseconds: 1500), () {
-      Get.back();
-    });
   }
 
   /// 保存语言设置到本地
