@@ -1,136 +1,158 @@
 import 'dart:convert';
-import 'dart:io';
+import 'dart:typed_data';
 
-import 'text_utils.dart';
-import 'package:crypto/crypto.dart';
-import 'package:convert/convert.dart';
-import 'package:logger/logger.dart';
+import 'package:encrypt/encrypt.dart';
+import 'package:flutter/services.dart';
+import 'package:pointycastle/asymmetric/api.dart';
+import 'package:roomcard/utils/commonUtils.dart';
 
-/// 加密和解密工具类
+/// 加密工具类
 class EncryptUtils {
-  /// md5 加密字符串
-  static String encodeMd5(String data) {
-    var content = const Utf8Encoder().convert(data);
-    var digest = md5.convert(content);
-    return hex.encode(digest.bytes);
-  }
+  ///aes
+  // static late Key _keyAes;
+  // static late Encrypter _encryptAes;
+  // static final IV _ivAes = IV.fromLength(16);
 
-  static String toMd5(String input) {
-    var bytes = utf8.encode(input);
-    var md5Result = md5.convert(bytes);
-    return md5Result.toString();
-  }
+  ///rsa
+  static late RSAPublicKey _publicKey;
+  static late RSAPrivateKey _privateKey;
+  static late Encrypter _encryptRsa;
+  static late Signer _signer;
 
-  /// md5 加密file
-  static String encodeMd5File(File file) {
-    var readAsStringSync = file.readAsStringSync();
-    var content = const Utf8Encoder().convert(readAsStringSync);
-    var digest = md5.convert(content);
-    return hex.encode(digest.bytes);
-  }
+  /// Rsa加密最大长度
+  static const int MAX_ENCRYPT_BLOCK = 117;
 
-  // /// 异或对称加密
-  // static String xorCode(String res, String key) {
-  //   List<String> keyList = key.split(',');
-  //   List<int> codeUnits = res.codeUnits;
-  //   List<int> codes = [];
-  //   for (int i = 0, length = codeUnits.length; i < length; i++) {
-  //     int code = codeUnits[i] ^ int.parse(keyList[i % keyList.length]);
-  //     codes.add(code);
+  /// Rsa解密最大长度
+  static const int MAX_DECRYPT_BLOCK = 128;
+
+  ///初始化AES加密启动时调用
+  // static Future<void> initAes(
+  //   String key, {
+  //   mode = AESMode.ecb,
+  //   padding = 'PKCS7',
+  // }) async {
+  //   if (key.length == 16 || key.length == 24 || key.length == 32) {
+  //     _keyAes = Key.fromUtf8(key);
+  //     _encryptAes = Encrypter(AES(_keyAes, mode: mode, padding: padding));
+  //     return;
   //   }
-  //   return String.fromCharCodes(codes);
-  // }
-  //
-  // /// 异或对称 Base64 加密
-  // static String xorBase64Encode(String res, String key) {
-  //   String encode = xorCode(res, key);
-  //   encode = encodeBase64(encode);
-  //   return encode;
-  // }
-  //
-  // /// 异或对称 Base64 解密
-  // static String xorBase64Decode(String res, String key) {
-  //   String encode = decodeBase64(res);
-  //   encode = xorCode(encode, key);
-  //   return encode;
+  //   printSome("密钥长度为16/24/32位");
   // }
 
-  /// Base64加密字符串
-  static String encodeBase64(String data) {
-    var content = utf8.encode(data);
-    var digest = base64Encode(content);
-    return digest;
+  ///初始化RAS加密启动时调用
+  static Future<void> initRsa(String publicPath, String privatePath) async {
+    String publicKeyString = await rootBundle.loadString(publicPath);
+    String privateKeyString = await rootBundle.loadString(privatePath);
+    _publicKey = RSAKeyParser().parse(publicKeyString) as RSAPublicKey;
+    _privateKey = RSAKeyParser().parse(privateKeyString) as RSAPrivateKey;
+
+    _encryptRsa = Encrypter(
+      RSA(publicKey: _publicKey, privateKey: _privateKey),
+    );
+    _signer = Signer(
+      RSASigner(
+        RSASignDigest.SHA256,
+        publicKey: _publicKey,
+        privateKey: _privateKey,
+      ),
+    );
   }
 
-  /// Base64解密字符串
-  static String decodeBase64(String data) {
-    List<int> bytes = base64Decode(data);
-    String result = utf8.decode(bytes);
-    return result;
-  }
-
-  //账户名加密 1 md5两次 2 前半段倒序+后半段倒序 3 取当前的前2-8位位检验位 4 md5
-  static String appEncrypt(String value) {
-    if (Platform.isIOS) {
-      return encryptionToken(value, 6);
+  ///Aes加密
+  static String encryptAes({
+    required String context,
+    required String key,
+    AESMode mode = AESMode.ecb,
+    String? padding = "PKCS7",
+    IV? iv,
+  }) {
+    if (key.length == 16 || key.length == 24 || key.length == 32) {
+      var k = Key.fromUtf8(key);
+      var encrypter = Encrypter(AES(k, mode: mode, padding: padding));
+      return encrypter.encrypt(context, iv: null).base64;
+      // return encrypter.encrypt(context, iv: iv ?? IV.fromLength(16)).base64;
     }
-    String first = encodeMd5(value.toLowerCase());
-    first = encodeMd5(first);
-    String rev0 = TextUtils.reverse(first.substring(0, (first.length ~/ 2)));
-    String rev1 =
-        TextUtils.reverse(first.substring((first.length ~/ 2)));
-    first = rev0 + rev1;
-    String valueCheck = "";
-    valueCheck = first.substring(2, 8);
-    first=first+valueCheck;
-    first=encodeMd5(first);
-    return first;
+    printSome("密钥长度为16/24/32位");
+    return "";
   }
 
-  static String encryptionToken(String input, int count) {
-    String lowerAccount = input.toLowerCase();
-    String tempStr1 = toMd5(lowerAccount);
-    String tempStr2 = toMd5(tempStr1);
-
-    String two = tempStr2.substring(0, tempStr2.length ~/ 2);
-    String one = tempStr2.substring(tempStr2.length ~/ 2);
-
-    String total = '${reversed(two)}${reversed(one)}';
-    String fanal = total.substring(0, count);
-
-    return toMd5('$total$fanal');
+  ///Aes解密
+  static String decryptAes({
+    required String context,
+    required String key,
+    AESMode mode = AESMode.ecb,
+    String? padding = "PKCS7",
+    IV? iv,
+  }) {
+    if (key.length == 16 || key.length == 24 || key.length == 32) {
+      var k = Key.fromUtf8(key);
+      var encrypter = Encrypter(AES(k, mode: mode, padding: padding));
+      var result = encrypter.decrypt(Encrypted.fromBase64(context), iv: null);
+      // var result =  encrypter.decrypt(Encrypted.fromBase64(context), iv: iv ?? IV.fromLength(16));
+      return result;
+    }
+    return "";
   }
 
-  static String reversed(String input) {
-    List<String> characters = input.split('');
-    List<String> reversedCharacters = characters.reversed.toList();
-    return reversedCharacters.join();
+  ///公钥Rsa加密
+  static String encryptRsa(String context) {
+    // 原始字符串转成字节数组
+    List<int> sourceBytes = utf8.encode(context);
+    // 数据长度
+    int inputLen = sourceBytes.length;
+    // 缓存数组
+    List<int> cache = [];
+    // 分段加密 步长为MAX_ENCRYPT_BLOCK
+    for (var i = 0; i < inputLen; i += MAX_ENCRYPT_BLOCK) {
+      // 剩余长度
+      int endLen = inputLen - i;
+      List<int> item;
+      if (endLen > MAX_ENCRYPT_BLOCK) {
+        item = sourceBytes.sublist(i, i + MAX_ENCRYPT_BLOCK);
+      } else {
+        item = sourceBytes.sublist(i, i + endLen);
+      }
+      // 加密后对象转换成数组存放到缓存
+      cache.addAll(_encryptRsa.encryptBytes(item).bytes);
+    }
+    // 加密后数组转换成base64编码并返回
+    String en = base64.encode(cache);
+    return en;
   }
 
-  //密码加密
-  static String pwdEncrypt(String value) {
-    // if (Platform.isIOS) {
-    //   return encryptionToken(value, 3);
-    // }
-    String first = encodeMd5(value);
-    first = encodeMd5(first);
-    String rev0 = TextUtils.reverse(first.substring(0, (first.length ~/ 2)));
-    String rev1 =
-    TextUtils.reverse(first.substring((first.length ~/ 2), first.length));
-    first = rev0 + rev1;
-    String valueCheck = first.substring(0, 3);
-    first=first+valueCheck;
-    first=encodeMd5(first);
-    return first;
+  ///私钥Rsa解密
+  static String decryptRsa(String data) {
+    // 原始字符串转成字节数组
+    Uint8List sourceBytes = base64.decode(data);
+    // 数据长度
+    int inputLen = sourceBytes.length;
+    // 缓存数组
+    List<int> cache = [];
+    // 分段解密 步长为MAX_DECRYPT_BLOCK
+    for (var i = 0; i < inputLen; i += MAX_DECRYPT_BLOCK) {
+      // 剩余长度
+      int endLen = inputLen - i;
+      Uint8List item;
+      if (endLen > MAX_DECRYPT_BLOCK) {
+        item = sourceBytes.sublist(i, i + MAX_DECRYPT_BLOCK);
+      } else {
+        item = sourceBytes.sublist(i, i + endLen);
+      }
+      // 解密后存放到缓存
+      cache.addAll(_encryptRsa.decryptBytes(Encrypted(item)));
+    }
+    // 解密后数组解码并返回
+    String decode = utf8.decode(cache);
+    return decode;
   }
 
-  // private static final char[] sHexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+  ///用私钥对信息生成数字签名
+  static String sign(String data) {
+    return _signer.sign(data).base64;
+  }
 
-   static String withrawPwdEnrugt(String source) {
-     var bytes = utf8.encode(source); // 将输入字符串编码为UTF-8字节
-     var md5Result = md5.convert(bytes); // 获取MD5 hash值
-     // 将MD5 hash值转换为16进制字符串，然后取其中的前32位
-     return md5Result.toString().substring(0, 32);
-
+  ///校验数字签名
+  static bool verify(String data, String sign) {
+    return _signer.verify64(data, sign);
   }
 }

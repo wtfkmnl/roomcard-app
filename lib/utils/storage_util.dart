@@ -1,12 +1,15 @@
+import 'dart:convert';
+
+import 'package:roomcard/utils/values/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// 存储key
-class StorageKey{
+class StorageKey {
   ///用户id
-  static const String userId="userId";
-  ///弹框公告数据list
-  static const String popGameNotice="popGameNotice";
+  static const String userId = "userId";
 
+  ///弹框公告数据list
+  static const String popGameNotice = "popGameNotice";
 }
 
 ///存储相关
@@ -44,7 +47,29 @@ class StorageUtil {
   // 删除prefs
   static Future<bool> clear() => _prefs.clear();
 
+  Future<List> getMemberAccountPsd() async {
+    List<String>? jsonDicts = _prefs.getStringList(
+      Constants.storageMemberAccountPsw,
+    );
+    if (jsonDicts != null) {
+      var list =
+          jsonDicts.map((json) => jsonDecode(json)).toList().reversed.toList();
 
+      List<Map<String, dynamic>> uniqueList = [];
+      Set<String> seen = Set<String>();
 
+      for (var map in list) {
+        // 将字典转换为字符串
+        String jsonString = map.toString();
 
+        // 如果这个字符串没有出现过，那么就添加到结果中
+        if (!seen.contains(jsonString)) {
+          seen.add(jsonString);
+          uniqueList.add(map);
+        }
+      }
+      return uniqueList;
+    }
+    return [];
+  }
 }
