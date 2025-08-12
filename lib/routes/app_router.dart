@@ -8,6 +8,15 @@ enum AppRouter<T> {
 
   ///欢迎页面
   welcome('/welcome'),
+
+  ///创建牌局页面
+  createRoom('/create-room'),
+  
+  ///创建俱乐部页面
+  createClub('/create-club'),
+  
+  ///加入俱乐部页面
+  joinClub('/join-club'),
   ///商务合作
   mineBusiness('/mine_business'),
   ///设置
@@ -17,7 +26,9 @@ enum AppRouter<T> {
   ///关于我们
   mineAbout('/mine_about'),
   ///安全管理
-  mineSafeManager('/mine_safe_manager');
+  mineSafeManager('/mine_safe_manager'),
+  ///昵称编辑
+  mineNameEdit('/mine_name_edit');
  ///路由路劲
   final String path;
 

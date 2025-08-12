@@ -163,6 +163,7 @@ flutter:
     - assets/images/launch/
     - assets/images/bottom_nav/
     - assets/images/public/
+    - assets/images/home/
     - lib/r.dart
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -176,6 +177,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: PingFangSC
+      fonts:
+        - asset: assets/fonts/PingFangSC-Regular.ttf
     - family: regular
       fonts:
         - asset: assets/fonts/regular.ttf

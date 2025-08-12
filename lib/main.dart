@@ -13,6 +13,7 @@ import 'package:roomcard/utils/storage_util.dart';
 import 'observer/getx_router_observer.dart';
 import 'observer/keyboard_observer.dart';
 import 'theme/app_theme.dart';
+import 'theme/font_theme_extension.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,42 +59,48 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'roomCard',
           theme: ThemeData(
-            extensions: [AppTheme().current],
-            fontFamily: AppFontStyle.regular,
-            scaffoldBackgroundColor: const Color(0xFF1C2C36), // 设置APP主题背景色为 #1C2C36
-            textTheme: const TextTheme(
-              bodyLarge: TextStyle(fontWeight: FontWeight.w400, height: 1.36),
-              bodyMedium: TextStyle(fontWeight: FontWeight.w400, height: 1.36),
-              bodySmall: TextStyle(fontWeight: FontWeight.w400, height: 1.36),
-              titleLarge: TextStyle(fontWeight: FontWeight.w400, height: 1.36),
-              titleMedium: TextStyle(fontWeight: FontWeight.w400, height: 1.36),
-              titleSmall: TextStyle(fontWeight: FontWeight.w400, height: 1.36),
-              labelLarge: TextStyle(fontWeight: FontWeight.w400, height: 1.36),
-              labelMedium: TextStyle(fontWeight: FontWeight.w400, height: 1.36),
-              labelSmall: TextStyle(fontWeight: FontWeight.w400, height: 1.36),
+            extensions: [AppTheme().current, FontThemeExtension.defaultTheme()],
+            fontFamily: AppFontStyle.defaultFont,
+            scaffoldBackgroundColor: const Color(0xFF0A1C26), // 设置APP主题背景色为 #1C2C36
+            textTheme: TextTheme(
+              bodyLarge: TextStyle(fontWeight: FontWeight.w400, height: 1.36, fontFamily: AppFontStyle.defaultFont),
+              bodyMedium: TextStyle(fontWeight: FontWeight.w400, height: 1.36, fontFamily: AppFontStyle.defaultFont),
+              bodySmall: TextStyle(fontWeight: FontWeight.w400, height: 1.36, fontFamily: AppFontStyle.defaultFont),
+              titleLarge: TextStyle(fontWeight: FontWeight.w400, height: 1.36, fontFamily: AppFontStyle.defaultFont),
+              titleMedium: TextStyle(fontWeight: FontWeight.w400, height: 1.36, fontFamily: AppFontStyle.defaultFont),
+              titleSmall: TextStyle(fontWeight: FontWeight.w400, height: 1.36, fontFamily: AppFontStyle.defaultFont),
+              labelLarge: TextStyle(fontWeight: FontWeight.w400, height: 1.36, fontFamily: AppFontStyle.defaultFont),
+              labelMedium: TextStyle(fontWeight: FontWeight.w400, height: 1.36, fontFamily: AppFontStyle.defaultFont),
+              labelSmall: TextStyle(fontWeight: FontWeight.w400, height: 1.36, fontFamily: AppFontStyle.defaultFont),
               displayLarge: TextStyle(
                 fontWeight: FontWeight.w400,
                 height: 1.36,
+                fontFamily: AppFontStyle.defaultFont,
               ),
               displayMedium: TextStyle(
                 fontWeight: FontWeight.w400,
                 height: 1.36,
+                fontFamily: AppFontStyle.defaultFont,
               ),
               displaySmall: TextStyle(
                 fontWeight: FontWeight.w400,
                 height: 1.36,
+                fontFamily: AppFontStyle.defaultFont,
               ),
               headlineLarge: TextStyle(
                 fontWeight: FontWeight.w400,
                 height: 1.36,
+                fontFamily: AppFontStyle.defaultFont,
               ),
               headlineMedium: TextStyle(
                 fontWeight: FontWeight.w400,
                 height: 1.36,
+                fontFamily: AppFontStyle.defaultFont,
               ),
               headlineSmall: TextStyle(
                 fontWeight: FontWeight.w400,
                 height: 1.36,
+                fontFamily: AppFontStyle.defaultFont,
               ),
             ),
             textSelectionTheme: TextSelectionThemeData(

@@ -2,6 +2,8 @@ import 'package:roomcard/pages/main/main_binding.dart';
 import 'package:roomcard/pages/main/main_view.dart';
 import 'package:roomcard/pages/my/about/about_view.dart';
 import 'package:roomcard/pages/my/business/business_view.dart';
+import 'package:roomcard/pages/my/name_edit/name_edit_binding.dart';
+import 'package:roomcard/pages/my/name_edit/name_edit_view.dart';
 import 'package:roomcard/pages/my/profile/profile_binding.dart';
 import 'package:roomcard/pages/my/profile/profile_view.dart';
 import 'package:roomcard/pages/my/safe_manager/safe_manager_binding.dart';
@@ -13,6 +15,12 @@ import 'package:roomcard/pages/unknown/unknown_view.dart';
 import 'package:get/get.dart';
 import 'package:roomcard/pages/welcome/welcome_binding.dart';
 import 'package:roomcard/pages/welcome/welcome_view.dart';
+import 'package:roomcard/pages/create_room/create_room_binding.dart';
+import 'package:roomcard/pages/create_room/create_room_view.dart';
+import 'package:roomcard/pages/club/create_club_logic.dart';
+import 'package:roomcard/pages/club/create_club_view.dart';
+import 'package:roomcard/pages/club/join_club_logic.dart';
+import 'package:roomcard/pages/club/join_club_view.dart';
 import 'package:roomcard/routes/app_router.dart';
 
 /// # 页面注册表，绑定页面与 binding
@@ -28,6 +36,25 @@ class AppPages {
       name: '/main',
       page: () => const MainPage(),
       binding: MainBinding(),
+    ),
+    GetPage(
+      name: AppRouter.createRoom.path,
+      page: () => const CreateRoomPage(),
+      binding: CreateRoomBinding(),
+    ),
+    GetPage(
+      name: AppRouter.createClub.path,
+      page: () => const CreateClubPage(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<CreateClubLogic>(() => CreateClubLogic());
+      }),
+    ),
+    GetPage(
+      name: AppRouter.joinClub.path,
+      page: () => const JoinClubPage(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<JoinClubLogic>(() => JoinClubLogic());
+      }),
     ),
     GetPage(
       name: AppRouter.mineBusiness.path,
@@ -48,6 +75,11 @@ class AppPages {
       name: AppRouter.mineSafeManager.path,
       page: () => SafeManagerPage(),
       binding: SafeManagerBinding(),
+    ),
+    GetPage(
+      name: AppRouter.mineNameEdit.path,
+      page: () => const NameEditPage(),
+      binding: NameEditBinding(),
     ),
   ];
 

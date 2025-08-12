@@ -8,19 +8,19 @@ import 'base_theme.dart';
 
 class BlackTheme extends BaseTheme<BlackTheme> with ThemeDefaultLogic {
   @override
-  Color get textColor1 => '#FFFFFF'.hexToColor; // 主要文字颜色 - 白色
+  Color get textColor1 => '#FFFFFF'.hexToColor.withValues(alpha: 1.0); // 不透明
 
   @override
-  Color get textColor2 => '#FFFFFF'.hexToColor; // 次要文字颜色 - 白色
+  Color get textColor2 => '#FFFFFF'.hexToColor.withValues(alpha: 0.8); // 80% 不透明
 
   @override
-  Color get textColor3 => '#FFFFFF'.hexToColor; // 三级文字颜色 - 白色
+  Color get textColor3 => '#FFFFFF'.hexToColor.withValues(alpha: 0.6); // 60% 不透明
 
   @override
-  Color get textColor4 => '#FFFFFF'.hexToColor; // 四级文字颜色 - 白色
+  Color get textColor4 => '#FFFFFF'.hexToColor.withValues(alpha: 0.4); // 40% 不透明
 
   @override
-  Color get textColor5 => '#FFFFFF'.hexToColor; // 五级文字颜色 - 白色
+  Color get textColor5 => '#FFFFFF'.hexToColor.withValues(alpha: 0.2); // 20% 不透明
 
   @override
   Color get textColorInButton => '#151515'.hexToColor;
@@ -65,7 +65,7 @@ class BlackTheme extends BaseTheme<BlackTheme> with ThemeDefaultLogic {
   Color get backgroundColor1 => '#151515'.hexToColor;
 
   @override
-  Color get backgroundColor2 => '#1F1F1F'.hexToColor;
+  Color get backgroundColor2 => '#1E3541'.hexToColor;
 
   @override
   Color get backgroundColorCard => '#151515'.hexToColor.withValues(alpha: 0.6);
