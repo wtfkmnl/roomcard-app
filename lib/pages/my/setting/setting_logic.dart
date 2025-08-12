@@ -17,7 +17,7 @@ class SettingLogic extends BaseController<SettingState> {
   /// 多语言点击
   void onLanguageTap() {
     print('多语言设置');
-    _showLanguageDialog();
+    AppRouter.mineLanguage.toPage();
   }
 
   /// 安全管理点击
@@ -53,9 +53,5 @@ class SettingLogic extends BaseController<SettingState> {
   /// 版本号点击
   void onVersionTap() {
     print('版本号: ${state.version.value}');
-  }
-
-  /// 显示多语言选择对话框
-  void _showLanguageDialog() {
   }
 }
