@@ -46,7 +46,10 @@ enum AppRouter<T> {
   loginRegist('/login_regist'),
 
   ///绑定手机
-  mineBindPhone('/mine_bind_phone');
+  mineBindPhone('/mine_bind_phone'),
+
+  ///绑定邮箱
+  mineBindEmail('/mine_bind_email');
 
   ///路由路径
   final String path;

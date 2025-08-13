@@ -142,8 +142,7 @@ class BindPhoneLogic extends BaseController<BindPhoneState> {
         actions: [
           TextButton(
             onPressed: () {
-              Get.back(); // 关闭对话框
-              Get.back(); // 返回上一页
+              Get.back();
             },
             child: const Text('确定', style: TextStyle(color: Color(0xFFF9C678))),
           ),

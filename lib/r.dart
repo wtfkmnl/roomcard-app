@@ -289,5 +289,9 @@ class R {
   /// Assets for assetsIconPhoneBindCode
   /// assets/images/icon_phone_bind_code.png
   static const String assetsIconPhoneBindCode = "assets/images/icon_phone_bind_code.png";
+
+  /// Assets for assetsIconPhoneBindEmail
+  /// assets/images/icon_phone_bind_email.png
+  static const String assetsIconPhoneBindEmail = "assets/images/icon_phone_bind_email.png";
 }
 

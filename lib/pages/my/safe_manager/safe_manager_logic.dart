@@ -41,8 +41,7 @@ class SafeManagerLogic extends BaseController<SafeManagerState> {
   /// 绑定邮箱点击
   void onEmailBindingTap() {
     print('绑定邮箱');
-    // TODO: 实现邮箱绑定功能
-    _showEmailBindingDialog();
+    Get.toNamed(AppRouter.mineBindEmail.path);
   }
 
   /// 登录安全验证开关切换
@@ -67,12 +66,6 @@ class SafeManagerLogic extends BaseController<SafeManagerState> {
   /// 隐藏安全验证说明弹窗
   void hideSecurityTipDialog() {
     state.showSecurityTipDialog.value = false;
-  }
-
-  /// 显示邮箱绑定对话框
-  void _showEmailBindingDialog() {
-    // TODO: 实现邮箱绑定对话框
-    Get.snackbar('提示', '邮箱绑定功能开发中...');
   }
 
   /// 显示修改密码对话框

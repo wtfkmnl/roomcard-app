@@ -30,6 +30,9 @@ import 'package:roomcard/pages/club/join_club_logic.dart';
 import 'package:roomcard/pages/club/join_club_view.dart';
 import 'package:roomcard/routes/app_router.dart';
 
+import '../pages/my/bind_email/bind_email_binding.dart';
+import '../pages/my/bind_email/bind_email_view.dart';
+
 /// # 页面注册表，绑定页面与 binding
 class AppPages {
   ///所有页面
@@ -108,6 +111,11 @@ class AppPages {
       name: AppRouter.mineBindPhone.path,
       page: () => const BindPhonePage(),
       binding: BindPhoneBinding(),
+    ),
+    GetPage(
+      name: AppRouter.mineBindEmail.path,
+      page: () => const BindEmailPage(),
+      binding: BindEmailBinding(),
     ),
   ];
 
