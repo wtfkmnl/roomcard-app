@@ -128,7 +128,8 @@ flutter:
     - assets/images/bottom_nav/
     - assets/images/public/
     - assets/images/home/
-    # - lib/r.dart
+    - assets/images/game/
+    - lib/r.dart
 
   fonts:
     - family: PingFangSC

@@ -45,7 +45,7 @@ class ClubLogic extends BaseController<ClubState> {
         isCreator: true,
         isPublic: true,
         activeGames: 0,
-        avatarPath: 'assets/images/home/俱乐部.png',
+        avatarPath: 'assets/images/Frame 83.png',
       ),
     ];
   }

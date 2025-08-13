@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:roomcard/base/base_controller.dart';
 import '../../../routes/app_router.dart';
 import 'profile_state.dart';
@@ -112,16 +115,20 @@ class ProfileLogic extends BaseController<ProfileState> {
   /// 拍照
   void _takePhoto() {
     print('拍照');
-    // TODO: 实现拍照功能
-    // 可以使用 image_picker 插件
-    Get.snackbar('提示', '拍照功能开发中...');
+    _pickImage(ImageSource.camera);
   }
 
   /// 从相册选择
   void _pickFromGallery() {
     print('从相册选择');
-    // TODO: 实现从相册选择功能
-    // 可以使用 image_picker 插件
-    Get.snackbar('提示', '相册选择功能开发中...');
+    _pickImage(ImageSource.gallery);
+  }
+
+  Future<void> _pickImage(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? imageXFile = await picker.pickImage(source: source);
+    if (imageXFile == null) {
+      return;
+    }
   }
 }

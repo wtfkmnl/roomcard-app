@@ -17,7 +17,7 @@ class BlackTheme extends BaseTheme<BlackTheme> with ThemeDefaultLogic {
   Color get textColor3 => '#FFFFFF'.hexToColor.withValues(alpha: 0.6); // 60% 不透明
 
   @override
-  Color get textColor4 => '#FFFFFF'.hexToColor.withValues(alpha: 0.4); // 40% 不透明
+  Color get textColor4 => '#FFFFFF'.hexToColor.withValues(alpha: 0.32); // 40% 不透明
 
   @override
   Color get textColor5 => '#FFFFFF'.hexToColor.withValues(alpha: 0.2); // 20% 不透明

@@ -3,6 +3,10 @@ import 'package:roomcard/pages/main/main_binding.dart';
 import 'package:roomcard/pages/main/main_view.dart';
 import 'package:roomcard/pages/my/about/about_view.dart';
 import 'package:roomcard/pages/my/business/business_view.dart';
+import 'package:roomcard/pages/my/change_account/change_account_binding.dart';
+import 'package:roomcard/pages/my/change_account/change_account_view.dart';
+import 'package:roomcard/pages/my/language/language_binding.dart';
+import 'package:roomcard/pages/my/language/language_view.dart';
 import 'package:roomcard/pages/my/name_edit/name_edit_binding.dart';
 import 'package:roomcard/pages/my/name_edit/name_edit_view.dart';
 import 'package:roomcard/pages/my/profile/profile_binding.dart';
@@ -87,6 +91,16 @@ class AppPages {
       name: AppRouter.loginRegist.path,
       page: () => const LoginRigistViewPage(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: AppRouter.mineLanguage.path,
+      page: () => const LanguagePage(),
+      binding: LanguageBinding(),
+    ),
+    GetPage(
+      name: AppRouter.mineChangeAccount.path,
+      page: () => const ChangeAccountPage(),
+      binding: ChangeAccountBinding(),
     ),
   ];
 

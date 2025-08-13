@@ -4,7 +4,7 @@ extension PX on num {
 
   double get pxw => w;
 
-  double get pxh => h;
+  double get pxh => w;
 
   double get pxSp => sp;
 }
