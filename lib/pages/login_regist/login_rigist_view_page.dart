@@ -45,108 +45,182 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: DefaultTabController(
-        length: controller.loginTitle.length,
-        child: Builder(
-          builder: (ctx) {
-            List<Widget> list = [];
-            for (var el in controller.loginTitle) {
-              if (el.value == controller.loginTab.value) {
-                list.add(loginTabView());
-              }
-              if (el.value == controller.registerTab.value) {
-                list.add(registerTabView());
-              }
-              if (el.value == controller.clickRegisterTab.value) {
-                list.add(clickRegisterTabView());
-              }
-            }
-            final tabController = DefaultTabController.of(ctx);
-            tabController.index = widget.selectIndex ?? 0;
-            controller.switchUIType(controller.loginTitle[tabController.index]);
-            tabController.addListener(() {
-              if (!tabController.indexIsChanging) {
-                controller.switchUIType(
-                  controller.loginTitle[tabController.index],
-                );
-              }
-            });
-            return Column(
-              children: [
-                SizedBox(
-                  // color: Colors.red,
-                  height: 180.h,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: TabBar(
-                          onTap: (int index) async {},
-                          indicatorPadding: EdgeInsets.only(top: 20),
-                          dividerHeight: 0,
-                          // labelColor: ColorManager.getColor(
-                          //   name: ColorsType.C_000000,
-                          // ),
-                          // unselectedLabelColor: ColorManager.getColor(
-                          //   name: ColorsType.C_696D74,
-                          // ),
-                          tabAlignment: TabAlignment.start,
-                          labelPadding: EdgeInsets.only(
-                            left: 80.w,
-                            right: 20.w,
-                          ), // 去除标签内边距
-                          indicator: BoxDecoration(
-                            borderRadius: BorderRadius.circular(0),
-                            border: Border(
-                              bottom: BorderSide(
-                                // 关键 2：自定义底部线条
-                                // color: ColorManager.getColor(
-                                //   name: ColorsType.C_43BC9B,
-                                // ), // 线条颜色
-                                width: 7.h,
-                              ),
-                            ),
-                          ),
-                          labelStyle: TextStyle(
-                            fontSize: 51.sp,
-                            fontFamily: MyFontFamily.miSans,
-                            fontWeight: FontWeight.w600,
-                            // color: ColorManager.getColor(
-                            //   name: ColorsType.C_000000,
-                            // ),
-                          ),
-                          unselectedLabelStyle: TextStyle(
-                            fontSize: 51.sp,
-                            fontFamily: MyFontFamily.miSans,
-                            fontWeight: FontWeight.w500,
-                            // color: ColorManager.getColor(
-                            //   name: ColorsType.C_696D74,
-                            // ),
-                          ),
-                          indicatorSize: TabBarIndicatorSize.label,
-                          isScrollable: true,
-                          tabs:
-                              controller.loginTitle
-                                  .map((e) => _buildTabBarItem(e))
-                                  .toList(),
-                        ),
-                      ),
-                      // imageView(
-                      //   R.assetsImagesLoginOrRegisterClose,
-                      //   width: 90.w,
-                      // ).marginOnly(right: 40.w).onTap(() {
-                      //   Get.back();
-                      // }),
-                    ],
-                  ),
-                ),
-                Expanded(child: TabBarView(children: list)),
-              ],
-            );
-          },
+      body: GetBuilder(
+        init: controller,
+        builder: (context) {
+          return Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(R.assetsImagesLoginBg),
+                fit: BoxFit.fill,
+              ),
+            ),
+
+            child: Column(
+              children: [_topWdiget(), _tabWidget(), _subTabWidget()],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _topWdiget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        imageView(R.assetsImagesIconTitleBack, width: 28.w, height: 28.w),
+        imageView(R.assetsImagesLoginService, width: 24.w, height: 24.w),
+      ],
+    ).marginOnly(left: 16.w, right: 16.w, top: 54.h);
+  }
+
+  Widget _tabWidget() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Color(0xFF0F212E),
+        borderRadius: BorderRadius.all(Radius.circular(24.h)),
+      ),
+      width: 344.w,
+      height: 45.h,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:
+            controller.tabs.map((e) {
+              return _tabItem(e).onTap(() {
+                List<TabItem> tabs = controller.tabs;
+                for (var i = 0; i < tabs.length; i++) {
+                  tabs[i].isSelected = false;
+                  if (tabs[i].name == e.name) {
+                    tabs[i].isSelected = true;
+                  }
+                }
+                controller.tabs = tabs;
+                controller.update();
+              });
+            }).toList(),
+      ),
+    ).marginOnly(top: 160.h);
+  }
+
+  Widget _tabItem(TabItem tabItem) {
+    return Container(
+      width: 166.w,
+      height: 38.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(19.h)),
+        color: tabItem.isSelected! ? Color(0xFF283D49) : Colors.transparent,
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            imageView(
+              tabItem.images,
+              width: 16.w,
+              color: tabItem.isSelected! ? Colors.white : Color(0xFFB3BEC1),
+            ).marginOnly(right: 12.w),
+            Text(
+              tabItem.name ?? '',
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: tabItem.isSelected! ? Colors.white : Color(0xFFB3BEC1),
+              ),
+            ),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _subTabWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children:
+          controller.loginTitle.map((e) {
+            return _subTabItem(e).onTap(() {
+              List<LoginTabItem> tabs = controller.loginTitle;
+              for (var i = 0; i < tabs.length; i++) {
+                tabs[i].isSelected = false;
+                if (tabs[i].name == e.name) {
+                  tabs[i].isSelected = true;
+                }
+              }
+              controller.loginTitle = tabs;
+              controller.update();
+            });
+          }).toList(),
+    ).marginOnly(top: 34.h, left: 32.w, right: 32.w);
+  }
+
+  Widget _subTabItem(LoginTabItem tabItem) {
+    return Container(
+      width: 96.w,
+      child: Column(
+        children: [
+          Text(
+            tabItem.name ?? '',
+            style: TextStyle(
+              fontSize: 15.sp,
+              color: tabItem.isSelected! ? Colors.white : Color(0xFFB3BEC1),
+            ),
+          ),
+          SizedBox(height: 10.h),
+          tabItem.isSelected!
+              ? Container(width: 96.w, height: 2.h, color: Color(0xFFF9C678))
+              : SizedBox(height: 2.h),
+        ],
+      ),
+    );
+  }
+
+  Widget _accountTextView() {
+    return Column(
+      children: [
+        CusTomTextField(
+          keyboardType: TextInputType.emailAddress,
+          height: 48.h,
+          onChange: (val) {
+            controller.setSubmitState();
+          },
+          boardColor: Color(0xFFFC3C3C),
+          noboardColor: Color(0xFF2F4553),
+          allRadius: 6.w,
+          leftIcon: Row(
+            children: [
+              // imageView(
+              //   icon,
+              //   width: 48.w,
+              //   height: 48.w,
+              // ).paddingOnly(left: 40.w, right: 40.w),
+              // Visibility(
+              //     visible: title.isNotEmpty,
+              //     child: Text(title,
+              //         style: TextStyle(
+              //           fontSize: 45.sp,
+              //           color: ColorManager.getColor(name: ColorsType.C_2D2D2D),
+              //           fontFamily: MyFontFamily.miSans,
+              //           fontWeight: FontWeight.w600,
+              //         )).paddingRight(30.w)),
+              Container(
+                width: 2.w,
+                height: 60.w,
+                // color: ColorManager.getColor(name: ColorsType.C_D9D9D9),
+              ).marginOnly(right: 40.w),
+            ],
+          ),
+          controller: TextEditingController(),
+          placeholder: '',
+          usedInPassword: true,
+          hintTextColor: Color(0xFFB3B7BD),
+          textColor: Color(0xFF2D2D2D),
+          textFontSize: 45.sp,
+          hintTextFontSize: 36.sp,
+          fontFamily: MyFontFamily.miSans,
+          fontWeight: FontWeight.w600,
+          hintFontWeight: FontWeight.w500,
+        ),
+      ],
     );
   }
 
@@ -554,10 +628,10 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
     return Container(
       decoration: BoxDecoration(
         // color: ColorManager.getColor(name: ColorsType.C_FFFFFF),
-        borderRadius: BorderRadius.circular(30.w),
+        borderRadius: BorderRadius.circular(6.w),
       ),
       margin: EdgeInsets.only(top: 5.w, bottom: 5.w, left: 80.w, right: 80.w),
-      height: 145.h,
+      height: 48.h,
       child: CusTomTextField(
         keyboardType: TextInputType.emailAddress,
         height: 145.h,

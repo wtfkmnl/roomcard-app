@@ -13,6 +13,7 @@ import 'package:roomcard/api/app_config.dart';
 import 'package:roomcard/global.dart';
 import 'package:roomcard/models/login_regist/index.dart';
 import 'package:roomcard/models/member_info_model.dart';
+import 'package:roomcard/r.dart';
 import 'package:roomcard/utils/Tools.dart';
 import 'package:roomcard/utils/commonUtils.dart';
 import 'package:roomcard/utils/common_extension/common_extension.dart';
@@ -26,7 +27,15 @@ import 'package:roomcard/utils/values/enums.dart';
 class LoginTabItem {
   String? name;
   int? value;
-  LoginTabItem({this.name, this.value});
+  bool? isSelected;
+  LoginTabItem({this.name, this.value, this.isSelected = false});
+}
+
+class TabItem {
+  String? name;
+  String? images;
+  bool? isSelected;
+  TabItem({this.name, this.images, this.isSelected});
 }
 
 class LoginRigistController extends GetxController
@@ -58,7 +67,24 @@ class LoginRigistController extends GetxController
 
   final statusFilterOpen = false.obs;
 
-  List<LoginTabItem> loginTitle = [];
+  List<LoginTabItem> loginTitle = [
+    LoginTabItem(name: "一键注册", value: 3, isSelected: false),
+    LoginTabItem(name: "登录", value: 0, isSelected: true),
+    LoginTabItem(name: "注册", value: 1, isSelected: false),
+  ];
+
+  List<TabItem> tabs = [
+    TabItem(
+      images: R.assetsImagesLoginAccountIcon,
+      name: '账号登录',
+      isSelected: true,
+    ),
+    TabItem(
+      images: R.assetsImagesLoginPhoneIcon,
+      name: '手机登录',
+      isSelected: false,
+    ),
+  ];
 
   /// 登录注册配置
   final _loginRegistConfigInfos = LoginRegisterSettingModel.fromJson({}).obs;
@@ -104,7 +130,7 @@ class LoginRigistController extends GetxController
   @override
   void onInit() async {
     super.onInit();
-    loginTitle = [loginTab];
+    // loginTitle = [LoginTabItem(name: "登录", value: 0, isSelected: true)];
     // OpenshareDataHandle.handleData();
     ever(selectedType, (val) {
       setSubmitState();

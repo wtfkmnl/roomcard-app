@@ -78,6 +78,26 @@ class R {
   /// assets/images/game/game1.png
   static const String assetsImagesGameGame1 = "assets/images/game/game1.png";
 
+  /// Assets for assetsImagesGameImgLevel1
+  /// assets/images/game/img_level_1.png
+  static const String assetsImagesGameImgLevel1 = "assets/images/game/img_level_1.png";
+
+  /// Assets for assetsImagesGameImgLevel2
+  /// assets/images/game/img_level_2.png
+  static const String assetsImagesGameImgLevel2 = "assets/images/game/img_level_2.png";
+
+  /// Assets for assetsImagesGameImgLevel3
+  /// assets/images/game/img_level_3.png
+  static const String assetsImagesGameImgLevel3 = "assets/images/game/img_level_3.png";
+
+  /// Assets for assetsImagesGameImgLevel4
+  /// assets/images/game/img_level_4.png
+  static const String assetsImagesGameImgLevel4 = "assets/images/game/img_level_4.png";
+
+  /// Assets for assetsImagesGameMoneyIcon
+  /// assets/images/game/money_icon.png
+  static const String assetsImagesGameMoneyIcon = "assets/images/game/money_icon.png";
+
   /// Assets for assetsImagesHomeAddRoomBtn
   /// assets/images/home/add_room_btn.png
   static const String assetsImagesHomeAddRoomBtn = "assets/images/home/add_room_btn.png";
@@ -126,6 +146,14 @@ class R {
   /// assets/images/home/Home_title_.png
   static const String assetsImagesHomeHomeTitle = "assets/images/home/Home_title_.png";
 
+  /// Assets for assetsImagesHomeIconCardLogo
+  /// assets/images/home/icon_card_logo.png
+  static const String assetsImagesHomeIconCardLogo = "assets/images/home/icon_card_logo.png";
+
+  /// Assets for assetsImagesHomeRoomNumber
+  /// assets/images/home/room_number.png
+  static const String assetsImagesHomeRoomNumber = "assets/images/home/room_number.png";
+
   /// Assets for assetsImagesHomeVector
   /// assets/images/home/Vector.png
   static const String assetsImagesHomeVector = "assets/images/home/Vector.png";
@@ -133,6 +161,10 @@ class R {
   /// Assets for assetsImagesIconAboutUsLogo
   /// assets/images/iconAboutUsLogo.png
   static const String assetsImagesIconAboutUsLogo = "assets/images/iconAboutUsLogo.png";
+
+  /// Assets for assetsImagesIconAddAccount
+  /// assets/images/iconAddAccount.png
+  static const String assetsImagesIconAddAccount = "assets/images/iconAddAccount.png";
 
   /// Assets for assetsImagesIconArrowNext
   /// assets/images/iconArrowNext.png
@@ -230,13 +262,45 @@ class R {
   /// assets/images/launch/startBg.png
   static const String assetsImagesLaunchStartBg = "assets/images/launch/startBg.png";
 
+  /// Assets for assetsImagesLoginAccountIcon
+  /// assets/images/login_account_icon.png
+  static const String assetsImagesLoginAccountIcon = "assets/images/login_account_icon.png";
+
   /// Assets for assetsImagesLoginBg
   /// assets/images/login_bg.png
   static const String assetsImagesLoginBg = "assets/images/login_bg.png";
 
+  /// Assets for assetsImagesLoginPhoneIcon
+  /// assets/images/login_phone_icon.png
+  static const String assetsImagesLoginPhoneIcon = "assets/images/login_phone_icon.png";
+
   /// Assets for assetsImagesLoginService
   /// assets/images/login_service.png
   static const String assetsImagesLoginService = "assets/images/login_service.png";
+
+  /// Assets for assetsImagesLoginTextfieldAccount
+  /// assets/images/login_textfield_account.png
+  static const String assetsImagesLoginTextfieldAccount = "assets/images/login_textfield_account.png";
+
+  /// Assets for assetsImagesLoginTextfieldArrowBottom
+  /// assets/images/login_textfield_arrow_bottom.png
+  static const String assetsImagesLoginTextfieldArrowBottom = "assets/images/login_textfield_arrow_bottom.png";
+
+  /// Assets for assetsImagesLoginTextfieldPhone
+  /// assets/images/login_textfield_phone.png
+  static const String assetsImagesLoginTextfieldPhone = "assets/images/login_textfield_phone.png";
+
+  /// Assets for assetsImagesLoginTextfieldPsw
+  /// assets/images/login_textfield_psw.png
+  static const String assetsImagesLoginTextfieldPsw = "assets/images/login_textfield_psw.png";
+
+  /// Assets for assetsImagesLoginTextfieldSearch
+  /// assets/images/login_textfield_search.png
+  static const String assetsImagesLoginTextfieldSearch = "assets/images/login_textfield_search.png";
+
+  /// Assets for assetsImagesLoginTextfieldVerfiy
+  /// assets/images/login_textfield_verfiy.png
+  static const String assetsImagesLoginTextfieldVerfiy = "assets/images/login_textfield_verfiy.png";
 
   /// Assets for assetsImagesPublic517395ed630994ae
   /// assets/images/public/关闭按钮.png
