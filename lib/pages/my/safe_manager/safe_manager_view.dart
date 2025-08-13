@@ -30,7 +30,7 @@ class SafeManagerPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Image.asset(R.assetsIconArrowBack),
+          icon: Image.asset(R.assetsImagesIconTitleBack),
           onPressed: () => Get.back(),
         ),
       ),
@@ -98,9 +98,10 @@ class SafeManagerPage extends StatelessWidget {
 
           // 安全验证说明弹窗
           Obx(
-            () => state.showSecurityTipDialog.value
-                ? _buildSecurityTipDialog(logic, _tipIconKey)
-                : const SizedBox.shrink(),
+            () =>
+                state.showSecurityTipDialog.value
+                    ? _buildSecurityTipDialog(logic, _tipIconKey)
+                    : const SizedBox.shrink(),
           ),
         ],
       ),
@@ -164,7 +165,7 @@ class SafeManagerPage extends StatelessWidget {
             GestureDetector(
               key: tipIconKey, // 设置GlobalKey
               onTap: onTipTap,
-              child: Image.asset(R.assetsIconSafeValidate),
+              child: Image.asset(R.assetsImagesIconSafeValidate),
             ),
           ],
         ),
@@ -210,7 +211,8 @@ class SafeManagerPage extends StatelessWidget {
               ),
               if (showArrow) const SizedBox(width: 8),
             ],
-            if (showArrow) Image.asset(R.assetsIconArrowNext, width: 20.w),
+            if (showArrow)
+              Image.asset(R.assetsImagesIconArrowNext, width: 20.w),
           ],
         ),
         onTap: onTap,
@@ -310,9 +312,10 @@ class SafeManagerPage extends StatelessWidget {
 class TrianglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white
-      ..style = PaintingStyle.fill;
+    final paint =
+        Paint()
+          ..color = Colors.white
+          ..style = PaintingStyle.fill;
 
     final path = Path();
     path.moveTo(size.width / 2, 0); // 顶点

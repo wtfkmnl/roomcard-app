@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'package:roomcard/manager/app_manager.dart';
 
@@ -11,25 +10,35 @@ enum AppRouter<T> {
 
   ///创建牌局页面
   createRoom('/create-room'),
-  
+
   ///创建俱乐部页面
   createClub('/create-club'),
-  
+
   ///加入俱乐部页面
   joinClub('/join-club'),
+
   ///商务合作
   mineBusiness('/mine_business'),
+
   ///设置
   mineSetting('/mine_setting'),
+
   ///个人资料
   mineProfile('/mine_profile'),
+
   ///关于我们
   mineAbout('/mine_about'),
+
   ///安全管理
   mineSafeManager('/mine_safe_manager'),
+
   ///昵称编辑
-  mineNameEdit('/mine_name_edit');
- ///路由路劲
+  mineNameEdit('/mine_name_edit'),
+
+  ///登录注册
+  loginRegist('/login_regist');
+
+  ///路由路劲
   final String path;
 
   ///是否登录验证

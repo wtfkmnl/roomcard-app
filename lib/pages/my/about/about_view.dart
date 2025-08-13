@@ -23,7 +23,7 @@ class AboutPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Image.asset(R.assetsIconArrowBack),
+          icon: Image.asset(R.assetsImagesIconTitleBack),
           onPressed: () => Get.back(),
         ),
       ),
@@ -35,7 +35,7 @@ class AboutPage extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  Image.asset(R.assetsIconAboutUsLogo),
+                  Image.asset(R.assetsImagesIconAboutUsLogo),
                   22.verticalSpace,
                   Text(
                     '公平竞技，畅玩社交',
@@ -90,7 +90,7 @@ class AboutPage extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(R.assetsIconGreenSelect),
+          Image.asset(R.assetsImagesIconGreenSelect),
           6.horizontalSpace,
           Expanded(
             child: Text(
@@ -113,10 +113,7 @@ class AboutPage extends StatelessWidget {
         ),
 
         8.verticalSpace,
-        Text(
-          '此致敬礼',
-          style: TextStyle(color: Colors.white, fontSize: 12.sp),
-        ),
+        Text('此致敬礼', style: TextStyle(color: Colors.white, fontSize: 12.sp)),
         8.verticalSpace,
         Text(
           'KO Poker开发团队',

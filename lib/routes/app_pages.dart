@@ -1,3 +1,4 @@
+import 'package:roomcard/pages/login_regist/login_rigist_view_page.dart';
 import 'package:roomcard/pages/main/main_binding.dart';
 import 'package:roomcard/pages/main/main_view.dart';
 import 'package:roomcard/pages/my/about/about_view.dart';
@@ -80,6 +81,12 @@ class AppPages {
       name: AppRouter.mineNameEdit.path,
       page: () => const NameEditPage(),
       binding: NameEditBinding(),
+    ),
+
+    GetPage(
+      name: AppRouter.loginRegist.path,
+      page: () => const LoginRigistViewPage(),
+      binding: ProfileBinding(),
     ),
   ];
 

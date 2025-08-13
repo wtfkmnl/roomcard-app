@@ -28,7 +28,7 @@ class SettingPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Image.asset(R.assetsIconArrowBack),
+          icon: Image.asset(R.assetsImagesIconTitleBack),
           onPressed: () => Get.back(),
         ),
       ),
@@ -37,7 +37,7 @@ class SettingPage extends StatelessWidget {
         children: [
           // 切换账号
           _buildMenuItem(
-            icon: R.assetsIconSettingMenuAccount,
+            icon: R.assetsImagesIconSettingMenuAccount,
             title: '切换账号',
             onTap: logic.onSwitchAccountTap,
             showArrow: true,
@@ -48,7 +48,7 @@ class SettingPage extends StatelessWidget {
           // 多语言
           Obx(
             () => _buildMenuItemWithValue(
-              icon: R.assetsIconSettingMenuLanguage,
+              icon: R.assetsImagesIconSettingMenuLanguage,
               title: '多语言',
               value: state.language.value,
               onTap: logic.onLanguageTap,
@@ -60,7 +60,7 @@ class SettingPage extends StatelessWidget {
 
           // 安全管理
           _buildMenuItem(
-            icon: R.assetsIconSettingMenuSafe,
+            icon: R.assetsImagesIconSettingMenuSafe,
             title: '安全管理',
             onTap: logic.onSecurityTap,
             showArrow: true,
@@ -71,7 +71,7 @@ class SettingPage extends StatelessWidget {
           // 游戏音效
           Obx(
             () => _buildSwitchItem(
-              icon: R.assetsIconSettingMenuGameVoice,
+              icon: R.assetsImagesIconSettingMenuGameVoice,
               title: '游戏音效',
               value: state.gameSound.value,
               onChanged: logic.onGameSoundToggle,
@@ -83,7 +83,7 @@ class SettingPage extends StatelessWidget {
           // 消息声音
           Obx(
             () => _buildSwitchItem(
-              icon: R.assetsIconSettingMenuMessageVoice,
+              icon: R.assetsImagesIconSettingMenuMessageVoice,
               title: '消息声音',
               value: state.messageSound.value,
               onChanged: logic.onMessageSoundToggle,
@@ -95,7 +95,7 @@ class SettingPage extends StatelessWidget {
           // 消息震动
           Obx(
             () => _buildSwitchItem(
-              icon: R.assetsIconSettingMenuVibrate,
+              icon: R.assetsImagesIconSettingMenuVibrate,
               title: '消息震动',
               value: state.messageVibration.value,
               onChanged: logic.onMessageVibrationToggle,
@@ -106,7 +106,7 @@ class SettingPage extends StatelessWidget {
 
           // 关于我们
           _buildMenuItem(
-            icon: R.assetsIconSettingMenuAbout,
+            icon: R.assetsImagesIconSettingMenuAbout,
             title: '关于我们',
             onTap: logic.onAboutUsTap,
             showArrow: true,
@@ -115,7 +115,7 @@ class SettingPage extends StatelessWidget {
           // 版本号
           Obx(
             () => _buildMenuItemWithValue(
-              icon: R.assetsIconSettingMenuVersion,
+              icon: R.assetsImagesIconSettingMenuVersion,
               title: '版本号',
               value: state.version.value,
               onTap: logic.onVersionTap,
@@ -151,9 +151,10 @@ class SettingPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        trailing: showArrow
-            ? Image.asset(R.assetsIconArrowNext, width: 20.w)
-            : null,
+        trailing:
+            showArrow
+                ? Image.asset(R.assetsImagesIconArrowNext, width: 20.w)
+                : null,
         onTap: onTap,
       ),
     );
@@ -197,7 +198,7 @@ class SettingPage extends StatelessWidget {
             ),
             if (showArrow) ...[
               const SizedBox(width: 8),
-              Image.asset(R.assetsIconArrowNext, width: 20.w),
+              Image.asset(R.assetsImagesIconArrowNext, width: 20.w),
             ],
           ],
         ),
@@ -230,10 +231,7 @@ class SettingPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        trailing: CustomSwitch(
-          value: value,
-          onChanged: onChanged,
-        ),
+        trailing: CustomSwitch(value: value, onChanged: onChanged),
       ),
     );
   }

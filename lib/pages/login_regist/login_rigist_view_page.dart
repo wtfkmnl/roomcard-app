@@ -193,7 +193,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                   SizedBox(height: 10.h),
                   _textFliedview(
                     editingController: controller.accountTEC,
-                    icon: R.assetsIconApokerLoginClear,
+                    icon: R.assetsImagesApokerLoginClear,
                     title: "",
                     placeholder: "请输入账号或手机号",
                     // obscure: false,
@@ -202,7 +202,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                   SizedBox(height: 30.h),
                   _textFliedview(
                     editingController: controller.psdTEC,
-                    icon: R.assetsIconApokerLoginClear,
+                    icon: R.assetsImagesApokerLoginClear,
                     title: "",
                     placeholder: "请输入登录密码",
                     // obscure: obscureText,
@@ -218,7 +218,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                     children: [
                       controller.isRememberPwd.value
                           ? imageView(
-                            R.assetsIconApokerLoginClear,
+                            R.assetsImagesApokerLoginClear,
                             width: 36.w,
                             height: 36.w,
                           ).marginOnly(right: 20.w)
@@ -313,7 +313,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                   SizedBox(height: 10.h),
                   _textFliedview(
                     editingController: controller.accountRegistTEC,
-                    icon: R.assetsIconAboutUsLogo,
+                    icon: R.assetsImagesApokerLoginClear,
                     title: "",
                     placeholder: "请输入账号或手机号",
                     // obscure: false,
@@ -322,7 +322,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                   SizedBox(height: 30.h),
                   _textFliedview(
                     editingController: controller.psdRegistTEC,
-                    icon: R.assetsIconAboutUsLogo,
+                    icon: R.assetsImagesApokerLoginClear,
                     title: "",
                     placeholder: "设置登录密码",
                     // obscure: obscureText1,
@@ -331,7 +331,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                   SizedBox(height: 30.h),
                   _textFliedview(
                     editingController: controller.configPsdTEC,
-                    icon: R.assetsIconAboutUsLogo,
+                    icon: R.assetsImagesApokerLoginClear,
                     title: "",
                     placeholder: "请再次输入密码",
                     // obscure: obscureText2,
@@ -341,20 +341,20 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
               ),
               _phoneNumberView(
                 controller.accountPhoneTEC,
-                R.assetsIconAboutUsLogo,
+                R.assetsImagesIconAboutUsLogo,
                 "请输入电话号码",
                 0,
               ).paddingTop(42.h).hide(!controller.accountPhoneEnable()),
               _textFliedview(
                 editingController: controller.inviteCodeTEC,
-                icon: R.assetsIconAboutUsLogo,
+                icon: R.assetsImagesIconAboutUsLogo,
                 title: "",
                 placeholder: "请输入邀请码",
                 tag: 2,
               ).paddingTop(42.h).hide(!controller.invitationCodeEnable()),
               _textFliedview(
                 editingController: controller.memberNameTEC,
-                icon: R.assetsIconAboutUsLogo,
+                icon: R.assetsImagesIconAboutUsLogo,
                 title: "",
                 placeholder: "请输入姓名",
                 tag: 2,
@@ -391,7 +391,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
               child: Column(
                 children: [
                   imageView(
-                    R.assetsIconAboutUsLogo,
+                    R.assetsImagesIconAboutUsLogo,
                     width: 294.w,
                     height: 280.h,
                   ).paddingTop(40.h),
@@ -399,7 +399,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       imageView(
-                        R.assetsIconAboutUsLogo,
+                        R.assetsImagesIconAboutUsLogo,
                         width: 42.w,
                         height: 42.h,
                       ).paddingOnly(top: 10.h, right: 10.w),
@@ -421,7 +421,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       imageView(
-                        R.assetsIconAboutUsLogo,
+                        R.assetsImagesIconAboutUsLogo,
                         width: 42.w,
                         height: 42.h,
                       ).paddingOnly(top: 10.h, right: 10.w),
@@ -508,7 +508,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _bottomButton(
-          imgPath: R.assetsIconAboutUsLogo,
+          imgPath: R.assetsImagesIconAboutUsLogo,
           name: "先去逛逛",
           onTap: () {
             Get.back();
@@ -523,7 +523,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
           // color: ColorManager.getColor(name: ColorsType.C_B3B7BD),
         ),
         _bottomButton(
-          imgPath: R.assetsIconAboutUsLogo,
+          imgPath: R.assetsImagesIconAboutUsLogo,
           name: "在线客服",
           onTap: () {
             // CommonUtils.openOnlineCustomServerPage();
@@ -636,7 +636,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                                         fit: BoxFit.fill,
                                         alignment: Alignment.center,
                                         image: AssetImage(
-                                          R.assetsIconAboutUsLogo,
+                                          R.assetsImagesIconAboutUsLogo,
                                         ),
                                       ),
                                     )
@@ -683,7 +683,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                                                 ).paddingLeft(30.w),
                                                 Center(
                                                       child: imageView(
-                                                        R.assetsIconAboutUsLogo,
+                                                        R.assetsImagesIconAboutUsLogo,
                                                         height: 16.w,
                                                         width: 16.w,
                                                         // color:
@@ -769,7 +769,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                                         fit: BoxFit.fill,
                                         alignment: Alignment.topCenter,
                                         image: AssetImage(
-                                          R.assetsIconAboutUsLogo,
+                                          R.assetsImagesIconAboutUsLogo,
                                         ),
                                       ),
                                     )
@@ -783,7 +783,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                             ? Transform.rotate(
                               angle: 0,
                               child: imageView(
-                                R.assetsIconAboutUsLogo,
+                                R.assetsImagesIconAboutUsLogo,
                                 width: 36.w,
                                 height: 22.h,
                               ),
@@ -791,7 +791,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                             : Transform.rotate(
                               angle: math.pi,
                               child: imageView(
-                                R.assetsIconAboutUsLogo,
+                                R.assetsImagesIconAboutUsLogo,
                                 width: 36.w,
                                 height: 22.h,
                               ),
@@ -862,7 +862,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                   height: 36.w,
                   width: 36.w,
                   child: imageView(
-                    R.assetsIconAboutUsLogo,
+                    R.assetsImagesIconAboutUsLogo,
                     width: 20.w,
                     height: 14.h,
                     fit: BoxFit.fitWidth,

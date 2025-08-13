@@ -53,7 +53,7 @@ class _AreaPhoneBottomSheetState extends State<AreaPhoneBottomSheet> {
                     ),
                   ),
                   imageView(
-                    R.assetsIconAboutUsLogo,
+                    R.assetsImagesIconAboutUsLogo,
                     width: 42.w,
                     height: 42.w,
                   ).gestureTap(onTap: () => Get.back()).paddingRight(42.w),
@@ -67,7 +67,7 @@ class _AreaPhoneBottomSheetState extends State<AreaPhoneBottomSheet> {
                   Row(
                         children: [
                           imageView(
-                            R.assetsIconAboutUsLogo,
+                            R.assetsImagesIconAboutUsLogo,
                             width: 37.w,
                             height: 37.w,
                           ).paddingOnly(left: 44.w, right: 32.w),

@@ -27,7 +27,7 @@ class ProfilePage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Image.asset(R.assetsIconArrowBack),
+          icon: Image.asset(R.assetsImagesIconTitleBack),
           onPressed: () => Get.back(),
         ),
       ),
@@ -84,7 +84,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                     16.horizontalSpace,
-                    Image.asset(R.assetsIconArrowNext, width: 20.w),
+                    Image.asset(R.assetsImagesIconArrowNext, width: 20.w),
                   ],
                 ),
               ],
@@ -117,7 +117,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       16.horizontalSpace,
-                      Image.asset(R.assetsIconArrowNext, width: 20.w),
+                      Image.asset(R.assetsImagesIconArrowNext, width: 20.w),
                     ],
                   ),
                 ],
@@ -150,7 +150,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       4.horizontalSpace,
-                      Image.asset(R.assetsIconTextCopy),
+                      Image.asset(R.assetsImagesIconTextCopy),
                     ],
                   ),
                 ),
@@ -198,7 +198,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       8.horizontalSpace,
-                      Image.asset(R.assetsIconArrowNext, width: 20.w),
+                      Image.asset(R.assetsImagesIconArrowNext, width: 20.w),
                     ],
                   ),
                 ),
@@ -262,18 +262,19 @@ class ProfilePage extends StatelessWidget {
               ),
               color: isSelected ? Color(0xFFFF6B9D) : Colors.transparent,
             ),
-            child: isSelected
-                ? Center(
-                    child: Container(
-                      width: 8.w,
-                      height: 8.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
+            child:
+                isSelected
+                    ? Center(
+                      child: Container(
+                        width: 8.w,
+                        height: 8.w,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                  )
-                : null,
+                    )
+                    : null,
           ),
           8.horizontalSpace,
           Text(

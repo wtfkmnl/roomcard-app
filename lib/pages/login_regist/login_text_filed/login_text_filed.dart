@@ -210,7 +210,7 @@ class _LoginTextFieldState extends State<CusTomTextField> {
     return _showClearIcon
         ? Center(
               child: imageView(
-                R.assetsIconApokerLoginClear,
+                R.assetsImagesApokerLoginClear,
                 width: 45.w,
                 height: 45.h,
                 fit: BoxFit.fitHeight,
@@ -237,13 +237,13 @@ class _LoginTextFieldState extends State<CusTomTextField> {
             child:
                 _obscurePassword
                     ? imageView(
-                      R.assetsIconApokerLoginCloseEyes,
+                      R.assetsImagesApokerLoginCloseEyes,
                       width: 48.w,
                       height: 48.h,
                       fit: BoxFit.fitWidth,
                     )
                     : imageView(
-                      R.assetsIconApokerLoginOpenEyes,
+                      R.assetsImagesApokerLoginOpenEyes,
                       width: 48.w,
                       height: 48.h,
                       fit: BoxFit.fitWidth,

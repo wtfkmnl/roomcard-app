@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/routes/app_router.dart';
+import 'package:roomcard/utils/common_extension/common_extension.dart';
 import '../../r.dart';
 import 'my_logic.dart';
 
@@ -27,7 +29,7 @@ class MyPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Image.asset(R.assetsIconArrowBack),
+          icon: Image.asset(R.assetsImagesIconTitleBack),
           onPressed: () => Get.back(),
         ),
       ),
@@ -43,7 +45,7 @@ class MyPage extends StatelessWidget {
             child: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(R.assetsIconMineTopBg),
+                  image: AssetImage(R.assetsImagesIconMineTopBg),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -100,7 +102,9 @@ class MyPage extends StatelessWidget {
                 child: const Icon(Icons.person, color: Colors.white, size: 33),
               ),
             ),
-          ),
+          ).onTap(() {
+            Get.toNamed(AppRouter.loginRegist.path);
+          }),
           8.horizontalSpace,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,7 +136,7 @@ class MyPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    R.assetsIconMineWallet,
+                    R.assetsImagesIconMineWallet,
                     width: 19.w,
                     height: 23.h,
                   ),
@@ -158,7 +162,7 @@ class MyPage extends StatelessWidget {
               GestureDetector(
                 onTap: logic.onProfileTap,
                 child: Image.asset(
-                  R.assetsIconArrowNext,
+                  R.assetsImagesIconArrowNext,
                   width: 28.w,
                   height: 28.h,
                 ),
@@ -249,43 +253,43 @@ class MyPage extends StatelessWidget {
   Widget _buildMenuList(MyLogic logic) {
     final menuItems = [
       {
-        'icon': R.assetsIconMineMenuTransform,
+        'icon': R.assetsImagesIconMineMenuTransform,
         'title': '好友转账',
         'color': const Color(0xFF4ECDC4),
         'onTap': logic.onFriendTransferTap,
       },
       {
-        'icon': R.assetsIconMineMenuFinancial,
+        'icon': R.assetsImagesIconMineMenuFinancial,
         'title': '资金明细',
         'color': const Color(0xFF45B7D1),
         'onTap': logic.onFundDetailTap,
       },
       {
-        'icon': R.assetsIconMineMenuRecord,
+        'icon': R.assetsImagesIconMineMenuRecord,
         'title': '战绩',
         'color': const Color(0xFF96CEB4),
         'onTap': logic.onGameRecordTap,
       },
       {
-        'icon': R.assetsIconMineMenuChess,
+        'icon': R.assetsImagesIconMineMenuChess,
         'title': '牌谱',
         'color': const Color(0xFFFECEA8),
         'onTap': logic.onCardRecordTap,
       },
       {
-        'icon': R.assetsIconMineMenuNews,
+        'icon': R.assetsImagesIconMineMenuNews,
         'title': '消息公告',
         'color': const Color(0xFFFF6B9D),
         'onTap': logic.onMessageTap,
       },
       {
-        'icon': R.assetsIconMineMenuBusiness,
+        'icon': R.assetsImagesIconMineMenuBusiness,
         'title': '商务合作',
         'color': const Color(0xFFC44569),
         'onTap': logic.onBusinessTap,
       },
       {
-        'icon': R.assetsIconMineMenuSetting,
+        'icon': R.assetsImagesIconMineMenuSetting,
         'title': '设置',
         'color': const Color(0xFF778CA3),
         'onTap': logic.onSettingsTap,
@@ -295,17 +299,18 @@ class MyPage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
-        children: menuItems
-            .map(
-              (item) => _buildMenuItem(
-                icon: item['icon'] as String,
-                title: item['title'] as String,
-                color: item['color'] as Color,
-                onTap: item['onTap'] as VoidCallback,
-                isLast: item == menuItems.last,
-              ),
-            )
-            .toList(),
+        children:
+            menuItems
+                .map(
+                  (item) => _buildMenuItem(
+                    icon: item['icon'] as String,
+                    title: item['title'] as String,
+                    color: item['color'] as Color,
+                    onTap: item['onTap'] as VoidCallback,
+                    isLast: item == menuItems.last,
+                  ),
+                )
+                .toList(),
       ),
     );
   }
@@ -342,7 +347,7 @@ class MyPage extends StatelessWidget {
                 ),
               ),
             ),
-            Image.asset(R.assetsIconArrowNext, width: 20.w),
+            Image.asset(R.assetsImagesIconArrowNext, width: 20.w),
           ],
         ),
       ),

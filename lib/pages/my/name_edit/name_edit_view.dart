@@ -27,7 +27,7 @@ class NameEditPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Image.asset(R.assetsIconArrowBack),
+          icon: Image.asset(R.assetsImagesIconTitleBack),
           onPressed: logic.goBack,
         ),
         actions: [
@@ -36,9 +36,10 @@ class NameEditPage extends StatelessWidget {
             child: Obx(
               () => Container(
                 decoration: BoxDecoration(
-                  color: state.canSave.value
-                      ? const Color(0xFFF9C678)
-                      : const Color(0xFFB3BEC1).withOpacity(0.3),
+                  color:
+                      state.canSave.value
+                          ? const Color(0xFFF9C678)
+                          : const Color(0xFFB3BEC1).withOpacity(0.3),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Material(
@@ -54,9 +55,10 @@ class NameEditPage extends StatelessWidget {
                       child: Text(
                         '完成',
                         style: TextStyle(
-                          color: state.canSave.value
-                              ? const Color(0xFF703E00)
-                              : const Color(0xFFB3BEC1),
+                          color:
+                              state.canSave.value
+                                  ? const Color(0xFF703E00)
+                                  : const Color(0xFFB3BEC1),
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
                         ),
@@ -85,7 +87,7 @@ class NameEditPage extends StatelessWidget {
               child: Row(
                 children: [
                   14.horizontalSpace,
-                  Image.asset(R.assetsIconNameEdit),
+                  Image.asset(R.assetsImagesIconNameEdit),
                   4.horizontalSpace,
                   Expanded(
                     child: TextField(
@@ -106,15 +108,14 @@ class NameEditPage extends StatelessWidget {
                         border: InputBorder.none,
                       ),
                       maxLength: 15,
-                      buildCounter:
-                          (
-                            context, {
-                            required currentLength,
-                            required isFocused,
-                            maxLength,
-                          }) {
-                            return null; // 隐藏默认计数器
-                          },
+                      buildCounter: (
+                        context, {
+                        required currentLength,
+                        required isFocused,
+                        maxLength,
+                      }) {
+                        return null; // 隐藏默认计数器
+                      },
                     ),
                   ),
                 ],
@@ -133,18 +134,19 @@ class NameEditPage extends StatelessWidget {
             ),
 
             Obx(
-              () => state.isSaving.value
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          valueColor: const AlwaysStoppedAnimation<Color>(
-                            Color(0xFFFFB800),
+              () =>
+                  state.isSaving.value
+                      ? Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                              Color(0xFFFFB800),
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
+                      )
+                      : const SizedBox.shrink(),
             ),
           ],
         ),
