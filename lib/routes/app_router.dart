@@ -1,3 +1,4 @@
+
 import 'package:get/get.dart';
 import 'package:roomcard/manager/app_manager.dart';
 
@@ -10,7 +11,7 @@ enum AppRouter<T> {
 
   ///创建牌局页面
   createRoom('/create-room'),
-
+  
   ///创建俱乐部页面
   createClub('/create-club'),
 
@@ -42,9 +43,12 @@ enum AppRouter<T> {
   mineChangeAccount('/mine_change_account'),
 
   ///登录注册
-  loginRegist('/login_regist');
+  loginRegist('/login_regist'),
 
-  ///路由路劲
+  ///绑定手机
+  mineBindPhone('/mine_bind_phone');
+
+  ///路由路径
   final String path;
 
   ///是否登录验证

@@ -277,5 +277,17 @@ class R {
   /// Assets for assetsImagesPublic8fd456de
   /// assets/images/public/返回.svg
   static const String assetsImagesPublic8fd456de = "assets/images/public/返回.svg";
+
+  /// Assets for assetsAssetsIconAddAccount
+  /// assets/images/assetsIconAddAccount.png
+  static const String assetsIconAddAccount = "assets/images/iconAddAccount.png";
+
+  /// Assets for assetsIconPhoneBindPhone
+  /// assets/images/icon_phone_bind_phone.png
+  static const String assetsIconPhoneBindPhone = "assets/images/icon_phone_bind_phone.png";
+
+  /// Assets for assetsIconPhoneBindCode
+  /// assets/images/icon_phone_bind_code.png
+  static const String assetsIconPhoneBindCode = "assets/images/icon_phone_bind_code.png";
 }
 

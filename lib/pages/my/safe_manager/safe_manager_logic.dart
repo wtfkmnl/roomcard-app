@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:roomcard/base/base_controller.dart';
+import 'package:roomcard/routes/app_router.dart';
 import 'safe_manager_state.dart';
 
 class SafeManagerLogic extends BaseController<SafeManagerState> {
@@ -34,8 +35,7 @@ class SafeManagerLogic extends BaseController<SafeManagerState> {
   /// 绑定手机点击
   void onPhoneBindingTap() {
     print('绑定手机');
-    // TODO: 实现手机绑定功能
-    _showPhoneBindingDialog();
+    Get.toNamed(AppRouter.mineBindPhone.path);
   }
 
   /// 绑定邮箱点击
@@ -67,12 +67,6 @@ class SafeManagerLogic extends BaseController<SafeManagerState> {
   /// 隐藏安全验证说明弹窗
   void hideSecurityTipDialog() {
     state.showSecurityTipDialog.value = false;
-  }
-
-  /// 显示手机绑定对话框
-  void _showPhoneBindingDialog() {
-    // TODO: 实现手机绑定对话框
-    Get.snackbar('提示', '手机绑定功能开发中...');
   }
 
   /// 显示邮箱绑定对话框
