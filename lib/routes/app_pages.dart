@@ -15,6 +15,8 @@ import 'package:roomcard/pages/my/safe_manager/safe_manager_binding.dart';
 import 'package:roomcard/pages/my/safe_manager/safe_manager_view.dart';
 import 'package:roomcard/pages/my/setting/setting_binding.dart';
 import 'package:roomcard/pages/my/setting/setting_view.dart';
+import 'package:roomcard/pages/my/bind_phone/bind_phone_binding.dart';
+import 'package:roomcard/pages/my/bind_phone/bind_phone_view.dart';
 import 'package:roomcard/pages/unknown/unknown_binding.dart';
 import 'package:roomcard/pages/unknown/unknown_view.dart';
 import 'package:get/get.dart';
@@ -27,6 +29,9 @@ import 'package:roomcard/pages/club/create_club_view.dart';
 import 'package:roomcard/pages/club/join_club_logic.dart';
 import 'package:roomcard/pages/club/join_club_view.dart';
 import 'package:roomcard/routes/app_router.dart';
+
+import '../pages/my/bind_email/bind_email_binding.dart';
+import '../pages/my/bind_email/bind_email_view.dart';
 
 /// # 页面注册表，绑定页面与 binding
 class AppPages {
@@ -101,6 +106,16 @@ class AppPages {
       name: AppRouter.mineChangeAccount.path,
       page: () => const ChangeAccountPage(),
       binding: ChangeAccountBinding(),
+    ),
+    GetPage(
+      name: AppRouter.mineBindPhone.path,
+      page: () => const BindPhonePage(),
+      binding: BindPhoneBinding(),
+    ),
+    GetPage(
+      name: AppRouter.mineBindEmail.path,
+      page: () => const BindEmailPage(),
+      binding: BindEmailBinding(),
     ),
   ];
 

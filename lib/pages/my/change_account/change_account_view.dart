@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../r.dart';
-import '../../../widgets/buttons/yellow_button.dart';
+import '../../../widgets/buttons/gradient_button.dart';
 import 'change_account_logic.dart';
 import 'change_account_state.dart';
 
@@ -61,39 +61,9 @@ class ChangeAccountPage extends StatelessWidget {
           ),
 
           Obx(
-            () =>
-                !state.isManageMode.value
-                    ? GestureDetector(
-                      onTap: logic.onLogout,
-                      child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 16.h),
-                        width: double.infinity,
-                        height: 43.h,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                          vertical: 8.h,
-                        ),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFFBF9048), Color(0xFFF9C678)],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '退出登录',
-                            style: TextStyle(
-                              color: Color(0XFF703E00),
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                    : const SizedBox.shrink(),
+            () => !state.isManageMode.value
+                ? GradientButton(text: '退出登录', onTap: logic.onLogout)
+                : const SizedBox.shrink(),
           ),
           135.verticalSpace,
         ],
@@ -175,7 +145,7 @@ class ChangeAccountPage extends StatelessWidget {
       return SizedBox(
         width: 48.w,
         height: 48.w,
-        // child: Image.asset(R.assetsIconAddAccount, width: 48.w, height: 48.w),
+        child: Image.asset(R.assetsIconAddAccount, width: 48.w, height: 48.w),
       );
     } else {
       // 有账号，显示头像
@@ -184,46 +154,34 @@ class ChangeAccountPage extends StatelessWidget {
         height: 48.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24.w),
-          border: Border.all(
-            color:
-                account.isCurrent
-                    ? const Color(0xFFFFD700)
-                    : Colors.transparent,
-            width: 2,
-          ),
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(23.w),
-          child:
-              account.avatar.startsWith('http')
-                  ? Image.network(
-                    account.avatar,
-                    width: 48.w,
-                    height: 48.w,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        width: 48.w,
-                        height: 48.w,
-                        color: const Color(0xFF37505E),
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white54,
-                          size: 24.w,
-                        ),
-                      );
-                    },
-                  )
-                  : Container(
-                    width: 48.w,
-                    height: 48.w,
-                    color: const Color(0xFF37505E),
-                    child: Icon(
-                      Icons.person,
-                      color: Colors.white54,
-                      size: 24.w,
-                    ),
-                  ),
+          borderRadius: BorderRadius.circular(24.w),
+          child: account.avatar.startsWith('http')
+              ? Image.network(
+                  account.avatar,
+                  width: 48.w,
+                  height: 48.w,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      width: 48.w,
+                      height: 48.w,
+                      color: const Color(0xFF37505E),
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white54,
+                        size: 24.w,
+                      ),
+                    );
+                  },
+                )
+              : Container(
+                  width: 48.w,
+                  height: 48.w,
+                  color: const Color(0xFF37505E),
+                  child: Icon(Icons.person, color: Colors.white54, size: 24.w),
+                ),
         ),
       );
     }
