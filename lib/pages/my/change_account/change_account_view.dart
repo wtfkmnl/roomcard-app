@@ -107,7 +107,7 @@ class ChangeAccountPage extends StatelessWidget {
     );
   }
 
-  /// 构建账号列表
+  /// 账号列表
   Widget _buildAccountList(ChangeAccountLogic logic, state) {
     if (state.isManageMode.value) {
       // 管理模式
@@ -117,15 +117,12 @@ class ChangeAccountPage extends StatelessWidget {
           final index = entry.key;
           final account = entry.value;
           final originalIndex = state.accounts.indexOf(account);
-          return Padding(
-            padding: EdgeInsets.only(bottom: 16.h),
-            child: _buildAccountItem(
-              account: account,
-              index: originalIndex,
-              onTap: () => logic.onAccountTap(originalIndex),
-              isManageMode: true,
-              onClearTap: () => logic.onClearTap(originalIndex),
-            ),
+          return _buildAccountItem(
+            account: account,
+            index: originalIndex,
+            onTap: () => logic.onAccountTap(originalIndex),
+            isManageMode: true,
+            onClearTap: () => logic.onClearTap(originalIndex),
           );
         }).toList(),
       );
@@ -157,18 +154,21 @@ class ChangeAccountPage extends StatelessWidget {
     VoidCallback? onClearTap,
   }) {
     return Container(
+      height: 80.h,
       decoration: BoxDecoration(
         color: const Color(0XFF283D49),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: const Color(0xFF37505E), width: 1),
       ),
-      child: ListTile(
-        horizontalTitleGap: 12.w,
-        leading: _buildAvatar(account, isManageMode),
-        title: _buildTitle(account),
-        subtitle: _buildSubtitle(account),
-        trailing: _buildTrailing(account, isManageMode, onClearTap),
-        onTap: onTap,
+      child: Center(
+        child: ListTile(
+          horizontalTitleGap: 12.w,
+          leading: _buildAvatar(account, isManageMode),
+          title: _buildTitle(account),
+          subtitle: _buildSubtitle(account),
+          trailing: _buildTrailing(account, isManageMode, onClearTap),
+          onTap: onTap,
+        ),
       ),
     );
   }
@@ -176,14 +176,18 @@ class ChangeAccountPage extends StatelessWidget {
   /// 头像
   Widget _buildAvatar(AccountInfo? account, bool isManageMode) {
     if (account == null) {
-      return Image.asset(R.assetsIconAddAccount, width: 36.w, height: 36.w);
+      return SizedBox(
+        width: 48.w,
+        height: 48.w,
+        child: Image.asset(R.assetsIconAddAccount, width: 48.w, height: 48.w),
+      );
     } else {
       // 有账号，显示头像
       return Container(
-        width: 50.w,
-        height: 50.w,
+        width: 48.w,
+        height: 48.w,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25.w),
+          borderRadius: BorderRadius.circular(24.w),
           border: Border.all(
             color: account.isCurrent
                 ? const Color(0xFFFFD700)
@@ -196,13 +200,13 @@ class ChangeAccountPage extends StatelessWidget {
           child: account.avatar.startsWith('http')
               ? Image.network(
                   account.avatar,
-                  width: 46.w,
-                  height: 46.w,
+                  width: 48.w,
+                  height: 48.w,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
-                      width: 46.w,
-                      height: 46.w,
+                      width: 48.w,
+                      height: 48.w,
                       color: const Color(0xFF37505E),
                       child: Icon(
                         Icons.person,
@@ -213,8 +217,8 @@ class ChangeAccountPage extends StatelessWidget {
                   },
                 )
               : Container(
-                  width: 46.w,
-                  height: 46.w,
+                  width: 48.w,
+                  height: 48.w,
                   color: const Color(0xFF37505E),
                   child: Icon(Icons.person, color: Colors.white54, size: 24.w),
                 ),
@@ -225,12 +229,17 @@ class ChangeAccountPage extends StatelessWidget {
 
   Widget _buildTitle(AccountInfo? account) {
     if (account == null) {
-      return Text(
-        '添加账号',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 14.sp,
-          fontWeight: FontWeight.bold,
+      // 添加账号时，确保文字垂直居中
+      return Container(
+        height: 48.h, // 与头像高度一致
+        alignment: Alignment.centerLeft,
+        child: Text(
+          '添加账号',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       );
     } else {
@@ -245,9 +254,9 @@ class ChangeAccountPage extends StatelessWidget {
     }
   }
 
-  Widget _buildSubtitle(AccountInfo? account) {
+  Widget? _buildSubtitle(AccountInfo? account) {
     if (account == null) {
-      return const SizedBox.shrink();
+      return null;
     } else {
       return Text(
         account.id,
