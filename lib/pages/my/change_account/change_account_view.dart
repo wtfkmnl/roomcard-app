@@ -67,9 +67,9 @@ class ChangeAccountPage extends StatelessWidget {
                       margin: EdgeInsets.symmetric(horizontal: 16.h),
                       width: double.infinity,
                       height: 43.h,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
+                      padding:  EdgeInsets.symmetric(
+                        horizontal: 16.w,
+                        vertical: 8.h,
                       ),
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
@@ -77,15 +77,7 @@ class ChangeAccountPage extends StatelessWidget {
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
                         ),
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xFFBD8742).withOpacity(0.3),
-                            offset: const Offset(0, 2), // 底部2像素阴影
-                            blurRadius: 4,
-                            spreadRadius: 0,
-                          ),
-                        ],
+                        borderRadius: BorderRadius.circular(8.r),
                       ),
                       child: Center(
                         child: Text(
@@ -229,9 +221,8 @@ class ChangeAccountPage extends StatelessWidget {
 
   Widget _buildTitle(AccountInfo? account) {
     if (account == null) {
-      // 添加账号时，确保文字垂直居中
       return Container(
-        height: 48.h, // 与头像高度一致
+        height: 48.h,
         alignment: Alignment.centerLeft,
         child: Text(
           '添加账号',
