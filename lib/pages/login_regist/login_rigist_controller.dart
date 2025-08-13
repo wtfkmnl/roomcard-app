@@ -27,15 +27,17 @@ import 'package:roomcard/utils/values/enums.dart';
 class LoginTabItem {
   String? name;
   int? value;
+  String? images;
   bool? isSelected;
-  LoginTabItem({this.name, this.value, this.isSelected = false});
+  LoginTabItem({this.name, this.value, this.images, this.isSelected = false});
 }
 
 class TabItem {
   String? name;
   String? images;
   bool? isSelected;
-  TabItem({this.name, this.images, this.isSelected});
+  int? value;
+  TabItem({this.name, this.images, this.value, this.isSelected});
 }
 
 class LoginRigistController extends GetxController
@@ -77,11 +79,13 @@ class LoginRigistController extends GetxController
     TabItem(
       images: R.assetsImagesLoginAccountIcon,
       name: '账号登录',
+      value: 0,
       isSelected: true,
     ),
     TabItem(
       images: R.assetsImagesLoginPhoneIcon,
       name: '手机登录',
+      value: 1,
       isSelected: false,
     ),
   ];

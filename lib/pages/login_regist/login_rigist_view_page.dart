@@ -56,9 +56,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
               ),
             ),
 
-            child: Column(
-              children: [_topWdiget(), _tabWidget(), _subTabWidget()],
-            ),
+            child: Column(children: [_topWdiget(), _tabWidget(), _tabView()]),
           );
         },
       ),
@@ -82,7 +80,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
         borderRadius: BorderRadius.all(Radius.circular(24.h)),
       ),
       width: 344.w,
-      height: 45.h,
+      height: 50.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children:
@@ -133,6 +131,10 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
     );
   }
 
+  Widget _tabView() {
+    return Column(children: [_subTabWidget(), _accountTextView()]);
+  }
+
   Widget _subTabWidget() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -150,7 +152,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
               controller.update();
             });
           }).toList(),
-    ).marginOnly(top: 34.h, left: 32.w, right: 32.w);
+    ).marginOnly(top: 34.h, left: 16.w, right: 16.w);
   }
 
   Widget _subTabItem(LoginTabItem tabItem) {
@@ -175,53 +177,224 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
   }
 
   Widget _accountTextView() {
+    LoginTabItem tabItem = controller.loginTitle.firstWhere(
+      (e) => e.isSelected!,
+    );
+    return Column(
+      children:
+          tabItem.value == 0
+              ? [
+                CusTomTextField(
+                  keyboardType: TextInputType.emailAddress,
+                  height: 48.h,
+                  onChange: (val) {
+                    controller.setSubmitState();
+                  },
+                  boardColor: Color(0xFFFC3C3C),
+                  noboardColor: Color(0xFF2F4553),
+                  allRadius: 12.w,
+                  leftIcon: imageView(
+                    controller.tabs.firstWhere((e) => e.isSelected!).value == 0
+                        ? R.assetsImagesLoginTextfieldAccount
+                        : R.assetsImagesLoginTextfieldPhone,
+                    width: 18.w,
+                    height: 18.w,
+                  ).paddingOnly(left: 16.w, right: 12.w),
+                  controller: TextEditingController(),
+                  placeholder: '',
+                  usedInPassword: true,
+                  hintTextColor: Color(0xFFB3B7BD),
+                  textColor: Color(0xFF2D2D2D),
+                  textFontSize: 45.sp,
+                  hintTextFontSize: 36.sp,
+                  fontFamily: MyFontFamily.miSans,
+                  fontWeight: FontWeight.w600,
+                  hintFontWeight: FontWeight.w500,
+                ),
+                CusTomTextField(
+                  keyboardType: TextInputType.emailAddress,
+                  height: 48.h,
+                  onChange: (val) {
+                    controller.setSubmitState();
+                  },
+                  boardColor: Color(0xFFFC3C3C),
+                  noboardColor: Color(0xFF2F4553),
+                  allRadius: 12.w,
+                  leftIcon: imageView(
+                    controller.tabs.firstWhere((e) => e.isSelected!).value == 0
+                        ? R.assetsImagesLoginTextfieldPsw
+                        : R.assetsImagesLoginTextfieldVerfiy,
+                    width: 18.w,
+                    height: 18.w,
+                  ).paddingOnly(left: 16.w, right: 12.w),
+                  controller: TextEditingController(),
+                  placeholder: '',
+                  usedInPassword: true,
+                  hintTextColor: Color(0xFFB3B7BD),
+                  textColor: Color(0xFF2D2D2D),
+                  textFontSize: 45.sp,
+                  hintTextFontSize: 36.sp,
+                  fontFamily: MyFontFamily.miSans,
+                  fontWeight: FontWeight.w600,
+                  hintFontWeight: FontWeight.w500,
+                ),
+                Row(children: []),
+                _oprationBtns(isLogin: true),
+              ]
+              : tabItem.value == 1
+              ? [
+                CusTomTextField(
+                  keyboardType: TextInputType.emailAddress,
+                  height: 48.h,
+                  onChange: (val) {
+                    controller.setSubmitState();
+                  },
+                  boardColor: Color(0xFFFC3C3C),
+                  noboardColor: Color(0xFF2F4553),
+                  allRadius: 12.w,
+                  leftIcon: imageView(
+                    controller.tabs.firstWhere((e) => e.isSelected!).value == 0
+                        ? R.assetsImagesLoginTextfieldAccount
+                        : R.assetsImagesLoginTextfieldPhone,
+                    width: 18.w,
+                    height: 18.w,
+                  ).paddingOnly(left: 16.w, right: 12.w),
+                  controller: TextEditingController(),
+                  placeholder: '',
+                  usedInPassword: true,
+                  hintTextColor: Color(0xFFB3B7BD),
+                  textColor: Color(0xFF2D2D2D),
+                  textFontSize: 45.sp,
+                  hintTextFontSize: 36.sp,
+                  fontFamily: MyFontFamily.miSans,
+                  fontWeight: FontWeight.w600,
+                  hintFontWeight: FontWeight.w500,
+                ),
+                CusTomTextField(
+                  keyboardType: TextInputType.emailAddress,
+                  height: 48.h,
+                  onChange: (val) {
+                    controller.setSubmitState();
+                  },
+                  boardColor: Color(0xFFFC3C3C),
+                  noboardColor: Color(0xFF2F4553),
+                  allRadius: 12.w,
+                  leftIcon: imageView(
+                    controller.tabs.firstWhere((e) => e.isSelected!).value == 0
+                        ? R.assetsImagesLoginTextfieldPsw
+                        : R.assetsImagesLoginTextfieldVerfiy,
+                    width: 18.w,
+                    height: 18.w,
+                  ).paddingOnly(left: 16.w, right: 12.w),
+                  controller: TextEditingController(),
+                  placeholder: '',
+                  usedInPassword: true,
+                  hintTextColor: Color(0xFFB3B7BD),
+                  textColor: Color(0xFF2D2D2D),
+                  textFontSize: 45.sp,
+                  hintTextFontSize: 36.sp,
+                  fontFamily: MyFontFamily.miSans,
+                  fontWeight: FontWeight.w600,
+                  hintFontWeight: FontWeight.w500,
+                ),
+                CusTomTextField(
+                  keyboardType: TextInputType.emailAddress,
+                  height: 48.h,
+                  onChange: (val) {
+                    controller.setSubmitState();
+                  },
+                  boardColor: Color(0xFFFC3C3C),
+                  noboardColor: Color(0xFF2F4553),
+                  allRadius: 12.w,
+                  leftIcon: imageView(
+                    controller.tabs.firstWhere((e) => e.isSelected!).value == 0
+                        ? R.assetsImagesLoginTextfieldPsw
+                        : R.assetsImagesLoginTextfieldVerfiy,
+                    width: 18.w,
+                    height: 18.w,
+                  ).paddingOnly(left: 16.w, right: 12.w),
+                  controller: TextEditingController(),
+                  placeholder: '',
+                  usedInPassword: true,
+                  hintTextColor: Color(0xFFB3B7BD),
+                  textColor: Color(0xFF2D2D2D),
+                  textFontSize: 45.sp,
+                  hintTextFontSize: 36.sp,
+                  fontFamily: MyFontFamily.miSans,
+                  fontWeight: FontWeight.w600,
+                  hintFontWeight: FontWeight.w500,
+                ),
+                _oprationBtns(),
+              ]
+              : [
+                Container(
+                  width: 364.w,
+                  height: 105.h,
+                  padding: EdgeInsets.only(top: 15.h, left: 12.w, right: 12.w),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF162530),
+                    borderRadius: BorderRadius.circular(14.w),
+                  ),
+                  child: Text(
+                    '无需填写任何信息，点击一键注册；系统自主给您生成账户。\n\n 一键生成的账户，安全且唯一; 您可放心使用',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ).marginOnly(top: 24.h, right: 12.w, left: 12.w),
+                _oprationBtns(text: '一键注册'),
+              ],
+    );
+  }
+
+  Widget _oprationBtns({bool isLogin = false, String? text}) {
     return Column(
       children: [
-        CusTomTextField(
-          keyboardType: TextInputType.emailAddress,
-          height: 48.h,
-          onChange: (val) {
-            controller.setSubmitState();
-          },
-          boardColor: Color(0xFFFC3C3C),
-          noboardColor: Color(0xFF2F4553),
-          allRadius: 6.w,
-          leftIcon: Row(
-            children: [
-              // imageView(
-              //   icon,
-              //   width: 48.w,
-              //   height: 48.w,
-              // ).paddingOnly(left: 40.w, right: 40.w),
-              // Visibility(
-              //     visible: title.isNotEmpty,
-              //     child: Text(title,
-              //         style: TextStyle(
-              //           fontSize: 45.sp,
-              //           color: ColorManager.getColor(name: ColorsType.C_2D2D2D),
-              //           fontFamily: MyFontFamily.miSans,
-              //           fontWeight: FontWeight.w600,
-              //         )).paddingRight(30.w)),
-              Container(
-                width: 2.w,
-                height: 60.w,
-                // color: ColorManager.getColor(name: ColorsType.C_D9D9D9),
-              ).marginOnly(right: 40.w),
-            ],
+        Container(
+          width: 400.w,
+          height: 70.h,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(R.assetsImagesLoginConfirmBtn),
+              fit: BoxFit.fill,
+            ),
           ),
-          controller: TextEditingController(),
-          placeholder: '',
-          usedInPassword: true,
-          hintTextColor: Color(0xFFB3B7BD),
-          textColor: Color(0xFF2D2D2D),
-          textFontSize: 45.sp,
-          hintTextFontSize: 36.sp,
-          fontFamily: MyFontFamily.miSans,
-          fontWeight: FontWeight.w600,
-          hintFontWeight: FontWeight.w500,
+          child: Center(
+            child: Text(
+              isLogin ? '立即登录' : text ?? '立即注册',
+              style: TextStyle(
+                fontSize: 18.sp,
+                color: Color(0xFF703E00),
+                fontWeight: FontWeight.w600,
+              ),
+            ).marginOnly(bottom: 6.h),
+          ),
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Text(
+                  '已有账号？',
+                  style: TextStyle(fontSize: 12.sp, color: Color(0xFFB3BEC1)),
+                ),
+                Text(
+                  isLogin ? '去登录' : '去注册',
+                  style: TextStyle(fontSize: 12.sp, color: Color(0xFFF9C678)),
+                ),
+              ],
+            ),
+            Text(
+              '联系客服',
+              style: TextStyle(fontSize: 12.sp, color: Color(0xFFF9C678)),
+            ),
+          ],
+        ).marginOnly(left: 16.w, right: 16.w),
       ],
-    );
+    ).marginOnly(top: 45.h);
   }
 
   Widget _bottomButton({String? imgPath, String? name, Function? onTap}) {

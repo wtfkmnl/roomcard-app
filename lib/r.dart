@@ -214,6 +214,18 @@ class R {
   /// assets/images/iconNameEdit.png
   static const String assetsImagesIconNameEdit = "assets/images/iconNameEdit.png";
 
+  /// Assets for assetsImagesIconPhoneBindCode
+  /// assets/images/icon_phone_bind_code.png
+  static const String assetsImagesIconPhoneBindCode = "assets/images/icon_phone_bind_code.png";
+
+  /// Assets for assetsImagesIconPhoneBindEmail
+  /// assets/images/icon_phone_bind_email.png
+  static const String assetsImagesIconPhoneBindEmail = "assets/images/icon_phone_bind_email.png";
+
+  /// Assets for assetsImagesIconPhoneBindPhone
+  /// assets/images/icon_phone_bind_phone.png
+  static const String assetsImagesIconPhoneBindPhone = "assets/images/icon_phone_bind_phone.png";
+
   /// Assets for assetsImagesIconSafeValidate
   /// assets/images/iconSafeValidate.png
   static const String assetsImagesIconSafeValidate = "assets/images/iconSafeValidate.png";
@@ -269,6 +281,18 @@ class R {
   /// Assets for assetsImagesLoginBg
   /// assets/images/login_bg.png
   static const String assetsImagesLoginBg = "assets/images/login_bg.png";
+
+  /// Assets for assetsImagesLoginCheckS
+  /// assets/images/login_check_s.png
+  static const String assetsImagesLoginCheckS = "assets/images/login_check_s.png";
+
+  /// Assets for assetsImagesLoginCheckU
+  /// assets/images/login_check_u.png
+  static const String assetsImagesLoginCheckU = "assets/images/login_check_u.png";
+
+  /// Assets for assetsImagesLoginConfirmBtn
+  /// assets/images/login_confirm_btn.png
+  static const String assetsImagesLoginConfirmBtn = "assets/images/login_confirm_btn.png";
 
   /// Assets for assetsImagesLoginPhoneIcon
   /// assets/images/login_phone_icon.png
@@ -341,21 +365,5 @@ class R {
   /// Assets for assetsImagesPublic8fd456de
   /// assets/images/public/返回.svg
   static const String assetsImagesPublic8fd456de = "assets/images/public/返回.svg";
-
-  /// Assets for assetsAssetsIconAddAccount
-  /// assets/images/assetsIconAddAccount.png
-  static const String assetsIconAddAccount = "assets/images/iconAddAccount.png";
-
-  /// Assets for assetsIconPhoneBindPhone
-  /// assets/images/icon_phone_bind_phone.png
-  static const String assetsIconPhoneBindPhone = "assets/images/icon_phone_bind_phone.png";
-
-  /// Assets for assetsIconPhoneBindCode
-  /// assets/images/icon_phone_bind_code.png
-  static const String assetsIconPhoneBindCode = "assets/images/icon_phone_bind_code.png";
-
-  /// Assets for assetsIconPhoneBindEmail
-  /// assets/images/icon_phone_bind_email.png
-  static const String assetsIconPhoneBindEmail = "assets/images/icon_phone_bind_email.png";
 }
 

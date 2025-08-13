@@ -74,7 +74,7 @@ class BindEmailPage extends StatelessWidget {
         children: [
           16.horizontalSpace,
           // 邮箱图标
-          Image.asset(R.assetsIconPhoneBindEmail),
+          Image.asset(R.assetsImagesIconPhoneBindEmail),
 
           // 邮箱输入
           Expanded(
@@ -119,7 +119,7 @@ class BindEmailPage extends StatelessWidget {
         children: [
           16.horizontalSpace,
           // 验证码图标
-          Image.asset(R.assetsIconPhoneBindCode),
+          Image.asset(R.assetsImagesIconPhoneBindCode),
 
           // 验证码输入
           Expanded(
@@ -155,16 +155,16 @@ class BindEmailPage extends StatelessWidget {
                 margin: EdgeInsets.only(right: 16.w),
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                 decoration: BoxDecoration(
-                  gradient: state.canSendCode.value
-                      ? const LinearGradient(
-                          colors: [Color(0xFFBF9048), Color(0xFFF9C678)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        )
-                      : null,
-                  color: state.canSendCode.value
-                      ? null
-                      : const Color(0xFF37505E),
+                  gradient:
+                      state.canSendCode.value
+                          ? const LinearGradient(
+                            colors: [Color(0xFFBF9048), Color(0xFFF9C678)],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          )
+                          : null,
+                  color:
+                      state.canSendCode.value ? null : const Color(0xFF37505E),
                   borderRadius: BorderRadius.circular(6.r),
                 ),
                 child: Text(
@@ -172,9 +172,10 @@ class BindEmailPage extends StatelessWidget {
                       ? '${state.countdown.value}s'
                       : '获取验证码',
                   style: TextStyle(
-                    color: state.canSendCode.value
-                        ? const Color(0xFF703E00)
-                        : Colors.white54,
+                    color:
+                        state.canSendCode.value
+                            ? const Color(0xFF703E00)
+                            : Colors.white54,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),

@@ -61,9 +61,10 @@ class ChangeAccountPage extends StatelessWidget {
           ),
 
           Obx(
-            () => !state.isManageMode.value
-                ? GradientButton(text: '退出登录', onTap: logic.onLogout)
-                : const SizedBox.shrink(),
+            () =>
+                !state.isManageMode.value
+                    ? GradientButton(text: '退出登录', onTap: logic.onLogout)
+                    : const SizedBox.shrink(),
           ),
           135.verticalSpace,
         ],
@@ -145,43 +146,50 @@ class ChangeAccountPage extends StatelessWidget {
       return SizedBox(
         width: 48.w,
         height: 48.w,
-        child: Image.asset(R.assetsIconAddAccount, width: 48.w, height: 48.w),
+        child: Image.asset(
+          R.assetsImagesIconAddAccount,
+          width: 48.w,
+          height: 48.w,
+        ),
       );
     } else {
       // 有账号，显示头像
       return Container(
         width: 48.w,
         height: 48.w,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24.w),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(24.w)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24.w),
-          child: account.avatar.startsWith('http')
-              ? Image.network(
-                  account.avatar,
-                  width: 48.w,
-                  height: 48.w,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: 48.w,
-                      height: 48.w,
-                      color: const Color(0xFF37505E),
-                      child: Icon(
-                        Icons.person,
-                        color: Colors.white54,
-                        size: 24.w,
-                      ),
-                    );
-                  },
-                )
-              : Container(
-                  width: 48.w,
-                  height: 48.w,
-                  color: const Color(0xFF37505E),
-                  child: Icon(Icons.person, color: Colors.white54, size: 24.w),
-                ),
+          child:
+              account.avatar.startsWith('http')
+                  ? Image.network(
+                    account.avatar,
+                    width: 48.w,
+                    height: 48.w,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        width: 48.w,
+                        height: 48.w,
+                        color: const Color(0xFF37505E),
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.white54,
+                          size: 24.w,
+                        ),
+                      );
+                    },
+                  )
+                  : Container(
+                    width: 48.w,
+                    height: 48.w,
+                    color: const Color(0xFF37505E),
+                    child: Icon(
+                      Icons.person,
+                      color: Colors.white54,
+                      size: 24.w,
+                    ),
+                  ),
         ),
       );
     }

@@ -35,6 +35,7 @@ class CusTomTextField extends StatefulWidget {
   final double? textFieldPaddingLeft;
   final bool? isLineShow;
   final bool? showEyesWhenInput;
+  final Color? bgColor;
 
   const CusTomTextField({
     super.key,
@@ -60,6 +61,7 @@ class CusTomTextField extends StatefulWidget {
     this.colseIconIconleft,
     this.boardColor,
     this.allRadius,
+    this.bgColor,
     this.otherIcon,
     this.noboardColor,
     this.textFieldPaddingLeft,
@@ -120,7 +122,8 @@ class _LoginTextFieldState extends State<CusTomTextField> {
     return Container(
       height: widget.height,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24.w),
+        color: widget.bgColor ?? Color(0xFF0F212E),
+        borderRadius: BorderRadius.circular(widget.allRadius ?? 24.w),
         border: Border.all(
           color:
               widget.isLineShow == true
@@ -148,7 +151,7 @@ class _LoginTextFieldState extends State<CusTomTextField> {
                       .paddingOnly(left: 42.w, right: 42.w, top: 30.h),
                 ],
               ),
-    );
+    ).marginOnly(top: 12.h);
   }
 
   Widget tetxFiledView() {
@@ -201,7 +204,7 @@ class _LoginTextFieldState extends State<CusTomTextField> {
         _buildClearIcon(),
         _buildPasswordEyeIcon(),
         widget.otherIcon ?? SizedBox(),
-        SizedBox(width: 42.w),
+        SizedBox(width: 12.w),
       ],
     );
   }
@@ -238,14 +241,12 @@ class _LoginTextFieldState extends State<CusTomTextField> {
                 _obscurePassword
                     ? imageView(
                       R.assetsImagesApokerLoginCloseEyes,
-                      width: 48.w,
-                      height: 48.h,
+                      width: 20.w,
                       fit: BoxFit.fitWidth,
                     )
                     : imageView(
                       R.assetsImagesApokerLoginOpenEyes,
-                      width: 48.w,
-                      height: 48.h,
+                      width: 20.w,
                       fit: BoxFit.fitWidth,
                     ),
           ).paddingOnly(right: widget.colseIconIconRight ?? 0.w),
