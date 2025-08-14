@@ -5,6 +5,7 @@ import 'package:roomcard/global.dart';
 import 'package:roomcard/routes/app_router.dart';
 import 'package:roomcard/services/global_data_service.dart';
 import 'package:roomcard/utils/common_extension/common_extension.dart';
+import 'package:roomcard/utils/image_extension.dart';
 import '../../r.dart';
 import '../../widgets/common_app_bar.dart';
 import 'my_logic.dart';
@@ -18,24 +19,6 @@ class MyPage extends StatelessWidget {
     final state = logic.state;
     return Scaffold(
       backgroundColor: const Color(0xFF1C2C36),
-      appBar: AppBar(
-        title: const Text(
-          '我的',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack),
-          onPressed: () => Get.back(),
-        ),
-      ),
-      extendBodyBehindAppBar: true,
       body: Stack(
         children: [
           // 背景图层
@@ -54,10 +37,7 @@ class MyPage extends StatelessWidget {
             ),
           ),
           SingleChildScrollView(
-            padding: EdgeInsets.only(
-              top: kToolbarHeight + MediaQuery.of(context).padding.top + 20.h,
-              bottom: 100.h,
-            ),
+            padding: EdgeInsets.only(top: kToolbarHeight, bottom: 100.h),
             child: Column(
               children: [
                 // 用户信息卡片
@@ -101,7 +81,9 @@ class MyPage extends StatelessWidget {
                     end: Alignment.bottomRight,
                   ),
                 ),
-                child: const Icon(Icons.person, color: Colors.white, size: 33),
+                child: imageView(
+                  '${Global.instance.dicModel?.baseSiteConfig?.ossDomain}/${state.userAvatar}',
+                ),
               ),
             ),
           ).onTap(() {
@@ -183,7 +165,6 @@ class MyPage extends StatelessWidget {
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
                           colors: [Color(0xFFABB9C2), Color(0xFF839197)],
-                          // 从左到右的蓝紫渐变
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
                         ),
@@ -301,18 +282,17 @@ class MyPage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
-        children:
-            menuItems
-                .map(
-                  (item) => _buildMenuItem(
-                    icon: item['icon'] as String,
-                    title: item['title'] as String,
-                    color: item['color'] as Color,
-                    onTap: item['onTap'] as VoidCallback,
-                    isLast: item == menuItems.last,
-                  ),
-                )
-                .toList(),
+        children: menuItems
+            .map(
+              (item) => _buildMenuItem(
+                icon: item['icon'] as String,
+                title: item['title'] as String,
+                color: item['color'] as Color,
+                onTap: item['onTap'] as VoidCallback,
+                isLast: item == menuItems.last,
+              ),
+            )
+            .toList(),
       ),
     );
   }

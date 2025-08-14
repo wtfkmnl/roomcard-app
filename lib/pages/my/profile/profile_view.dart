@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../../global.dart';
 import '../../../r.dart';
+import '../../../utils/image_extension.dart';
 import 'profile_logic.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -81,6 +83,9 @@ class ProfilePage extends StatelessWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
+                      ),
+                      child: imageView(
+                        '${Global.instance.dicModel?.baseSiteConfig?.ossDomain}/${state.avatar}',
                       ),
                     ),
                     16.horizontalSpace,
@@ -262,19 +267,18 @@ class ProfilePage extends StatelessWidget {
               ),
               color: isSelected ? Color(0xFFFF6B9D) : Colors.transparent,
             ),
-            child:
-                isSelected
-                    ? Center(
-                      child: Container(
-                        width: 8.w,
-                        height: 8.w,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
+            child: isSelected
+                ? Center(
+                    child: Container(
+                      width: 8.w,
+                      height: 8.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
                       ),
-                    )
-                    : null,
+                    ),
+                  )
+                : null,
           ),
           8.horizontalSpace,
           Text(
