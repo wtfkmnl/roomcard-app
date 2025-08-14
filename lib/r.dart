@@ -278,6 +278,18 @@ class R {
   /// assets/images/login_account_icon.png
   static const String assetsImagesLoginAccountIcon = "assets/images/login_account_icon.png";
 
+  /// Assets for assetsImagesLoginAreaChoseClose
+  /// assets/images/login_area_chose_close.png
+  static const String assetsImagesLoginAreaChoseClose = "assets/images/login_area_chose_close.png";
+
+  /// Assets for assetsImagesLoginAreaChoseS
+  /// assets/images/login_area_chose_s.png
+  static const String assetsImagesLoginAreaChoseS = "assets/images/login_area_chose_s.png";
+
+  /// Assets for assetsImagesLoginAreaChoseU
+  /// assets/images/login_area_chose_u.png
+  static const String assetsImagesLoginAreaChoseU = "assets/images/login_area_chose_u.png";
+
   /// Assets for assetsImagesLoginBg
   /// assets/images/login_bg.png
   static const String assetsImagesLoginBg = "assets/images/login_bg.png";
@@ -326,6 +338,14 @@ class R {
   /// assets/images/login_textfield_verfiy.png
   static const String assetsImagesLoginTextfieldVerfiy = "assets/images/login_textfield_verfiy.png";
 
+  /// Assets for assetsImagesLoginVerifyCodeBtnS
+  /// assets/images/login_verify_code_btn_s.png
+  static const String assetsImagesLoginVerifyCodeBtnS = "assets/images/login_verify_code_btn_s.png";
+
+  /// Assets for assetsImagesLoginVerifyCodeBtnU
+  /// assets/images/login_verify_code_btn_u.png
+  static const String assetsImagesLoginVerifyCodeBtnU = "assets/images/login_verify_code_btn_u.png";
+
   /// Assets for assetsImagesPublic517395ed630994ae
   /// assets/images/public/关闭按钮.png
   static const String assetsImagesPublic517395ed630994ae = "assets/images/public/关闭按钮.png";
@@ -365,5 +385,9 @@ class R {
   /// Assets for assetsImagesPublic8fd456de
   /// assets/images/public/返回.svg
   static const String assetsImagesPublic8fd456de = "assets/images/public/返回.svg";
+
+  /// Assets for assetsImagesVerifyCodeBtn
+  /// assets/images/verify_code_btn.png
+  static const String assetsImagesVerifyCodeBtn = "assets/images/verify_code_btn.png";
 }
 

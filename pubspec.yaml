@@ -63,6 +63,7 @@ dependencies:
   phone_numbers_parser: ^9.0.1
   timezone: ^0.9.3
   flutter_keyboard_visibility: ^6.0.0
+  uuid: ^4.3.2
 
 # Flutter Launcher Icons 配置
 flutter_launcher_icons:

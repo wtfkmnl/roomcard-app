@@ -10,10 +10,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:roomcard/api/app_config.dart';
+import 'package:roomcard/api/user.dart';
 import 'package:roomcard/global.dart';
 import 'package:roomcard/models/login_regist/index.dart';
 import 'package:roomcard/models/member_info_model.dart';
 import 'package:roomcard/r.dart';
+import 'package:roomcard/services/global_data_service.dart';
 import 'package:roomcard/utils/Tools.dart';
 import 'package:roomcard/utils/commonUtils.dart';
 import 'package:roomcard/utils/common_extension/common_extension.dart';
@@ -150,7 +152,6 @@ class LoginRigistController extends GetxController
     isRememberPwd.value =
         await StorageUtil.getBool(Constants.storageRememberPassword) ?? false;
     placeStorgeAccountPassword();
-
     update();
   }
 
@@ -382,58 +383,79 @@ class LoginRigistController extends GetxController
         "memberName": "",
       };
     } else {
-      // if (registType.value == false) {
-      if (psdRegistTEC.text.isEmpty) {
-        // ToastUtils.showToast(msg: "inputAcctPwd".tr);
-        return;
-      }
-      if (!isMatchAccountValidateInput(accountRegistTEC.text)) {
-        // ToastUtils.showToast(msg: "账号格式不正确".tr);
-        return;
+      if (tabs.firstWhere((e) => e.isSelected!).value == 0) {
+        ///账号注册
+
+        if (psdRegistTEC.text.isEmpty) {
+          // ToastUtils.showToast(msg: "inputAcctPwd".tr);
+          return;
+        }
+
+        if (!isMatchAccountValidateInput(accountRegistTEC.text)) {
+          // ToastUtils.showToast(msg: "账号格式不正确".tr);
+          return;
+        }
+
+        if (psdRegistTEC.text.isEmpty) {
+          // ToastUtils.showToast(msg: "inputAcctPwd".tr);
+          return;
+        }
+
+        if (!isMatchPwdValidateInput(psdRegistTEC.text)) {
+          // ToastUtils.showToast(msg: "loginPasswordLimit".tr);
+          return;
+        }
+
+        if (psdRegistTEC.text != configPsdTEC.text) {
+          // ToastUtils.showToast(msg: "agTwoPasswordsAreInconsistent".tr);
+          return;
+        }
+      } else {
+        if (accountPhoneRequired() &&
+            !RegExp(r'^1[3-9]\d{9}$').hasMatch(phoneRegistTEC.text)) {
+          // ToastUtils.showToast(msg: "请输入正确的手机号".tr);
+          return;
+        }
+
+        if (phoneCodeRegistTEC.text.isEmpty) {
+          return;
+        }
       }
 
-      if (psdRegistTEC.text.isEmpty) {
-        // ToastUtils.showToast(msg: "inputAcctPwd".tr);
-        return;
-      }
-
-      if (!isMatchPwdValidateInput(psdRegistTEC.text)) {
-        // ToastUtils.showToast(msg: "loginPasswordLimit".tr);
-        return;
-      }
-      if (psdRegistTEC.text != configPsdTEC.text) {
-        // ToastUtils.showToast(msg: "agTwoPasswordsAreInconsistent".tr);
-        return;
-      }
-
-      if (memberNameRequired()) {
-        // ToastUtils.showToast(msg: "请输入姓名".tr);
-        return;
-      }
-      if (invitationCodeRequired()) {
-        // ToastUtils.showToast(msg: "请输入邀请码".tr);
-        return;
-      }
-      if (accountPhoneRequired() &&
-          !RegExp(r'^1[3-9]\d{9}$').hasMatch(accountPhoneTEC.text)) {
-        // ToastUtils.showToast(msg: "请输入正确的手机号".tr);
-        return;
-      }
+      // // if (memberNameRequired()) {
+      // //   // ToastUtils.showToast(msg: "请输入姓名".tr);
+      // //   return;
+      // // }
+      // if (invitationCodeRequired()) {
+      //   // ToastUtils.showToast(msg: "请输入邀请码".tr);
+      //   return;
+      // }
 
       var inviteCode = inviteCodeTEC.text;
       if (inviteCode.isEmpty) {
         // inviteCode = Global.instance.openShareDataModel.invitationCode;
       }
 
-      params = {
-        "memberId": accountRegistTEC.text,
-        "memberPwd": Tools.generateMd5(psdRegistTEC.text),
-        "telephone": accountPhoneTEC.text,
-        "smsCode": "",
-        "requestMethod": 0,
-        "memberName": memberNameTEC.text,
-        "invitationCode": inviteCode,
-      };
+      params =
+          tabs.firstWhere((e) => e.isSelected!).value == 0
+              ? {
+                "memberId": accountRegistTEC.text,
+                "memberPwd": Tools.generateMd5(psdRegistTEC.text),
+                "telephone": '',
+                "smsCode": '',
+                "requestMethod": 0,
+                "memberName": memberNameTEC.text,
+                "invitationCode": inviteCode,
+              }
+              : {
+                "memberId": phoneRegistTEC.text,
+                "memberPwd": '', //Tools.generateMd5(psdRegistTEC.text),
+                "telephone": phoneRegistTEC.text,
+                "smsCode": phoneCodeRegistTEC.text,
+                "requestMethod": 0,
+                "memberName": memberNameTEC.text,
+                "invitationCode": inviteCode,
+              };
     }
     params['deviceType'] = await Tools.getDevice();
     params['areaCode'] = countryData[codeIndexs.value].code;
@@ -474,49 +496,39 @@ class LoginRigistController extends GetxController
     Map<String, dynamic> params,
     bool oneClickRegistration,
   ) async {
-    // MemberInfoModel? model;
-    // if (oneClickRegistration) {
-    //   model = await UserApi.clickRegister(params);
-    // } else {
-    //   model = await UserApi.register(params);
-    // }
+    MemberInfoModel? model;
+    if (oneClickRegistration) {
+      model = await UserApi.clickRegister(params);
+    } else {
+      model = await UserApi.register(params);
+    }
 
-    // if (model != null) {
-    //   Storage().setString(Constants.storageMemberInfo, jsonEncode(model));
-    //   Global.instance.memberInfo = model;
-    //   GlobalDataService.instance.isLogin = true;
-    //   SharedEventBus.eventBus.fire(LoginStatusEvent());
+    if (model != null) {
+      StorageUtil.setString(Constants.storageMemberInfo, jsonEncode(model));
+      Global.instance.memberInfo = model;
+      GlobalDataService.instance.isLogin = true;
 
-    //   // ToastUtils.showToast(msg: "注册成功".tr);
-    //   if (oneClickRegistration) {
-    //     await loginSucces(
-    //       memberInfo: model,
-    //       account: memberIdRandom,
-    //       password: memberPwdRandom,
-    //     );
-    //     // SharedEventBus.eventBus.fire(ShowAfterClickRegisterDialog(
-    //     //   memberIdRandom: memberIdRandom,
-    //     //   memberPwdRandom: memberPwdRandom,
-    //     // ));
-    //   } else {
-    //     await loginSucces(
-    //       memberInfo: model,
-    //       account: accountRegistTEC.text,
-    //       password: psdRegistTEC.text,
-    //     );
-    //     // SharedEventBus.eventBus.fire(ShowAfterBindingPhoneDialog(
-    //     //     hasBind: model.telephone != null && model.telephone!.isNotEmpty));
-    //   }
-
-    //   SharedEventBus.eventBus.fire(
-    //     LoginSuccessEvent(
-    //       isClickLogin: oneClickRegistration,
-    //       memberIdRandom: memberIdRandom,
-    //       memberPwdRandom: memberPwdRandom,
-    //       hasBindPhone: model.telephone != null && model.telephone!.isNotEmpty,
-    //     ),
-    //   );
-    // }
+      // ToastUtils.showToast(msg: "注册成功".tr);
+      if (oneClickRegistration) {
+        await loginSucces(
+          memberInfo: model,
+          account: memberIdRandom,
+          password: memberPwdRandom,
+        );
+        // SharedEventBus.eventBus.fire(ShowAfterClickRegisterDialog(
+        //   memberIdRandom: memberIdRandom,
+        //   memberPwdRandom: memberPwdRandom,
+        // ));
+      } else {
+        await loginSucces(
+          memberInfo: model,
+          account: accountRegistTEC.text,
+          password: psdRegistTEC.text,
+        );
+        // SharedEventBus.eventBus.fire(ShowAfterBindingPhoneDialog(
+        //     hasBind: model.telephone != null && model.telephone!.isNotEmpty));
+      }
+    }
   }
 
   isRememberPassword() {
