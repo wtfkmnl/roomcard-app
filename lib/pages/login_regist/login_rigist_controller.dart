@@ -73,9 +73,9 @@ class LoginRigistController extends GetxController
   final statusFilterOpen = false.obs;
 
   List<LoginTabItem> loginTitle = [
-    LoginTabItem(name: "一键注册", value: 3, isSelected: false),
+    // LoginTabItem(name: "一键注册", value: 3, isSelected: false),
     LoginTabItem(name: "登录", value: 0, isSelected: true),
-    LoginTabItem(name: "注册", value: 1, isSelected: false),
+    // LoginTabItem(name: "注册", value: 1, isSelected: false),
   ];
 
   List<TabItem> tabs = [
@@ -137,6 +137,8 @@ class LoginRigistController extends GetxController
   @override
   void onInit() async {
     super.onInit();
+
+    requestConfigInfo();
     // loginTitle = [LoginTabItem(name: "登录", value: 0, isSelected: true)];
     // OpenshareDataHandle.handleData();
 
@@ -148,8 +150,6 @@ class LoginRigistController extends GetxController
   @override
   void onReady() async {
     super.onReady();
-
-    // requestConfigInfo();
 
     isRememberPwd.value =
         await StorageUtil.getBool(Constants.storageRememberPassword) ?? false;
@@ -177,6 +177,8 @@ class LoginRigistController extends GetxController
         }
       }
     });
+
+    update();
 
     return model;
   }
@@ -453,7 +455,7 @@ class LoginRigistController extends GetxController
               }
               : {
                 "memberId": phoneRegistTEC.text,
-                "memberPwd": '', //Tools.generateMd5(psdRegistTEC.text),
+                "memberPwd": Tools.generateMd5("a12345678"), //psdRegistTEC.text
                 "telephone": phoneRegistTEC.text,
                 "smsCode": phoneCodeRegistTEC.text,
                 "requestMethod": 0,

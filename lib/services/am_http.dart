@@ -9,6 +9,8 @@ import 'package:roomcard/global.dart';
 import 'package:roomcard/services/global_data_service.dart';
 import 'package:roomcard/utils/Tools.dart';
 import 'package:roomcard/utils/commonUtils.dart';
+import 'package:roomcard/utils/storage_util.dart';
+import 'package:roomcard/utils/values/constants.dart';
 import 'am_interceptor.dart';
 
 enum BaseResCode {
@@ -292,8 +294,11 @@ dynamic dealResData(Response response) {
             response.requestOptions.path.contains("getLoginAndRegisterSetting");
         if (isAgent) {
           //代理的特殊处理
+          dealLoginAndRegisterSettingForAgent(response);
         } else if (isFeedback) {
-        } else {}
+        } else {
+          dealLoginAndRegisterSetting(response);
+        }
       }
       if (responseData['result'] != null &&
           !path.contains("tc/submitTransferOrder")) {
@@ -354,6 +359,60 @@ dynamic dealResData(Response response) {
     }
 
     return null;
+  }
+}
+
+dealLoginAndRegisterSetting(Response response) async {
+  String path = response.requestOptions.path;
+  if (path.contains('getLoginAndRegisterSetting') ||
+      path.contains('loginMember') ||
+      path.contains('newMember')) {
+    String? contentLen = response.headers['content-lengths']?[0];
+    await StorageUtil.setString(Constants.storageContentLen, contentLen ?? "");
+    Global.instance.registerVerifyType = contentLen?[1];
+    Global.instance.loginVerifyType = contentLen?[2];
+
+    String? xAuthToken = response.headers['x-auth-token']?[0];
+
+    printSome("$path : x-auth-token $xAuthToken");
+
+    if (xAuthToken != null) {
+      String last = contentLen!.substring(contentLen.length - 1);
+      String auth = xAuthToken.replaceAll(last, '');
+      String authorization = Tools.generateMd5(auth);
+
+      Global.instance.contentLen = contentLen;
+      Global.instance.xAuthToken = xAuthToken;
+      Global.instance.authorization = authorization;
+
+      await StorageUtil.setString(Constants.storageXAuthToken, xAuthToken);
+      await StorageUtil.setString(
+        Constants.storageAuthorization,
+        authorization,
+      );
+    }
+  }
+}
+
+dealLoginAndRegisterSettingForAgent(Response response) async {
+  String path = response.requestOptions.path;
+  if (path.contains('getLoginAndRegisterSetting') ||
+      path.contains('loginMember') ||
+      path.contains('newMember')) {
+    String? contentLen = response.headers['content-lengths']?[0];
+    String? xAuthToken = response.headers['x-auth-token']?[0];
+
+    if (xAuthToken != null) {
+      String last = contentLen!.substring(contentLen.length - 1);
+      String auth = xAuthToken.replaceAll(last, '');
+      String authorization = Tools.generateMd5(auth);
+
+      await StorageUtil.setString(Constants.storageXAuthTokenAgent, xAuthToken);
+      await StorageUtil.setString(
+        Constants.storageAuthorizationAgent,
+        authorization,
+      );
+    }
   }
 }
 
