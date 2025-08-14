@@ -1,10 +1,16 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:roomcard/global.dart';
 import 'package:roomcard/manager/app_manager.dart';
+import 'package:roomcard/models/acct_info_model.dart';
+import 'package:roomcard/models/archive_config_model.dart';
 import 'package:roomcard/routes/app_pages.dart';
 import 'package:roomcard/routes/app_router.dart';
 import 'package:roomcard/services/am_http.dart';
@@ -13,7 +19,9 @@ import 'package:roomcard/services/global_data_service.dart';
 import 'package:roomcard/services/sp_http.dart';
 import 'package:roomcard/utils/Tools.dart';
 import 'package:roomcard/utils/app_font_style.dart';
+import 'package:roomcard/utils/commonUtils.dart';
 import 'package:roomcard/utils/storage_util.dart';
+import 'package:roomcard/utils/values/constants.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'observer/getx_router_observer.dart';
 import 'observer/keyboard_observer.dart';
@@ -48,6 +56,7 @@ Future<void> initializeApp() async {
   await StorageUtil.init();
   await AppManager().init();
   tz.initializeTimeZones();
+  await getArchiveConfig();
   Get.put(GlobalDataService());
   await Future.wait([
     Get.putAsync<ConfigService>(() async => await ConfigService().init()),
@@ -195,4 +204,25 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+Future getArchiveConfig() async {
+  var v = StorageUtil.getString(Constants.storageAppInfoData);
+  if (v.isNotEmpty) {
+    var appInfo = AppInfo.fromJson(jsonDecode(v));
+    Global.instance.appInfo = appInfo;
+  }
+
+  var data = await rootBundle.loadString(
+    kReleaseMode
+        ? "assets/archive_config.json"
+        : "assets/archive_config_test.json",
+  );
+  var model = ArchiveConfigModel.fromJson(jsonDecode(data));
+  if (model.siteType != "V1") {
+    model.siteType = "V3";
+  }
+  Global.instance.archiveModel = model;
+
+  printSome("站点 ${model.sIte}");
 }

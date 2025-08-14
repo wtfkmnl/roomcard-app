@@ -130,6 +130,8 @@ flutter:
     - assets/images/public/
     - assets/images/home/
     - assets/images/game/
+    - assets/archive_config.json
+    - assets/archive_config_test.json
     - lib/r.dart
 
   fonts:
