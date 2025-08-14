@@ -16,7 +16,6 @@ class MyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final logic = Get.put(MyLogic());
     final state = logic.state;
-    Global.instance.memberInfo;
     return Scaffold(
       backgroundColor: const Color(0xFF1C2C36),
       appBar: AppBar(
@@ -273,12 +272,12 @@ class MyPage extends StatelessWidget {
         'color': const Color(0xFF96CEB4),
         'onTap': logic.onGameRecordTap,
       },
-      {
-        'icon': R.assetsImagesIconMineMenuChess,
-        'title': '牌谱',
-        'color': const Color(0xFFFECEA8),
-        'onTap': logic.onCardRecordTap,
-      },
+      // {
+      //   'icon': R.assetsImagesIconMineMenuChess,
+      //   'title': '牌谱',
+      //   'color': const Color(0xFFFECEA8),
+      //   'onTap': logic.onCardRecordTap,
+      // },
       {
         'icon': R.assetsImagesIconMineMenuNews,
         'title': '消息公告',

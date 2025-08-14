@@ -54,8 +54,7 @@ class SafeManagerLogic extends BaseController<SafeManagerState> {
   /// 修改密码点击
   void onChangePasswordTap() {
     print('修改密码');
-    // TODO: 实现修改密码功能
-    _showChangePasswordDialog();
+    Get.toNamed(AppRouter.mineChangePassword.path);
   }
 
   /// 安全验证说明图标点击

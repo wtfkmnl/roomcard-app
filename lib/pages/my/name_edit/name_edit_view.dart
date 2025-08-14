@@ -42,26 +42,23 @@ class NameEditPage extends StatelessWidget {
                           : const Color(0xFFB3BEC1).withOpacity(0.3),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(8),
-                    onTap: state.canSave.value ? logic.saveNickname : null,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 6.h,
-                      ),
-                      child: Text(
-                        '完成',
-                        style: TextStyle(
-                          color:
-                              state.canSave.value
-                                  ? const Color(0xFF703E00)
-                                  : const Color(0xFFB3BEC1),
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(8),
+                  onTap: state.canSave.value ? logic.saveNickname : null,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 6.h,
+                    ),
+                    child: Text(
+                      '完成',
+                      style: TextStyle(
+                        color:
+                        state.canSave.value
+                            ? const Color(0xFF703E00)
+                            : const Color(0xFFB3BEC1),
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
