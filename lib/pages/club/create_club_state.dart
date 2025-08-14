@@ -19,6 +19,23 @@ class CreateClubState extends BaseState with StateAutoManager {
   /// 选中的地区
   final selectedLocation = '中国'.obs;
   
+  /// 当前选中的头像
+  final selectedAvatar = 'assets/images/club/img_club_head_0.png'.obs;
+  
+  /// 可选择的头像列表
+  final List<String> avatarOptions = [
+    'assets/images/club/img_club_head_0.png',
+    'assets/images/club/img_club_head_1.png',
+    'assets/images/club/img_club_head_2.png',
+    'assets/images/club/img_club_head_3.png',
+    'assets/images/club/img_club_head_4.png',
+    'assets/images/club/img_club_head_5.png',
+    'assets/images/club/img_club_head_6.png',
+    'assets/images/club/img_club_head_7.png',
+    'assets/images/club/img_club_head_8.png',
+    'assets/images/club/img_club_head_9.png',
+  ];
+  
   @override
   void onClose() {
     clubNameController.dispose();

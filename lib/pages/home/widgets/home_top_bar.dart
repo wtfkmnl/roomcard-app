@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:roomcard/utils/common_extension/common_extension.dart';
 import 'package:roomcard/utils/num_px.dart';
 import 'package:roomcard/theme/app_theme.dart';
+import '../../../r.dart';
 import '../home_logic.dart';
 
 /// 首页顶部导航栏组件
@@ -105,7 +106,7 @@ class HomeTopBar extends StatelessWidget {
                Gap(10.pxw),
                Container(
                  width: 14.pxw,height: 14.pxh,
-                 child: Image.asset('assets/images/home/Vector (2).png' ,    fit: BoxFit.contain,),
+                 child: Image.asset(R.assetsImagesHomeVector,    fit: BoxFit.contain,),
                )
              ],
            ),

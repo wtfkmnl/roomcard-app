@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:gap/gap.dart';
 import 'package:roomcard/utils/num_px.dart';
 import 'package:roomcard/theme/app_theme.dart';
+import '../../widgets/common_app_bar.dart';
+import '../../widgets/buttons/confirm_button.dart';
+import '../../widgets/avatar_picker.dart';
 import 'create_club_logic.dart';
 
 /// 创建俱乐部页面
@@ -20,25 +23,27 @@ class _CreateClubPageState extends State<CreateClubPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A1A),
+      appBar: const CommonAppBar(title: '创建俱乐部'),
+      backgroundColor: const Color(0xFF1C2C36),
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Column(
-          children: [
-            // 头部
-            _buildHeader(),
-            
-            Gap(32.pxh),
-            
-            // 俱乐部标志区域
-            _buildClubLogoSection(),
-            
-            Gap(32.pxh),
-            
-            // 输入字段区域
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.pxw),
-                child: Column(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20.pxh,
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18.pxw),
+            child: Column(
+              children: [
+                Gap(58.pxh),
+                
+                // 俱乐部标志区域
+                _buildClubLogoSection(),
+                
+                Gap(32.pxh),
+                
+                // 输入字段区域
+                Column(
                   children: [
                     // 俱乐部名称
                     _buildInputField(
@@ -59,7 +64,7 @@ class _CreateClubPageState extends State<CreateClubPage> {
                     // 俱乐部公告
                     _buildAnnouncementField(),
                     
-                    const Spacer(),
+                    Gap(48.pxh),
                     
                     // 创建按钮
                     _buildCreateButton(),
@@ -67,55 +72,10 @@ class _CreateClubPageState extends State<CreateClubPage> {
                     Gap(32.pxh),
                   ],
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
-    );
-  }
-
-  /// 构建头部
-  Widget _buildHeader() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 18.pxw, vertical: 16.pxh),
-      child: Row(
-        children: [
-          // 返回按钮
-          GestureDetector(
-            onTap: () => Get.back(),
-            child: Container(
-              width: 40.pxw,
-              height: 40.pxh,
-              decoration: BoxDecoration(
-                color: const Color(0xFF3A3A3A),
-                borderRadius: BorderRadius.circular(8.pxw),
-              ),
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-                size: 20.pxw,
-              ),
-            ),
-          ),
-          
-          const Spacer(),
-          
-          // 标题
-          Text(
-            '创建俱乐部',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18.pxSp,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          
-          const Spacer(),
-          
-          // 占位，保持标题居中
-          SizedBox(width: 40.pxw),
-        ],
       ),
     );
   }
@@ -128,30 +88,23 @@ class _CreateClubPageState extends State<CreateClubPage> {
         Stack(
           alignment: Alignment.bottomRight,
           children: [
-            Container(
-              width: 120.pxw,
-              height: 120.pxh,
+            Obx(() => Container(
+              width: 100.pxw,
+              height: 100.pxh,
               decoration: BoxDecoration(
+                color: const Color(0x2ED9D9D9),
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage('assets/images/home/俱乐部.png'),
+                  image: AssetImage(state.selectedAvatar.value),
                   fit: BoxFit.cover,
                 ),
               ),
-            ),
-            // 编辑图标
-            Container(
-              width: 32.pxw,
-              height: 32.pxh,
-              decoration: BoxDecoration(
-                color: const Color(0xFFFF6B35),
-                borderRadius: BorderRadius.circular(6.pxw),
-              ),
-              child: Icon(
-                Icons.edit,
-                color: Colors.white,
-                size: 18.pxw,
-              ),
+            )),
+            // 头像选择器
+            AvatarPicker(
+              currentAvatar: state.selectedAvatar.value,
+              onAvatarSelected: (avatarPath) => logic.selectAvatar(avatarPath),
+              avatarOptions: state.avatarOptions,
             ),
           ],
         ),
@@ -198,8 +151,23 @@ class _CreateClubPageState extends State<CreateClubPage> {
         Container(
           height: 48.pxh,
           decoration: BoxDecoration(
-            color: const Color(0xFF2A2A2A),
+            color: const Color(0xFF0F212E),
             borderRadius: BorderRadius.circular(8.pxw),
+            border: Border.all(color: const Color(0xFF2F4553), width: 2.pxw),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x33000000), // 对应 #00000033
+                offset: Offset(0, 1),
+                blurRadius: 3,
+                spreadRadius: 0,
+              ),
+              BoxShadow(
+                color: Color(0x1F000000), // 对应 #0000001F
+                offset: Offset(0, 1),
+                blurRadius: 2,
+                spreadRadius: 0,
+              ),
+            ],
           ),
           child: Row(
             children: [
@@ -207,6 +175,8 @@ class _CreateClubPageState extends State<CreateClubPage> {
                 child: TextField(
                   controller: controller,
                   onChanged: onChanged,
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.text,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14.pxSp,
@@ -267,8 +237,23 @@ class _CreateClubPageState extends State<CreateClubPage> {
             height: 48.pxh,
             padding: EdgeInsets.symmetric(horizontal: 16.pxw),
             decoration: BoxDecoration(
-              color: const Color(0xFF2A2A2A),
+              color: const Color(0xFF0F212E),
               borderRadius: BorderRadius.circular(8.pxw),
+              border: Border.all(color: const Color(0xFF2F4553), width: 2.pxw),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0x33000000), // 对应 #00000033
+                  offset: Offset(0, 1),
+                  blurRadius: 3,
+                  spreadRadius: 0,
+                ),
+                BoxShadow(
+                  color: Color(0x1F000000), // 对应 #0000001F
+                  offset: Offset(0, 1),
+                  blurRadius: 2,
+                  spreadRadius: 0,
+                ),
+              ],
             ),
             child: Row(
               children: [
@@ -327,8 +312,23 @@ class _CreateClubPageState extends State<CreateClubPage> {
         Container(
           height: 120.pxh,
           decoration: BoxDecoration(
-            color: const Color(0xFF2A2A2A),
+            color: const Color(0xFF0F212E),
             borderRadius: BorderRadius.circular(8.pxw),
+            border: Border.all(color: const Color(0xFF2F4553), width: 2.pxw),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x33000000), // 对应 #00000033
+                offset: Offset(0, 1),
+                blurRadius: 3,
+                spreadRadius: 0,
+              ),
+              BoxShadow(
+                color: Color(0x1F000000), // 对应 #0000001F
+                offset: Offset(0, 1),
+                blurRadius: 2,
+                spreadRadius: 0,
+              ),
+            ],
           ),
           child: Stack(
             children: [
@@ -338,6 +338,8 @@ class _CreateClubPageState extends State<CreateClubPage> {
                 onChanged: (value) => state.announcementLength.value = value.length,
                 maxLines: null,
                 expands: true,
+                textInputAction: TextInputAction.done,
+                keyboardType: TextInputType.multiline,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 14.pxSp,
@@ -374,34 +376,9 @@ class _CreateClubPageState extends State<CreateClubPage> {
 
   /// 构建创建按钮
   Widget _buildCreateButton() {
-    return Container(
-      width: double.infinity,
-      height: 48.pxh,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFFFD700), Color(0xFFDAA520)],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
-        borderRadius: BorderRadius.circular(8.pxw),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () => logic.createClub(),
-          borderRadius: BorderRadius.circular(8.pxw),
-          child: Center(
-            child: Text(
-              '创建',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16.pxSp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ),
-      ),
+    return ConfirmButton(
+      text: '创建',
+      onTap: () => logic.createClub(),
     );
   }
 } 

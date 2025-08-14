@@ -20,7 +20,7 @@ class MyGamesSection extends StatelessWidget {
       height: 48.pxh,
       decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/home/Rectangle 346271929.png'),
+            image: AssetImage('assets/images/home/title_bar_bg.png'),
             fit: BoxFit.fill,
           ),
         borderRadius: BorderRadius.circular(8.pxw),

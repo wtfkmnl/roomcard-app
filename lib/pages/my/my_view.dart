@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:roomcard/routes/app_router.dart';
 import 'package:roomcard/utils/common_extension/common_extension.dart';
 import '../../r.dart';
+import '../../widgets/common_app_bar.dart';
 import 'my_logic.dart';
 
 class MyPage extends StatelessWidget {

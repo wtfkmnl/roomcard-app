@@ -28,25 +28,56 @@ class GameActionSection extends StatelessWidget {
           // 左侧按钮
           Positioned(
             left: 12.pxw,
-            child: _button(
-              186.pxw,
-              66.pxh,
-              'assets/images/home/俱乐部-主页-创建按钮.png',
-              leftTitle,
-              leftOnTap,
-            ),
+            child:
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/home/create_club_btn.png'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                width:   186.pxw,
+                height:   66.pxh,
+                child: Stack(
+                  children: [
+                    Positioned(left: 22.pxw,top:-8.pxh,child:  Container(width: 54.pxw, height: 62.pxh, child: Image.asset('assets/images/home/btn_icon_2.png'))),
+                    Center(
+                      child: Text(leftTitle,style: TextStyle(
+                        fontSize: 14.pxSp,
+                        fontWeight: FontWeight.w600,
+                      )).paddingOnly(bottom: 10.pxh,left: 40.pxw),
+                    )
+                  ],
+                ),
+              ).onTap(leftOnTap)
           ),
           // 右侧按钮
           Positioned(
             top: 5.pxh,
             right: 12.pxw,
-            child: _button(
-              186.pxw,
-             61.pxh,
-             'assets/images/home/俱乐部-主页-加入按钮.png',
-              rightTitle,
-              rightOnTap,
-            ),
+            child:
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/home/add_club_btn.png'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                width:   186.pxw,
+                height:   61.pxh,
+                child: Stack(
+
+                  children: [
+                    Positioned(left: 22.pxw,top:-8.pxh,child:  Container(width: 67.pxw, height: 56.pxh, child: Image.asset('assets/images/home/btn_icon_1.png'))),
+                    Center(
+                      child: Text(rightTitle,style: TextStyle(
+                        fontSize: 14.pxSp,
+                        fontWeight: FontWeight.w600,
+                      )).paddingOnly(bottom: 10.pxh,left: 50.pxw),
+                    )
+                  ],
+                ),
+              ).onTap(rightOnTap)
           ),
         ],
       ),
@@ -63,11 +94,17 @@ class GameActionSection extends StatelessWidget {
       ),
       width: width,
       height: height,
-      child: Center(
-        child: Text(title,style: TextStyle(
-          fontSize: 14.pxSp,
-          fontWeight: FontWeight.w600,
-        )).paddingOnly(bottom: 10.pxh,left: 40.pxw),
+      child: Stack(
+
+        children: [
+         Positioned(left: 20.pxw,child:  Container(width: 56.pxw, height: 46.pxh, child: Image.asset('assets/images/home/btn_icon_1.png'))),
+          Center(
+            child: Text(title,style: TextStyle(
+              fontSize: 14.pxSp,
+              fontWeight: FontWeight.w600,
+            )).paddingOnly(bottom: 10.pxh,left: 40.pxw),
+          )
+        ],
       ),
     ).onTap(
       onTap

@@ -36,7 +36,7 @@ class ClubCardListWidget extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 16.pxh),
       padding: EdgeInsets.only(left: 17.pxh, top: 16.pxh, right: 17.pxh),
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('assets/images/俱乐部-列表-子项.png'), fit: BoxFit.fill),
+        image: DecorationImage(image: AssetImage('assets/images/club/club_list_bg.png'), fit: BoxFit.fill),
         color: const Color(0xFF2A3A4A),
         borderRadius: BorderRadius.circular(12.pxw),
       ),
@@ -54,7 +54,7 @@ class ClubCardListWidget extends StatelessWidget {
                       height: 60.pxh,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        image: DecorationImage(image: AssetImage(club.avatarPath), fit: BoxFit.cover),
+                        image: DecorationImage(image: AssetImage('assets/images/club/img_club_head_0.png'), fit: BoxFit.cover),
                       ),
                     ),
                     Gap(14.pxw),
@@ -72,7 +72,7 @@ class ClubCardListWidget extends StatelessWidget {
                           // 俱乐部ID
                           Row(
                             children: [
-                              Container(width: 16.pxw, height: 16.pxh, child: Image.asset('assets/images/俱乐部.png')),
+                              Container(width: 16.pxw, height: 16.pxh, child: Image.asset('assets/images/club_name_icon.png')),
 
                               SizedBox(width: 2.pxw),
                               Text(
@@ -85,30 +85,22 @@ class ClubCardListWidget extends StatelessWidget {
                           // 成员数量
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 6.pxw, vertical: 2.pxh), // 保证内部有点留白
-                            decoration: BoxDecoration(
-                              color: Color(0x26FFFFFF),
-                              borderRadius: BorderRadius.circular(80.pxw),
-                            ),
+                            decoration: BoxDecoration(color: Color(0x26FFFFFF), borderRadius: BorderRadius.circular(80.pxw)),
                             child: Row(
                               mainAxisSize: MainAxisSize.min, // 宽度随内容变化
                               mainAxisAlignment: MainAxisAlignment.center, // 水平居中
                               crossAxisAlignment: CrossAxisAlignment.center, // 垂直居中
                               children: [
-
-                          Container(width: 10.pxw, height: 10.pxh, child: Image.asset('assets/images/俱乐部-子项-人数图标.png')),
+                                Container(width: 10.pxw, height: 10.pxh, child: Image.asset('assets/images/iconSettingMenuAccount.png')),
 
                                 SizedBox(width: 4.pxw),
                                 Text(
                                   '${club.memberCount}',
-                                  style: TextStyle(
-                                    color: Color(0xFFB3BEC1),
-                                    fontSize: 10.pxSp,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  style: TextStyle(color: Color(0xFFB3BEC1), fontSize: 10.pxSp, fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -117,16 +109,13 @@ class ClubCardListWidget extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-
                         // 右侧玩家信息
                         Container(
                           width: 49.pxw,
                           height: 18.pxh,
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 10.pxw),
-                          decoration: BoxDecoration(
-                              image: DecorationImage(image: AssetImage('assets/images/game/img_level_1.png'))
-                          ),
+                          decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/game/img_level_1.png'))),
                           child: Text(
                             'VIP1',
                             style: TextStyle(color: AppTheme().current.textColor1, fontSize: 10.pxSp, fontWeight: FontWeight.w600),
@@ -141,15 +130,12 @@ class ClubCardListWidget extends StatelessWidget {
                           height: 35.pxw,
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 30.pxw),
-                          decoration: BoxDecoration(
-                              image: DecorationImage(image: AssetImage("assets/images/home/room_number.png"))
-                          ),
+                          decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/home/room_number.png"))),
                           child: Text(
                             '${club.activeGames}牌局',
                             style: TextStyle(color: AppTheme().current.textColor1, fontSize: 12.pxSp, fontWeight: FontWeight.w600),
                           ),
                         ),
-
                       ],
                     ),
                   ],
@@ -190,8 +176,7 @@ class ClubCardListWidget extends StatelessWidget {
             child: Row(
               children: [
                 Spacer(),
-                Container(width: 18.pxw, height: 18.pxh, child: Image.asset('assets/images/Frame 2120045021.png')),
-
+                Container(width: 18.pxw, height: 18.pxh, child: Image.asset('assets/images/iconArrowNext.png')),
               ],
             ),
           ),
