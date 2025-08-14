@@ -69,8 +69,10 @@ void printSome(dynamic msg) {
 
 class CommonUtils {
   static bool validPhoneNumber(String number) {
-    var phoneParse = PhoneNumber.parse(number);
-    return phoneParse.isValid();
+    // var phoneParse = PhoneNumber.parse(number);
+    // return phoneParse.isValid();
+    final RegExp regex = RegExp(r'^1[3-9]\d{9}$');
+    return regex.hasMatch(number);
   }
 
   static String generateMd5(String input) {
