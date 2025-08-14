@@ -36,6 +36,7 @@ class CusTomTextField extends StatefulWidget {
   final bool? isLineShow;
   final bool? showEyesWhenInput;
   final Color? bgColor;
+  final VoidCallback? callback;
 
   const CusTomTextField({
     super.key,
@@ -48,6 +49,7 @@ class CusTomTextField extends StatefulWidget {
     this.leftIcon,
     this.keyboardType,
     this.placeholder,
+    this.callback,
     this.usedInPassword = false,
     this.maxLength,
     this.onChange,
@@ -102,6 +104,9 @@ class _LoginTextFieldState extends State<CusTomTextField> {
           _isFocus = true;
         });
       } else {
+        if (widget.callback != null) {
+          widget.callback!();
+        }
         setState(() {
           _isFocus = false;
         });

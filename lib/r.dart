@@ -386,6 +386,10 @@ class R {
   /// assets/images/public/返回.svg
   static const String assetsImagesPublic8fd456de = "assets/images/public/返回.svg";
 
+  /// Assets for assetsImagesToastErrorIcon
+  /// assets/images/toast_error_icon.png
+  static const String assetsImagesToastErrorIcon = "assets/images/toast_error_icon.png";
+
   /// Assets for assetsImagesVerifyCodeBtn
   /// assets/images/verify_code_btn.png
   static const String assetsImagesVerifyCodeBtn = "assets/images/verify_code_btn.png";

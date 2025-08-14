@@ -201,6 +201,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       onChange: (val) {
                         controller.setSubmitState();
                       },
+                      callback: () {
+                        controller.update();
+                      },
                       boardColor: Color(0xFFF9C678),
                       noboardColor: Color(0xFF2F4553),
                       allRadius: 12.w,
@@ -223,6 +226,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                     CusTomTextField(
                       keyboardType: TextInputType.emailAddress,
                       height: 48.h,
+                      callback: () {
+                        controller.update();
+                      },
                       onChange: (val) {
                         controller.setSubmitState();
                       },
@@ -289,6 +295,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       onChange: (val) {
                         controller.setSubmitState();
                       },
+                      callback: () {
+                        controller.update();
+                      },
                       boardColor: Color(0xFFF9C678),
                       noboardColor: Color(0xFF2F4553),
                       allRadius: 12.w,
@@ -314,6 +323,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       onChange: (val) {
                         controller.setSubmitState();
                       },
+                      callback: () {
+                        controller.update();
+                      },
                       boardColor: Color(0xFFF9C678),
                       noboardColor: Color(0xFF2F4553),
                       allRadius: 12.w,
@@ -338,6 +350,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       height: 48.h,
                       onChange: (val) {
                         controller.setSubmitState();
+                      },
+                      callback: () {
+                        controller.update();
                       },
                       boardColor: Color(0xFFF9C678),
                       noboardColor: Color(0xFF2F4553),
@@ -395,6 +410,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       controller: controller.phoneLoginTEC,
                       onChange: (val) {
                         controller.setSubmitState();
+                      },
+                      callback: () {
+                        controller.update();
                       },
                       boardColor: Color(0xFFF9C678),
                       noboardColor:
@@ -459,6 +477,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       onChange: (val) {
                         controller.setSubmitState();
                       },
+                      callback: () {
+                        controller.update();
+                      },
                       boardColor: Color(0xFFF9C678),
                       noboardColor: Color(0xFF2F4553),
                       allRadius: 12.w,
@@ -518,8 +539,17 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       onChange: (val) {
                         controller.setSubmitState();
                       },
+                      callback: () {
+                        controller.update();
+                      },
                       boardColor: Color(0xFFF9C678),
-                      noboardColor: Color(0xFF2F4553),
+                      noboardColor:
+                          controller.phoneRegistTEC.text.isNotEmpty &&
+                                  !CommonUtils.validPhoneNumber(
+                                    controller.phoneRegistTEC.text,
+                                  )
+                              ? Color(0xFFFC3C3C)
+                              : Color(0xFF2F4553),
                       allRadius: 12.w,
 
                       leftIcon: Row(
@@ -567,6 +597,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       textColor: Color(0xFFFFFFFF),
                       textFontSize: 14.sp,
                       hintTextFontSize: 14.sp,
+                      maxLength: 11,
                       fontFamily: MyFontFamily.miSans,
                       fontWeight: FontWeight.w600,
                       hintFontWeight: FontWeight.w500,
@@ -576,6 +607,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       height: 48.h,
                       onChange: (val) {
                         controller.setSubmitState();
+                      },
+                      callback: () {
+                        controller.update();
                       },
                       maxLength: 4,
                       boardColor: Color(0xFFF9C678),
@@ -1150,6 +1184,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
         // boardColor: ColorManager.getColor(name: ColorsType.C_43BC9B),
         // noboardColor: ColorManager.getColor(name: ColorsType.C_CEDAD7),
         allRadius: 30.w,
+        callback: () {
+          controller.update();
+        },
         leftIcon: Row(
           children: [
             imageView(
@@ -1416,6 +1453,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
       child: CusTomTextField(
         keyboardType: TextInputType.number,
         height: 145.h,
+
         hintTextColor: Color(0xFF43BC9B),
         textColor: Color(0xFFCEDAD7),
         allRadius: 30.w,

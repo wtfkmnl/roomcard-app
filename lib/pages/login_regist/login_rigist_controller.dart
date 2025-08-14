@@ -22,6 +22,7 @@ import 'package:roomcard/utils/common_extension/common_extension.dart';
 import 'package:roomcard/utils/keyboard_extension.dart';
 import 'package:roomcard/utils/mixin/captcha.dart';
 import 'package:roomcard/utils/storage_util.dart';
+import 'package:roomcard/utils/top_toast.dart';
 import 'package:roomcard/utils/values/constants.dart';
 import 'package:roomcard/utils/values/country.dart';
 import 'package:roomcard/utils/values/enums.dart';
@@ -138,6 +139,7 @@ class LoginRigistController extends GetxController
     super.onInit();
     // loginTitle = [LoginTabItem(name: "登录", value: 0, isSelected: true)];
     // OpenshareDataHandle.handleData();
+
     ever(selectedType, (val) {
       setSubmitState();
     });
@@ -343,13 +345,10 @@ class LoginRigistController extends GetxController
     if (validateCode != null) {
       params["validateCode"] = validateCode;
     }
-    var model;
-    //  = await UserApi.loginMember(params);
-    // if (model == null) {
-    //   return;
-    // }
-    // SharedEventBus.eventBus.fire(ShowAfterBindingPhoneDialog(
-    //     hasBind: model.telephone != null && model.telephone!.isNotEmpty));
+    var model = await UserApi.loginMember(params);
+    if (model == null) {
+      return;
+    }
     await loginSucces(
       memberInfo: model,
       account: accountTEC.text,
@@ -411,9 +410,14 @@ class LoginRigistController extends GetxController
           return;
         }
       } else {
-        if (accountPhoneRequired() &&
-            !RegExp(r'^1[3-9]\d{9}$').hasMatch(phoneRegistTEC.text)) {
+        if (!RegExp(r'^1[3-9]\d{9}$').hasMatch(phoneRegistTEC.text)) {
           // ToastUtils.showToast(msg: "请输入正确的手机号".tr);
+          TopToast().show(
+            Get.context!,
+            message: "请输入正确的手机号",
+            icon: Icons.error,
+            iconColor: Colors.red,
+          );
           return;
         }
 
@@ -500,7 +504,10 @@ class LoginRigistController extends GetxController
     if (oneClickRegistration) {
       model = await UserApi.clickRegister(params);
     } else {
-      model = await UserApi.register(params);
+      model =
+          tabs.firstWhere((e) => e.isSelected!).value == 0
+              ? await UserApi.register(params)
+              : await UserApi.newMember(params);
     }
 
     if (model != null) {
