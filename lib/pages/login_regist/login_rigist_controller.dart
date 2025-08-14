@@ -15,6 +15,7 @@ import 'package:roomcard/global.dart';
 import 'package:roomcard/models/login_regist/index.dart';
 import 'package:roomcard/models/member_info_model.dart';
 import 'package:roomcard/r.dart';
+import 'package:roomcard/routes/app_router.dart';
 import 'package:roomcard/services/global_data_service.dart';
 import 'package:roomcard/utils/Tools.dart';
 import 'package:roomcard/utils/commonUtils.dart';
@@ -329,21 +330,44 @@ class LoginRigistController extends GetxController
 
   Future login({dynamic validateCode}) async {
     // if (loginType.value == false) {
-    if (accountTEC.text.isEmpty) {
-      // ToastUtils.showToast(msg: "inputMemberId".tr);
-      return;
+
+    if (tabs.firstWhere((e) => e.isSelected!).value == 0) {
+      if (accountTEC.text.isEmpty) {
+        TopToast().show(message: "请输入账号");
+        return;
+      }
+
+      if (psdTEC.text.isEmpty) {
+        TopToast().show(message: "请输入密码");
+        return;
+      }
+    } else {
+      if (phoneLoginTEC.text.isEmpty) {
+        TopToast().show(message: "请输入手机号");
+        return;
+      }
+
+      if (phoneCodeLoginTEC.text.isEmpty) {
+        TopToast().show(message: "请输入验证码");
+        return;
+      }
     }
 
-    if (psdTEC.text.isEmpty) {
-      // ToastUtils.showToast(msg: "inputAcctPwd".tr);
-      return;
-    }
-
-    var params = {
-      "memberId": accountTEC.text,
-      "memberPwd": psdTEC.text.md5Value(),
-      "requestMethod": 0,
-    };
+    var params =
+        tabs.firstWhere((e) => e.isSelected!).value == 0
+            ? {
+              "memberId": accountTEC.text,
+              "memberPwd": psdTEC.text.md5Value(),
+              "requestMethod": 0,
+            }
+            : {
+              "memberId":
+                  countryData[codeIndexs.value].code + phoneLoginTEC.text,
+              "telephone": phoneLoginTEC.text,
+              "areaCode": countryData[codeIndexs.value].code,
+              "validateCode": phoneCodeLoginTEC.text,
+              "requestMethod": 1,
+            };
     if (validateCode != null) {
       params["validateCode"] = validateCode;
     }
@@ -414,16 +438,13 @@ class LoginRigistController extends GetxController
       } else {
         if (!RegExp(r'^1[3-9]\d{9}$').hasMatch(phoneRegistTEC.text)) {
           // ToastUtils.showToast(msg: "请输入正确的手机号".tr);
-          TopToast().show(
-            Get.context!,
-            message: "请输入正确的手机号",
-            icon: Icons.error,
-            iconColor: Colors.red,
-          );
+          TopToast().show(message: "请输入正确的手机号");
           return;
         }
 
-        if (phoneCodeRegistTEC.text.isEmpty) {
+        if (phoneCodeRegistTEC.text.isEmpty ||
+            phoneCodeRegistTEC.text.length < 6) {
+          TopToast().show(message: "请输入正确的验证码");
           return;
         }
       }
@@ -458,7 +479,7 @@ class LoginRigistController extends GetxController
                 "memberPwd": Tools.generateMd5("a12345678"), //psdRegistTEC.text
                 "telephone": phoneRegistTEC.text,
                 "smsCode": phoneCodeRegistTEC.text,
-                "requestMethod": 0,
+                "requestMethod": 1,
                 "memberName": memberNameTEC.text,
                 "invitationCode": inviteCode,
               };
@@ -515,7 +536,6 @@ class LoginRigistController extends GetxController
     if (model != null) {
       StorageUtil.setString(Constants.storageMemberInfo, jsonEncode(model));
       Global.instance.memberInfo = model;
-      GlobalDataService.instance.isLogin = true;
 
       // ToastUtils.showToast(msg: "注册成功".tr);
       if (oneClickRegistration) {
@@ -553,92 +573,90 @@ class LoginRigistController extends GetxController
     // 保存用户信息到全局
     Global.instance.memberInfo = memberInfo;
 
-    // 获取已保存的账号列表
-    // var list = await StorageUtil.getMemberAccountPsd();
+    ///获取已保存的账号列表
+    var list = await StorageUtil().getMemberAccountPsd();
 
-    // // 根据登录时间排序，最近登录的排在前面
-    // list.sort((a, b) {
-    //   // 如果包含loginTime字段，则按时间排序
-    //   if (a.containsKey('loginTime') && b.containsKey('loginTime')) {
-    //     // 降序排列，最新的在前面
-    //     return DateTime.parse(
-    //       b['loginTime'],
-    //     ).compareTo(DateTime.parse(a['loginTime']));
-    //   }
-    //   // 如果只有一个元素有loginTime，有loginTime的排前面
-    //   else if (a.containsKey('loginTime')) {
-    //     return -1;
-    //   } else if (b.containsKey('loginTime')) {
-    //     return 1;
-    //   }
-    //   // 都没有loginTime，保持原顺序
-    //   return 0;
-    // });
+    // 根据登录时间排序，最近登录的排在前面
+    list.sort((a, b) {
+      // 如果包含loginTime字段，则按时间排序
+      if (a.containsKey('loginTime') && b.containsKey('loginTime')) {
+        // 降序排列，最新的在前面
+        return DateTime.parse(
+          b['loginTime'],
+        ).compareTo(DateTime.parse(a['loginTime']));
+      }
+      // 如果只有一个元素有loginTime，有loginTime的排前面
+      else if (a.containsKey('loginTime')) {
+        return -1;
+      } else if (b.containsKey('loginTime')) {
+        return 1;
+      }
+      // 都没有loginTime，保持原顺序
+      return 0;
+    });
 
-    // // 创建包含登录时间的账号记录
-    // final now = DateTime.now();
-    // final loginTime = now.toIso8601String();
+    // 创建包含登录时间的账号记录
+    final now = DateTime.now();
+    final loginTime = now.toIso8601String();
 
-    // // 在列表中查找是否已存在该账号
-    // final existingIndex = list.indexWhere((item) => item["account"] == account);
+    // 在列表中查找是否已存在该账号
+    final existingIndex = list.indexWhere((item) => item["account"] == account);
 
-    // if (existingIndex != -1) {
-    //   // 已存在则更新密码和登录时间
-    //   list[existingIndex] = {
-    //     "account": account,
-    //     "password": password,
-    //     "loginTime": loginTime,
-    //   };
-    // } else {
-    //   // 如果列表超过5个，移除最旧的记录
-    //   if (list.length > 2) {
-    //     list.removeLast();
-    //   }
-    //   // 不存在则添加新记录
-    //   list.insert(0, {
-    //     "account": account,
-    //     "password": password,
-    //     "loginTime": loginTime,
-    //   });
-    //   // accountLists.add();
-    // }
-    // 保存更新后的列表
-    // await StorageU.setMemberAccountPsd(list);
+    if (existingIndex != -1) {
+      // 已存在则更新密码和登录时间
+      list[existingIndex] = {
+        "account": account,
+        "password": password,
+        "loginTime": loginTime,
+      };
+    } else {
+      // 如果列表超过5个，移除最旧的记录
+      if (list.length > 2) {
+        list.removeLast();
+      }
+      // 不存在则添加新记录
+      list.insert(0, {
+        "account": account,
+        "password": password,
+        "loginTime": loginTime,
+      });
+      // accountLists.add();
+    }
+    //保存更新后的列表
+    await StorageUtil().setMemberAccountPsd(list);
 
-    // // 保存当前用户信息
-    // await Storage().setString(Constants.storageMemberIdAccount, account);
-    // await Storage().setString(Constants.storageMemberPwd, password);
-    // await Storage().setString(
-    //   "${Constants.storageMemberIdAccount}_loginTime",
-    //   loginTime,
-    // );
+    // 保存当前用户信息
+    await StorageUtil.setString(Constants.storageMemberIdAccount, account);
+    await StorageUtil.setString(Constants.storageMemberPwd, password);
+    await StorageUtil.setString(
+      "${Constants.storageMemberIdAccount}_loginTime",
+      loginTime,
+    );
 
-    // // 自动记录账号密码
-    // if (selectedType.value.value == loginTab.value) {
-    //   if (!isRememberPwd.value) {
-    //     var list = await Storage().getMemberAccountPsd();
-    //     var listT =
-    //         list.where((e) => e["account"] != memberInfo.memberId).toList();
-    //     await Storage().setMemberAccountPsd(listT);
-    //   }
+    // 自动记录账号密码
+    if (selectedType.value.value == loginTab.value) {
+      if (!isRememberPwd.value) {
+        var list = await StorageUtil().getMemberAccountPsd();
+        var listT =
+            list.where((e) => e["account"] != memberInfo.memberId).toList();
+        await StorageUtil().setMemberAccountPsd(listT);
+      }
 
-    //   CommonUtils.rememberPassword(isRememberPwd.value);
-    // } else {
-    //   // CommonUtils.rememberPassword(true);
-    // }
+      CommonUtils.rememberPassword(isRememberPwd.value);
+    } else {
+      // CommonUtils.rememberPassword(true);
+    }
 
     // GlobalDataService.instance.checkLoginStatus();
-    // // CommonUtils.handleNoticeAlert();
-    // // 如果不是第三种登录类型，返回上一页面
-    // // if (selectedType.value != 2) {
-    // //   Get.back();
-    // // }
-    // Get.until((route) {
-    //   return route.settings.name == RouteNames.mainTabPage;
-    // });
-    // var controller = Get.find<MainTabController>();
-    // controller.selectIndex(0);
-    // ToastUtils.showToast(msg: "登录成功".tr);
+    // CommonUtils.handleNoticeAlert();
+    // 如果不是第三种登录类型，返回上一页面
+    // if (selectedType.value != 2) {
+    //   Get.back();
+    // }
+    GlobalDataService.instance.isLogin = true;
+    AppRouter.main.offAll();
+
+    TopToast().show(message: "登录正确", icon: R.assetsImagesToastSuceessIcon);
   }
 
   bool isMatchAccountValidateInput(String input) {

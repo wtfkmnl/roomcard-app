@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/global.dart';
 import 'package:roomcard/routes/app_router.dart';
+import 'package:roomcard/services/global_data_service.dart';
 import 'package:roomcard/utils/common_extension/common_extension.dart';
 import '../../r.dart';
 import '../../widgets/common_app_bar.dart';
@@ -14,7 +16,7 @@ class MyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final logic = Get.put(MyLogic());
     final state = logic.state;
-
+    Global.instance.memberInfo;
     return Scaffold(
       backgroundColor: const Color(0xFF1C2C36),
       appBar: AppBar(

@@ -12,11 +12,9 @@ class TopToast {
   OverlayEntry? _overlayEntry;
   bool _isShowing = false;
 
-  void show(
-    BuildContext context, {
+  void show({
     required String message,
-    IconData icon = Icons.error,
-    Color iconColor = Colors.red,
+    String? icon,
     Duration duration = const Duration(seconds: 2),
   }) {
     if (_isShowing) {
@@ -31,13 +29,13 @@ class TopToast {
           right: 16,
           child: Material(
             color: Colors.transparent,
-            child: _buildToastContent(message, icon, iconColor),
+            child: _buildToastContent(message, icon: icon),
           ),
         );
       },
     );
 
-    Overlay.of(context).insert(_overlayEntry!);
+    Overlay.of(Get.context!).insert(_overlayEntry!);
     _isShowing = true;
 
     Future.delayed(duration, () {
@@ -53,7 +51,7 @@ class TopToast {
     }
   }
 
-  Widget _buildToastContent(String message, IconData icon, Color iconColor) {
+  Widget _buildToastContent(String message, {String? icon}) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14.h),
       decoration: BoxDecoration(
@@ -66,7 +64,7 @@ class TopToast {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          imageView(R.assetsImagesToastErrorIcon, width: 16.w),
+          imageView(icon ?? R.assetsImagesToastErrorIcon, width: 16.w),
           const SizedBox(width: 8),
           Expanded(
             child: Text(

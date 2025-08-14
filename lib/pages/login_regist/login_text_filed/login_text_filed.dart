@@ -37,6 +37,7 @@ class CusTomTextField extends StatefulWidget {
   final bool? showEyesWhenInput;
   final Color? bgColor;
   final VoidCallback? callback;
+  final bool? obscurePassword;
 
   const CusTomTextField({
     super.key,
@@ -51,6 +52,7 @@ class CusTomTextField extends StatefulWidget {
     this.placeholder,
     this.callback,
     this.usedInPassword = false,
+    this.obscurePassword,
     this.maxLength,
     this.onChange,
     this.cursorColor,
@@ -172,7 +174,7 @@ class _LoginTextFieldState extends State<CusTomTextField> {
             cursorColor: widget.cursorColor ?? Color(0xFF1bc69c),
             keyboardType: widget.keyboardType,
             controller: widget.controller,
-            obscureText: _obscurePassword,
+            obscureText: widget.obscurePassword ?? _obscurePassword,
             obscuringCharacter: "*",
             style: TextStyle(
               fontSize: widget.textFontSize,

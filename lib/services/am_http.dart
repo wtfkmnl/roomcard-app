@@ -6,10 +6,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 import 'package:roomcard/global.dart';
+import 'package:roomcard/r.dart';
+import 'package:roomcard/routes/app_router.dart';
 import 'package:roomcard/services/global_data_service.dart';
 import 'package:roomcard/utils/Tools.dart';
 import 'package:roomcard/utils/commonUtils.dart';
 import 'package:roomcard/utils/storage_util.dart';
+import 'package:roomcard/utils/top_toast.dart';
 import 'package:roomcard/utils/values/constants.dart';
 import 'am_interceptor.dart';
 
@@ -299,6 +302,8 @@ dynamic dealResData(Response response) {
         } else {
           dealLoginAndRegisterSetting(response);
         }
+
+        GlobalDataService.instance.isLogin = true;
       }
       if (responseData['result'] != null &&
           !path.contains("tc/submitTransferOrder")) {
@@ -331,6 +336,7 @@ dynamic dealResData(Response response) {
       Global.instance.clearData();
       GlobalDataService.instance.clearData();
       GlobalDataService.instance.isLogin = false;
+      AppRouter.loginRegist.offAll();
       printSome("========login==????============");
       return null;
     } else {
@@ -348,6 +354,11 @@ dynamic dealResData(Response response) {
     //   responseData['code'],
     //   path,
     // );
+
+    TopToast().show(
+      message: responseData['message'],
+      icon: R.assetsImagesToastErrorIcon,
+    );
 
     if ("pre119" == responseData['code']) {
       //充值订单错误---code":"pre119","message":"存在未完成的订单"

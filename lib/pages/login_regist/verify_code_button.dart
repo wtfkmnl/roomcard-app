@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/api/user.dart';
 import 'package:roomcard/r.dart';
+import 'package:roomcard/services/am_http.dart';
 import 'package:roomcard/utils/commonUtils.dart';
 import 'package:roomcard/utils/common_extension/common_extension.dart';
 import 'package:roomcard/utils/my_font_family.dart';
@@ -142,27 +144,27 @@ class _VerifyCodeButtonState extends State<VerifyCodeButton> {
 
       // ToastUtils.showLoading();
       if (widget.isEmailSms == false) {
-        // var res = await UserApi.sySms(data: data);
+        var res = await UserApi.sySms(data: data);
         // ToastUtils.hideLoading();
-        // if (res != null && res.code == BaseResCode.success.value) {
-        //   //开始倒计时
-        //   ToastUtils.showToast(msg: "验证码已发送");
-        startCountdownTimer();
-        // } else {
-        //   isStart = false;
-        //   isRepeat = false;
-        // }
+        if (res != null && res.code == BaseResCode.success.value) {
+          //   //开始倒计时
+          //   ToastUtils.showToast(msg: "验证码已发送");
+          startCountdownTimer();
+        } else {
+          isStart = false;
+          isRepeat = false;
+        }
       } else {
-        // var res = await UserApi.syEmailSms(data: data);
+        var res = await UserApi.syEmailSms(data: data);
         // ToastUtils.hideLoading();
-        // if (res != null && res.code == BaseResCode.success.value) {
-        //   //开始倒计时
-        //   ToastUtils.showToast(msg: "验证码已发送");
-        startCountdownTimer();
-        // } else {
-        //   isStart = false;
-        //   isRepeat = false;
-        // }
+        if (res != null && res.code == BaseResCode.success.value) {
+          //开始倒计时
+          // ToastUtils.showToast(msg: "验证码已发送");
+          startCountdownTimer();
+        } else {
+          isStart = false;
+          isRepeat = false;
+        }
       }
 
       // ToastUtils.hideLoading();

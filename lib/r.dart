@@ -74,9 +74,65 @@ class R {
   /// assets/images/bottom_nav/regresh_u.svg
   static const String assetsImagesBottomNavRegreshU = "assets/images/bottom_nav/regresh_u.svg";
 
+  /// Assets for assetsImagesClubClubListBg
+  /// assets/images/club/club_list_bg.png
+  static const String assetsImagesClubClubListBg = "assets/images/club/club_list_bg.png";
+
+  /// Assets for assetsImagesClubImgClubHead0
+  /// assets/images/club/img_club_head_0.png
+  static const String assetsImagesClubImgClubHead0 = "assets/images/club/img_club_head_0.png";
+
+  /// Assets for assetsImagesClubImgClubHead1
+  /// assets/images/club/img_club_head_1.png
+  static const String assetsImagesClubImgClubHead1 = "assets/images/club/img_club_head_1.png";
+
+  /// Assets for assetsImagesClubImgClubHead2
+  /// assets/images/club/img_club_head_2.png
+  static const String assetsImagesClubImgClubHead2 = "assets/images/club/img_club_head_2.png";
+
+  /// Assets for assetsImagesClubImgClubHead3
+  /// assets/images/club/img_club_head_3.png
+  static const String assetsImagesClubImgClubHead3 = "assets/images/club/img_club_head_3.png";
+
+  /// Assets for assetsImagesClubImgClubHead4
+  /// assets/images/club/img_club_head_4.png
+  static const String assetsImagesClubImgClubHead4 = "assets/images/club/img_club_head_4.png";
+
+  /// Assets for assetsImagesClubImgClubHead5
+  /// assets/images/club/img_club_head_5.png
+  static const String assetsImagesClubImgClubHead5 = "assets/images/club/img_club_head_5.png";
+
+  /// Assets for assetsImagesClubImgClubHead6
+  /// assets/images/club/img_club_head_6.png
+  static const String assetsImagesClubImgClubHead6 = "assets/images/club/img_club_head_6.png";
+
+  /// Assets for assetsImagesClubImgClubHead7
+  /// assets/images/club/img_club_head_7.png
+  static const String assetsImagesClubImgClubHead7 = "assets/images/club/img_club_head_7.png";
+
+  /// Assets for assetsImagesClubImgClubHead8
+  /// assets/images/club/img_club_head_8.png
+  static const String assetsImagesClubImgClubHead8 = "assets/images/club/img_club_head_8.png";
+
+  /// Assets for assetsImagesClubImgClubHead9
+  /// assets/images/club/img_club_head_9.png
+  static const String assetsImagesClubImgClubHead9 = "assets/images/club/img_club_head_9.png";
+
+  /// Assets for assetsImagesClubNameIcon
+  /// assets/images/club_name_icon.png
+  static const String assetsImagesClubNameIcon = "assets/images/club_name_icon.png";
+
+  /// Assets for assetsImagesEditIcon
+  /// assets/images/edit_icon.png
+  static const String assetsImagesEditIcon = "assets/images/edit_icon.png";
+
   /// Assets for assetsImagesGameGame1
   /// assets/images/game/game1.png
   static const String assetsImagesGameGame1 = "assets/images/game/game1.png";
+
+  /// Assets for assetsImagesGameGameBtnBg
+  /// assets/images/game/game_btn_bg.png
+  static const String assetsImagesGameGameBtnBg = "assets/images/game/game_btn_bg.png";
 
   /// Assets for assetsImagesGameImgLevel1
   /// assets/images/game/img_level_1.png
@@ -98,21 +154,69 @@ class R {
   /// assets/images/game/money_icon.png
   static const String assetsImagesGameMoneyIcon = "assets/images/game/money_icon.png";
 
+  /// Assets for assetsImagesGameSliderBtn
+  /// assets/images/game/slider_btn.png
+  static const String assetsImagesGameSliderBtn = "assets/images/game/slider_btn.png";
+
+  /// Assets for assetsImagesHomeAddClubBtn
+  /// assets/images/home/add_club_btn.png
+  static const String assetsImagesHomeAddClubBtn = "assets/images/home/add_club_btn.png";
+
   /// Assets for assetsImagesHomeAddRoomBtn
   /// assets/images/home/add_room_btn.png
   static const String assetsImagesHomeAddRoomBtn = "assets/images/home/add_room_btn.png";
+
+  /// Assets for assetsImagesHomeAllIcon
+  /// assets/images/home/all_icon.png
+  static const String assetsImagesHomeAllIcon = "assets/images/home/all_icon.png";
+
+  /// Assets for assetsImagesHomeAllIcon1
+  /// assets/images/home/all_icon_1.png
+  static const String assetsImagesHomeAllIcon1 = "assets/images/home/all_icon_1.png";
 
   /// Assets for assetsImagesHomeBorder
   /// assets/images/home/Border.png
   static const String assetsImagesHomeBorder = "assets/images/home/Border.png";
 
+  /// Assets for assetsImagesHomeBtnBg1
+  /// assets/images/home/btn_bg_1.png
+  static const String assetsImagesHomeBtnBg1 = "assets/images/home/btn_bg_1.png";
+
+  /// Assets for assetsImagesHomeBtnIcon1
+  /// assets/images/home/btn_icon_1.png
+  static const String assetsImagesHomeBtnIcon1 = "assets/images/home/btn_icon_1.png";
+
+  /// Assets for assetsImagesHomeBtnIcon2
+  /// assets/images/home/btn_icon_2.png
+  static const String assetsImagesHomeBtnIcon2 = "assets/images/home/btn_icon_2.png";
+
   /// Assets for assetsImagesHomeChoose
   /// assets/images/home/choose.png
   static const String assetsImagesHomeChoose = "assets/images/home/choose.png";
 
+  /// Assets for assetsImagesHomeClub
+  /// assets/images/home/club.png
+  static const String assetsImagesHomeClub = "assets/images/home/club.png";
+
+  /// Assets for assetsImagesHomeClub1
+  /// assets/images/home/club-1.png
+  static const String assetsImagesHomeClub1 = "assets/images/home/club-1.png";
+
+  /// Assets for assetsImagesHomeClubIcon
+  /// assets/images/home/club_icon.png
+  static const String assetsImagesHomeClubIcon = "assets/images/home/club_icon.png";
+
+  /// Assets for assetsImagesHomeClubIcon1
+  /// assets/images/home/club_icon_1.png
+  static const String assetsImagesHomeClubIcon1 = "assets/images/home/club_icon_1.png";
+
   /// Assets for assetsImagesHomeClubMainNotIcon
   /// assets/images/home/club_main_not_icon.png
   static const String assetsImagesHomeClubMainNotIcon = "assets/images/home/club_main_not_icon.png";
+
+  /// Assets for assetsImagesHomeCreateClubBtn
+  /// assets/images/home/create_club_btn.png
+  static const String assetsImagesHomeCreateClubBtn = "assets/images/home/create_club_btn.png";
 
   /// Assets for assetsImagesHomeCreateRoomBtn
   /// assets/images/home/create_room_btn.png
@@ -121,6 +225,22 @@ class R {
   /// Assets for assetsImagesHomeDiamond
   /// assets/images/home/diamond.png
   static const String assetsImagesHomeDiamond = "assets/images/home/diamond.png";
+
+  /// Assets for assetsImagesHomeFriend
+  /// assets/images/home/friend.png
+  static const String assetsImagesHomeFriend = "assets/images/home/friend.png";
+
+  /// Assets for assetsImagesHomeFriend1
+  /// assets/images/home/friend-1.png
+  static const String assetsImagesHomeFriend1 = "assets/images/home/friend-1.png";
+
+  /// Assets for assetsImagesHomeFriendIcon
+  /// assets/images/home/friend_icon.png
+  static const String assetsImagesHomeFriendIcon = "assets/images/home/friend_icon.png";
+
+  /// Assets for assetsImagesHomeFriendIcon1
+  /// assets/images/home/friend_icon_1.png
+  static const String assetsImagesHomeFriendIcon1 = "assets/images/home/friend_icon_1.png";
 
   /// Assets for assetsImagesHomeGroup
   /// assets/images/home/Group.png
@@ -142,6 +262,10 @@ class R {
   /// assets/images/home/Home_header_menu.png
   static const String assetsImagesHomeHomeHeaderMenu = "assets/images/home/Home_header_menu.png";
 
+  /// Assets for assetsImagesHomeHomeIcon1
+  /// assets/images/home/home_icon_1.png
+  static const String assetsImagesHomeHomeIcon1 = "assets/images/home/home_icon_1.png";
+
   /// Assets for assetsImagesHomeHomeTitle
   /// assets/images/home/Home_title_.png
   static const String assetsImagesHomeHomeTitle = "assets/images/home/Home_title_.png";
@@ -150,13 +274,33 @@ class R {
   /// assets/images/home/icon_card_logo.png
   static const String assetsImagesHomeIconCardLogo = "assets/images/home/icon_card_logo.png";
 
+  /// Assets for assetsImagesHomeLobby
+  /// assets/images/home/lobby.png
+  static const String assetsImagesHomeLobby = "assets/images/home/lobby.png";
+
+  /// Assets for assetsImagesHomeLobby1
+  /// assets/images/home/lobby-1.png
+  static const String assetsImagesHomeLobby1 = "assets/images/home/lobby-1.png";
+
+  /// Assets for assetsImagesHomeLobbyIcon
+  /// assets/images/home/lobby_icon.png
+  static const String assetsImagesHomeLobbyIcon = "assets/images/home/lobby_icon.png";
+
   /// Assets for assetsImagesHomeRoomNumber
   /// assets/images/home/room_number.png
   static const String assetsImagesHomeRoomNumber = "assets/images/home/room_number.png";
 
+  /// Assets for assetsImagesHomeTitleBarBg
+  /// assets/images/home/title_bar_bg.png
+  static const String assetsImagesHomeTitleBarBg = "assets/images/home/title_bar_bg.png";
+
   /// Assets for assetsImagesHomeVector
   /// assets/images/home/Vector.png
   static const String assetsImagesHomeVector = "assets/images/home/Vector.png";
+
+  /// Assets for assetsImagesHomeVectorIcon
+  /// assets/images/home/vector_icon.png
+  static const String assetsImagesHomeVectorIcon = "assets/images/home/vector_icon.png";
 
   /// Assets for assetsImagesIconAboutUsLogo
   /// assets/images/iconAboutUsLogo.png
@@ -346,49 +490,13 @@ class R {
   /// assets/images/login_verify_code_btn_u.png
   static const String assetsImagesLoginVerifyCodeBtnU = "assets/images/login_verify_code_btn_u.png";
 
-  /// Assets for assetsImagesPublic517395ed630994ae
-  /// assets/images/public/关闭按钮.png
-  static const String assetsImagesPublic517395ed630994ae = "assets/images/public/关闭按钮.png";
-
-  /// Assets for assetsImagesPublic517395ed630994ae5f397a97
-  /// assets/images/public/关闭按钮_弹窗.png
-  static const String assetsImagesPublic517395ed630994ae5f397a97 = "assets/images/public/关闭按钮_弹窗.png";
-
-  /// Assets for assetsImagesPublic56fe724752a08f7d59318d259ed88ba456fe
-  /// assets/images/public/图片加载失败默认图.svg
-  static const String assetsImagesPublic56fe724752a08f7d59318d259ed88ba456fe = "assets/images/public/图片加载失败默认图.svg";
-
-  /// Assets for assetsImagesPublic630994ae
-  /// assets/images/public/按钮.png
-  static const String assetsImagesPublic630994ae = "assets/images/public/按钮.png";
-
-  /// Assets for assetsImagesPublic630994ae4e2d
-  /// assets/images/public/按钮中.png
-  static const String assetsImagesPublic630994ae4e2d = "assets/images/public/按钮中.png";
-
-  /// Assets for assetsImagesPublic630994ae4e2d7070
-  /// assets/images/public/按钮中灰.png
-  static const String assetsImagesPublic630994ae4e2d7070 = "assets/images/public/按钮中灰.png";
-
-  /// Assets for assetsImagesPublic630994ae5927
-  /// assets/images/public/按钮大.png
-  static const String assetsImagesPublic630994ae5927 = "assets/images/public/按钮大.png";
-
-  /// Assets for assetsImagesPublic668265e06570636e
-  /// assets/images/public/暂无数据.svg
-  static const String assetsImagesPublic668265e06570636e = "assets/images/public/暂无数据.svg";
-
-  /// Assets for assetsImagesPublic8b66544a63d0793a
-  /// assets/images/public/警告提示.png
-  static const String assetsImagesPublic8b66544a63d0793a = "assets/images/public/警告提示.png";
-
-  /// Assets for assetsImagesPublic8fd456de
-  /// assets/images/public/返回.svg
-  static const String assetsImagesPublic8fd456de = "assets/images/public/返回.svg";
-
   /// Assets for assetsImagesToastErrorIcon
   /// assets/images/toast_error_icon.png
   static const String assetsImagesToastErrorIcon = "assets/images/toast_error_icon.png";
+
+  /// Assets for assetsImagesToastSuceessIcon
+  /// assets/images/toast_suceess_icon.png
+  static const String assetsImagesToastSuceessIcon = "assets/images/toast_suceess_icon.png";
 
   /// Assets for assetsImagesVerifyCodeBtn
   /// assets/images/verify_code_btn.png

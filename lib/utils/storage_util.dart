@@ -72,4 +72,14 @@ class StorageUtil {
     }
     return [];
   }
+
+  Future<void> setMemberAccountPsd(List list) async {
+    List<String> jsonDicts = [];
+
+    for (var element in list) {
+      jsonDicts.add(jsonEncode(element));
+    }
+
+    _prefs.setStringList(Constants.storageMemberAccountPsw, jsonDicts);
+  }
 }

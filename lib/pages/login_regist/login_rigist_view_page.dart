@@ -18,7 +18,8 @@ import 'package:roomcard/utils/image_extension.dart';
 import 'package:roomcard/utils/keyboard_extension.dart';
 import 'package:roomcard/utils/my_font_family.dart';
 import 'package:roomcard/utils/show_am_bottom_sheet.dart';
-import 'package:roomcard/utils/storage_util.dart'; // 导入数学库以使用 pi
+import 'package:roomcard/utils/storage_util.dart';
+import 'package:roomcard/utils/top_toast.dart'; // 导入数学库以使用 pi
 
 class LoginRigistViewPage extends StatefulWidget {
   final int? selectIndex;
@@ -73,11 +74,12 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        imageView(R.assetsImagesIconTitleBack, width: 28.w, height: 28.w).onTap(
-          () {
-            Get.back();
-          },
-        ),
+        // imageView(R.assetsImagesIconTitleBack, width: 28.w, height: 28.w).onTap(
+        //   () {
+        //     Get.back();
+        //   },
+        // ),
+        SizedBox(),
         imageView(R.assetsImagesLoginService, width: 24.w, height: 24.w),
       ],
     ).marginOnly(left: 16.w, right: 16.w, top: 54.h);
@@ -486,19 +488,21 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       otherIcon: VerifyCodeButton(
                         getSmsData: () {
                           KeyboardHelper.close(Get.context);
-                          // if (phoneTEC.text.isEmpty) {
-                          //   ToastUtils.showToast(msg: "请输手机号".tr);
-                          //   return null;
-                          // }
+                          if (controller.phoneLoginTEC.text.isEmpty) {
+                            TopToast().show(message: "请输入正确的手机号");
+                            return null;
+                          }
 
-                          // if (!_phoneMatch()) {
-                          //   ToastUtils.showToast(msg: "请输入有效手机号".tr);
-                          //   return null;
-                          // }
+                          if (!CommonUtils.validPhoneNumber(
+                            controller.phoneLoginTEC.text,
+                          )) {
+                            TopToast().show(message: "请输入正确的手机号");
+                            return null;
+                          }
 
-                          // bool pixAccountCheck = true;
-                          // String msg = "inputPhone2".tr;
-                          // pixAccountCheck = phoneTEC.text.isMatchReg(
+                          bool pixAccountCheck = true;
+                          String msg = "inputPhone2".tr;
+                          // pixAccountCheck = controller.phoneRegistTEC.text.isMatchReg(
                           //   RegularUtil.DIGIT_REGEX,
                           // );
 
@@ -508,8 +512,11 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                           // }
 
                           return {
-                            "telephone": '', //phoneTEC.text,
-                            'areaCode': '', //widget.areaCode,
+                            "telephone": controller.phoneLoginTEC.text,
+                            'areaCode':
+                                controller
+                                    .countryData[controller.codeIndexs.value]
+                                    .code,
                           };
                         },
                       ),
@@ -521,6 +528,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       controller: controller.phoneCodeLoginTEC,
                       placeholder: '请输入验证码',
                       usedInPassword: false,
+                      obscurePassword: false,
                       hintTextColor: Color(0xFF57646D),
                       textColor: Color(0xFFFFFFFF),
                       textFontSize: 14.sp,
@@ -529,7 +537,12 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       fontWeight: FontWeight.w600,
                       hintFontWeight: FontWeight.w500,
                     ).marginSymmetric(horizontal: 16.w),
-                    _oprationBtns(isLogin: true),
+                    _oprationBtns(
+                      isLogin: true,
+                      callback: () {
+                        controller.login();
+                      },
+                    ),
                   ]
                   : tabItem.value == 1
                   ? [
@@ -611,26 +624,28 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       callback: () {
                         controller.update();
                       },
-                      maxLength: 4,
+                      maxLength: 6,
                       boardColor: Color(0xFFF9C678),
                       noboardColor: Color(0xFF2F4553),
                       allRadius: 12.w,
                       otherIcon: VerifyCodeButton(
                         getSmsData: () {
                           KeyboardHelper.close(Get.context);
-                          // if (phoneTEC.text.isEmpty) {
-                          //   ToastUtils.showToast(msg: "请输手机号".tr);
+                          if (controller.phoneRegistTEC.text.isEmpty) {
+                            TopToast().show(message: "请输入正确的手机号");
+                            return null;
+                          }
+
+                          // if (!CommonUtils.validPhoneNumber(
+                          //   controller.phoneRegistTEC.text,
+                          // )) {
+                          //   TopToast().show(message: "请输入正确的手机号");
                           //   return null;
                           // }
 
-                          // if (!_phoneMatch()) {
-                          //   ToastUtils.showToast(msg: "请输入有效手机号".tr);
-                          //   return null;
-                          // }
-
-                          // bool pixAccountCheck = true;
-                          // String msg = "inputPhone2".tr;
-                          // pixAccountCheck = phoneTEC.text.isMatchReg(
+                          bool pixAccountCheck = true;
+                          String msg = "inputPhone2".tr;
+                          // pixAccountCheck = controller.phoneRegistTEC.text.isMatchReg(
                           //   RegularUtil.DIGIT_REGEX,
                           // );
 
@@ -640,8 +655,11 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                           // }
 
                           return {
-                            "telephone": '', //phoneTEC.text,
-                            'areaCode': '', //widget.areaCode,
+                            "telephone": controller.phoneRegistTEC.text,
+                            'areaCode':
+                                controller
+                                    .countryData[controller.codeIndexs.value]
+                                    .code,
                           };
                         },
                       ),
@@ -653,6 +671,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       controller: controller.phoneCodeRegistTEC,
                       placeholder: '请输入验证码',
                       usedInPassword: false,
+                      obscurePassword: false,
                       hintTextColor: Color(0xFF57646D),
                       textColor: Color(0xFFFFFFFF),
                       textFontSize: 14.sp,

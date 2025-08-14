@@ -1,15 +1,17 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:roomcard/api/app_config.dart';
+import 'package:roomcard/api/user.dart';
 import 'package:roomcard/base/base_controller.dart';
+import 'package:roomcard/global.dart';
+import 'package:roomcard/services/global_data_service.dart';
 import '../../routes/app_router.dart';
 import 'welcome_state.dart';
 import 'package:path_provider/path_provider.dart';
 
 class WelcomeLogic extends BaseController<WelcomeState> {
-  void _loadLaunchImage() {
-
-  }
+  void _loadLaunchImage() {}
 
   Future<String> _saveBytesToSandbox(List<int> bytes, String fileName) async {
     String sandBoxPath = await _getSandBoxPath();
@@ -30,15 +32,12 @@ class WelcomeLogic extends BaseController<WelcomeState> {
     return imagesDir.path;
   }
 
-
-
   /// 请求桶域名
   void onInitRequestBucket() {
     state.showDowncount.value = true;
     state.downCount.value = 0;
     state.errorStr.value = "";
     startTimer();
-
   }
 
   // 开始倒计时
@@ -54,11 +53,16 @@ class WelcomeLogic extends BaseController<WelcomeState> {
   }
 
   // 进入主页面
-  void goToMainPage() {
+  void goToMainPage() async {
     if (!state.intoMain) {
       state.intoMain = true;
       stopTimer();
-      AppRouter.main.offAll();
+      if (GlobalDataService.instance.isLogin) {
+        await UserApi.getMemberInfo();
+        AppRouter.main.offAll();
+      } else {
+        AppRouter.loginRegist.offAll();
+      }
     }
   }
 
@@ -71,9 +75,8 @@ class WelcomeLogic extends BaseController<WelcomeState> {
   }
 
   Future<bool> onInitRequestConfig() async {
-
-   //等待3秒
-   await Future.delayed(const Duration(seconds: 3));
+    //等待3秒
+    await Future.delayed(const Duration(seconds: 3));
     return true;
   }
 
@@ -82,15 +85,12 @@ class WelcomeLogic extends BaseController<WelcomeState> {
     super.onInit();
     _loadLaunchImage();
 
-        await onInitAppConfig();
-        onInitRequestBucket();
+    await onInitAppConfig();
+    onInitRequestBucket();
   }
-
-
 
   // 启动APP配置
-  Future<void> onInitAppConfig() async {
-  }
+  Future<void> onInitAppConfig() async {}
 
   @override
   void onReady() {
