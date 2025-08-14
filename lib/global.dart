@@ -1,5 +1,6 @@
 // import 'package:facebook_app_events/facebook_app_events.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/models/acct_info_model.dart';
 import 'package:roomcard/models/app_config_model/index.dart';
 import 'package:roomcard/models/archive_config_model.dart';
 import 'package:roomcard/models/global_dic_model.dart';
@@ -50,6 +51,7 @@ class Global {
   String spName = '';
   bool imTyService = false;
   MemberInfoModel? memberInfo;
+  AppInfo? appInfo;
 
   bool didShowMaintenanceAlert = false;
 

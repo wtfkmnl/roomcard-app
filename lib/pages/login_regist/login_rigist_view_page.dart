@@ -3,15 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/global.dart';
 
 import 'dart:math' as math;
 
 import 'package:roomcard/pages/login_regist/login_rigist_controller.dart';
 import 'package:roomcard/pages/login_regist/login_text_filed/login_text_filed.dart';
+import 'package:roomcard/pages/login_regist/verify_code_button.dart';
+import 'package:roomcard/pages/login_regist/view/area_phone_bottom_sheet.dart';
 import 'package:roomcard/r.dart';
+import 'package:roomcard/utils/commonUtils.dart';
 import 'package:roomcard/utils/common_extension/common_extension.dart';
 import 'package:roomcard/utils/image_extension.dart';
+import 'package:roomcard/utils/keyboard_extension.dart';
 import 'package:roomcard/utils/my_font_family.dart';
+import 'package:roomcard/utils/show_am_bottom_sheet.dart';
 import 'package:roomcard/utils/storage_util.dart'; // 导入数学库以使用 pi
 
 class LoginRigistViewPage extends StatefulWidget {
@@ -67,7 +73,11 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        imageView(R.assetsImagesIconTitleBack, width: 28.w, height: 28.w),
+        imageView(R.assetsImagesIconTitleBack, width: 28.w, height: 28.w).onTap(
+          () {
+            Get.back();
+          },
+        ),
         imageView(R.assetsImagesLoginService, width: 24.w, height: 24.w),
       ],
     ).marginOnly(left: 16.w, right: 16.w, top: 54.h);
@@ -180,197 +190,510 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
     LoginTabItem tabItem = controller.loginTitle.firstWhere(
       (e) => e.isSelected!,
     );
-    return Column(
-      children:
-          tabItem.value == 0
-              ? [
-                CusTomTextField(
-                  keyboardType: TextInputType.emailAddress,
-                  height: 48.h,
-                  onChange: (val) {
-                    controller.setSubmitState();
-                  },
-                  boardColor: Color(0xFFFC3C3C),
-                  noboardColor: Color(0xFF2F4553),
-                  allRadius: 12.w,
-                  leftIcon: imageView(
-                    controller.tabs.firstWhere((e) => e.isSelected!).value == 0
-                        ? R.assetsImagesLoginTextfieldAccount
-                        : R.assetsImagesLoginTextfieldPhone,
-                    width: 18.w,
-                    height: 18.w,
-                  ).paddingOnly(left: 16.w, right: 12.w),
-                  controller: TextEditingController(),
-                  placeholder: '',
-                  usedInPassword: true,
-                  hintTextColor: Color(0xFFB3B7BD),
-                  textColor: Color(0xFF2D2D2D),
-                  textFontSize: 45.sp,
-                  hintTextFontSize: 36.sp,
-                  fontFamily: MyFontFamily.miSans,
-                  fontWeight: FontWeight.w600,
-                  hintFontWeight: FontWeight.w500,
-                ),
-                CusTomTextField(
-                  keyboardType: TextInputType.emailAddress,
-                  height: 48.h,
-                  onChange: (val) {
-                    controller.setSubmitState();
-                  },
-                  boardColor: Color(0xFFFC3C3C),
-                  noboardColor: Color(0xFF2F4553),
-                  allRadius: 12.w,
-                  leftIcon: imageView(
-                    controller.tabs.firstWhere((e) => e.isSelected!).value == 0
-                        ? R.assetsImagesLoginTextfieldPsw
-                        : R.assetsImagesLoginTextfieldVerfiy,
-                    width: 18.w,
-                    height: 18.w,
-                  ).paddingOnly(left: 16.w, right: 12.w),
-                  controller: TextEditingController(),
-                  placeholder: '',
-                  usedInPassword: true,
-                  hintTextColor: Color(0xFFB3B7BD),
-                  textColor: Color(0xFF2D2D2D),
-                  textFontSize: 45.sp,
-                  hintTextFontSize: 36.sp,
-                  fontFamily: MyFontFamily.miSans,
-                  fontWeight: FontWeight.w600,
-                  hintFontWeight: FontWeight.w500,
-                ),
-                Row(children: []),
-                _oprationBtns(isLogin: true),
-              ]
-              : tabItem.value == 1
-              ? [
-                CusTomTextField(
-                  keyboardType: TextInputType.emailAddress,
-                  height: 48.h,
-                  onChange: (val) {
-                    controller.setSubmitState();
-                  },
-                  boardColor: Color(0xFFFC3C3C),
-                  noboardColor: Color(0xFF2F4553),
-                  allRadius: 12.w,
-                  leftIcon: imageView(
-                    controller.tabs.firstWhere((e) => e.isSelected!).value == 0
-                        ? R.assetsImagesLoginTextfieldAccount
-                        : R.assetsImagesLoginTextfieldPhone,
-                    width: 18.w,
-                    height: 18.w,
-                  ).paddingOnly(left: 16.w, right: 12.w),
-                  controller: TextEditingController(),
-                  placeholder: '',
-                  usedInPassword: true,
-                  hintTextColor: Color(0xFFB3B7BD),
-                  textColor: Color(0xFF2D2D2D),
-                  textFontSize: 45.sp,
-                  hintTextFontSize: 36.sp,
-                  fontFamily: MyFontFamily.miSans,
-                  fontWeight: FontWeight.w600,
-                  hintFontWeight: FontWeight.w500,
-                ),
-                CusTomTextField(
-                  keyboardType: TextInputType.emailAddress,
-                  height: 48.h,
-                  onChange: (val) {
-                    controller.setSubmitState();
-                  },
-                  boardColor: Color(0xFFFC3C3C),
-                  noboardColor: Color(0xFF2F4553),
-                  allRadius: 12.w,
-                  leftIcon: imageView(
-                    controller.tabs.firstWhere((e) => e.isSelected!).value == 0
-                        ? R.assetsImagesLoginTextfieldPsw
-                        : R.assetsImagesLoginTextfieldVerfiy,
-                    width: 18.w,
-                    height: 18.w,
-                  ).paddingOnly(left: 16.w, right: 12.w),
-                  controller: TextEditingController(),
-                  placeholder: '',
-                  usedInPassword: true,
-                  hintTextColor: Color(0xFFB3B7BD),
-                  textColor: Color(0xFF2D2D2D),
-                  textFontSize: 45.sp,
-                  hintTextFontSize: 36.sp,
-                  fontFamily: MyFontFamily.miSans,
-                  fontWeight: FontWeight.w600,
-                  hintFontWeight: FontWeight.w500,
-                ),
-                CusTomTextField(
-                  keyboardType: TextInputType.emailAddress,
-                  height: 48.h,
-                  onChange: (val) {
-                    controller.setSubmitState();
-                  },
-                  boardColor: Color(0xFFFC3C3C),
-                  noboardColor: Color(0xFF2F4553),
-                  allRadius: 12.w,
-                  leftIcon: imageView(
-                    controller.tabs.firstWhere((e) => e.isSelected!).value == 0
-                        ? R.assetsImagesLoginTextfieldPsw
-                        : R.assetsImagesLoginTextfieldVerfiy,
-                    width: 18.w,
-                    height: 18.w,
-                  ).paddingOnly(left: 16.w, right: 12.w),
-                  controller: TextEditingController(),
-                  placeholder: '',
-                  usedInPassword: true,
-                  hintTextColor: Color(0xFFB3B7BD),
-                  textColor: Color(0xFF2D2D2D),
-                  textFontSize: 45.sp,
-                  hintTextFontSize: 36.sp,
-                  fontFamily: MyFontFamily.miSans,
-                  fontWeight: FontWeight.w600,
-                  hintFontWeight: FontWeight.w500,
-                ),
-                _oprationBtns(),
-              ]
-              : [
-                Container(
-                  width: 364.w,
-                  height: 105.h,
-                  padding: EdgeInsets.only(top: 15.h, left: 12.w, right: 12.w),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF162530),
-                    borderRadius: BorderRadius.circular(14.w),
-                  ),
-                  child: Text(
-                    '无需填写任何信息，点击一键注册；系统自主给您生成账户。\n\n 一键生成的账户，安全且唯一; 您可放心使用',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.normal,
+    return controller.tabs.firstWhere((e) => e.isSelected!).value == 0
+        ? Column(
+          children:
+              tabItem.value == 0
+                  ? [
+                    CusTomTextField(
+                      keyboardType: TextInputType.emailAddress,
+                      height: 48.h,
+                      onChange: (val) {
+                        controller.setSubmitState();
+                      },
+                      boardColor: Color(0xFFF9C678),
+                      noboardColor: Color(0xFF2F4553),
+                      allRadius: 12.w,
+                      leftIcon: imageView(
+                        R.assetsImagesLoginTextfieldAccount,
+                        width: 18.w,
+                        height: 18.w,
+                      ).paddingOnly(left: 16.w, right: 5.w),
+                      controller: controller.accountTEC,
+                      placeholder: '请输入账号',
+                      usedInPassword: false,
+                      hintTextColor: Color(0xFF57646D),
+                      textColor: Color(0xFFFFFFFF),
+                      textFontSize: 14.sp,
+                      hintTextFontSize: 14.sp,
+                      fontFamily: MyFontFamily.miSans,
+                      fontWeight: FontWeight.w600,
+                      hintFontWeight: FontWeight.w500,
+                    ).marginSymmetric(horizontal: 16.w),
+                    CusTomTextField(
+                      keyboardType: TextInputType.emailAddress,
+                      height: 48.h,
+                      onChange: (val) {
+                        controller.setSubmitState();
+                      },
+                      boardColor: Color(0xFFF9C678),
+                      noboardColor: Color(0xFF2F4553),
+                      allRadius: 12.w,
+                      leftIcon: imageView(
+                        R.assetsImagesLoginTextfieldPsw,
+                        width: 18.w,
+                        height: 18.w,
+                      ).paddingOnly(left: 16.w, right: 5.w),
+                      controller: controller.psdTEC,
+                      placeholder: '请输入密码',
+                      usedInPassword: true,
+                      hintTextColor: Color(0xFF57646D),
+                      textColor: Color(0xFFFFFFFF),
+                      textFontSize: 14.sp,
+                      hintTextFontSize: 14.sp,
+                      fontFamily: MyFontFamily.miSans,
+                      fontWeight: FontWeight.w600,
+                      hintFontWeight: FontWeight.w500,
+                    ).marginSymmetric(horizontal: 16.w),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            imageView(
+                              controller.isRememberPwd.value
+                                  ? R.assetsImagesLoginCheckS
+                                  : R.assetsImagesLoginCheckU,
+                              width: 16.w,
+                            ),
+                            SizedBox(width: 4.w),
+                            Text(
+                              '记住密码',
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                color: Color(0xFFB3BEC1),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ).onTap(() {
+                          controller.remberMemberAccountAndPassWord();
+                        }),
+                        Text(
+                          '忘记密码',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Color(0xFFB3BEC1),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ).marginOnly(left: 16.w, right: 16.w, top: 12.h),
+                    _oprationBtns(isLogin: true),
+                  ]
+                  : tabItem.value == 1
+                  ? [
+                    CusTomTextField(
+                      keyboardType: TextInputType.emailAddress,
+                      height: 48.h,
+                      onChange: (val) {
+                        controller.setSubmitState();
+                      },
+                      boardColor: Color(0xFFF9C678),
+                      noboardColor: Color(0xFF2F4553),
+                      allRadius: 12.w,
+                      leftIcon: imageView(
+                        R.assetsImagesLoginTextfieldAccount,
+                        width: 18.w,
+                        height: 18.w,
+                      ).paddingOnly(left: 16.w, right: 5.w),
+                      controller: TextEditingController(),
+                      placeholder: '请输入6至16位数字或字母',
+                      usedInPassword: false,
+                      hintTextColor: Color(0xFF57646D),
+                      textColor: Color(0xFFFFFFFF),
+                      textFontSize: 14.sp,
+                      hintTextFontSize: 14.sp,
+                      fontFamily: MyFontFamily.miSans,
+                      fontWeight: FontWeight.w600,
+                      hintFontWeight: FontWeight.w500,
+                    ).marginSymmetric(horizontal: 16.w),
+                    CusTomTextField(
+                      keyboardType: TextInputType.emailAddress,
+                      height: 48.h,
+                      onChange: (val) {
+                        controller.setSubmitState();
+                      },
+                      boardColor: Color(0xFFF9C678),
+                      noboardColor: Color(0xFF2F4553),
+                      allRadius: 12.w,
+                      leftIcon: imageView(
+                        R.assetsImagesLoginTextfieldPsw,
+                        width: 18.w,
+                        height: 18.w,
+                      ).paddingOnly(left: 16.w, right: 5.w),
+                      controller: TextEditingController(),
+                      placeholder: '请输入密码（6-18位字符）',
+                      usedInPassword: true,
+                      hintTextColor: Color(0xFF57646D),
+                      textColor: Color(0xFFFFFFFF),
+                      textFontSize: 14.sp,
+                      hintTextFontSize: 14.sp,
+                      fontFamily: MyFontFamily.miSans,
+                      fontWeight: FontWeight.w600,
+                      hintFontWeight: FontWeight.w500,
+                    ).marginSymmetric(horizontal: 16.w),
+                    CusTomTextField(
+                      keyboardType: TextInputType.emailAddress,
+                      height: 48.h,
+                      onChange: (val) {
+                        controller.setSubmitState();
+                      },
+                      boardColor: Color(0xFFF9C678),
+                      noboardColor: Color(0xFF2F4553),
+                      allRadius: 12.w,
+                      leftIcon: imageView(
+                        R.assetsImagesLoginTextfieldPsw,
+                        width: 18.w,
+                        height: 18.w,
+                      ).paddingOnly(left: 16.w, right: 5.w),
+                      controller: TextEditingController(),
+                      placeholder: '请再次输入密码',
+                      usedInPassword: true,
+                      hintTextColor: Color(0xFF57646D),
+                      textColor: Color(0xFFFFFFFF),
+                      textFontSize: 14.sp,
+                      hintTextFontSize: 14.sp,
+                      fontFamily: MyFontFamily.miSans,
+                      fontWeight: FontWeight.w600,
+                      hintFontWeight: FontWeight.w500,
+                    ).marginSymmetric(horizontal: 16.w),
+                    _oprationBtns(),
+                  ]
+                  : [
+                    Container(
+                      width: 364.w,
+                      height: 105.h,
+                      padding: EdgeInsets.only(
+                        top: 15.h,
+                        left: 12.w,
+                        right: 12.w,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF162530),
+                        borderRadius: BorderRadius.circular(14.w),
+                      ),
+                      child: Text(
+                        '无需填写任何信息，点击一键注册；系统自主给您生成账户。\n\n 一键生成的账户，安全且唯一; 您可放心使用',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ).marginOnly(top: 24.h, right: 12.w, left: 12.w),
+                    _oprationBtns(text: '一键注册'),
+                  ],
+        )
+        : Column(
+          children:
+              tabItem.value == 0
+                  ? [
+                    CusTomTextField(
+                      keyboardType: TextInputType.phone,
+                      height: 48.h,
+                      controller: controller.phoneLoginTEC,
+                      onChange: (val) {
+                        controller.setSubmitState();
+                      },
+                      boardColor: Color(0xFFF9C678),
+                      noboardColor:
+                          controller.phoneLoginTEC.text.isNotEmpty &&
+                                  !CommonUtils.validPhoneNumber(
+                                    controller.phoneLoginTEC.text,
+                                  )
+                              ? Color(0xFFFC3C3C)
+                              : Color(0xFF2F4553),
+                      allRadius: 12.w,
+                      leftIcon: Row(
+                        children: [
+                          imageView(
+                            R.assetsImagesLoginTextfieldPhone,
+                            width: 18.w,
+                            height: 18.w,
+                          ),
+                          Text(
+                            '+${controller.countryData[controller.codeIndexs.value].code}',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ).marginOnly(left: 4.w, right: 4.w),
+                          imageView(
+                            R.assetsImagesLoginTextfieldArrowBottom,
+                            width: 8.w,
+                          ).marginOnly(right: 4.w),
+                          Container(
+                            width: 2.w,
+                            height: 14.h,
+                            color: Color(0xFF37505E),
+                          ),
+                        ],
+                      ).paddingOnly(left: 16.w, right: 5.w).onTap(() {
+                        showAmBottomSheet(
+                          content: AreaPhoneBottomSheet(
+                            titles: "区域选择",
+                            countryData: controller.countryData,
+                            cuIndex: controller.codeIndexs.value ?? 0,
+                            callback: (index) {
+                              controller.codeIndexs.value = index;
+                              controller.update();
+                            },
+                          ),
+                        );
+                      }),
+                      placeholder: '请输入您的手机号码',
+                      usedInPassword: false,
+                      hintTextColor: Color(0xFF57646D),
+                      textColor: Color(0xFFFFFFFF),
+                      textFontSize: 14.sp,
+                      hintTextFontSize: 14.sp,
+                      fontFamily: MyFontFamily.miSans,
+                      fontWeight: FontWeight.w600,
+                      hintFontWeight: FontWeight.w500,
+                    ).marginSymmetric(horizontal: 16.w),
+                    CusTomTextField(
+                      keyboardType: TextInputType.number,
+                      height: 48.h,
+                      onChange: (val) {
+                        controller.setSubmitState();
+                      },
+                      boardColor: Color(0xFFF9C678),
+                      noboardColor: Color(0xFF2F4553),
+                      allRadius: 12.w,
+                      otherIcon: VerifyCodeButton(
+                        getSmsData: () {
+                          KeyboardHelper.close(Get.context);
+                          // if (phoneTEC.text.isEmpty) {
+                          //   ToastUtils.showToast(msg: "请输手机号".tr);
+                          //   return null;
+                          // }
+
+                          // if (!_phoneMatch()) {
+                          //   ToastUtils.showToast(msg: "请输入有效手机号".tr);
+                          //   return null;
+                          // }
+
+                          // bool pixAccountCheck = true;
+                          // String msg = "inputPhone2".tr;
+                          // pixAccountCheck = phoneTEC.text.isMatchReg(
+                          //   RegularUtil.DIGIT_REGEX,
+                          // );
+
+                          // if (!pixAccountCheck) {
+                          //   ToastUtils.showToast(msg: msg);
+                          //   return null;
+                          // }
+
+                          return {
+                            "telephone": '', //phoneTEC.text,
+                            'areaCode': '', //widget.areaCode,
+                          };
+                        },
+                      ),
+                      leftIcon: imageView(
+                        R.assetsImagesLoginTextfieldVerfiy,
+                        width: 18.w,
+                        height: 18.w,
+                      ).paddingOnly(left: 16.w, right: 5.w),
+                      controller: controller.phoneCodeLoginTEC,
+                      placeholder: '请输入验证码',
+                      usedInPassword: false,
+                      hintTextColor: Color(0xFF57646D),
+                      textColor: Color(0xFFFFFFFF),
+                      textFontSize: 14.sp,
+                      hintTextFontSize: 14.sp,
+                      fontFamily: MyFontFamily.miSans,
+                      fontWeight: FontWeight.w600,
+                      hintFontWeight: FontWeight.w500,
+                    ).marginSymmetric(horizontal: 16.w),
+                    _oprationBtns(isLogin: true),
+                  ]
+                  : tabItem.value == 1
+                  ? [
+                    CusTomTextField(
+                      keyboardType: TextInputType.phone,
+                      height: 48.h,
+                      onChange: (val) {
+                        controller.setSubmitState();
+                      },
+                      boardColor: Color(0xFFF9C678),
+                      noboardColor: Color(0xFF2F4553),
+                      allRadius: 12.w,
+
+                      leftIcon: Row(
+                        children: [
+                          imageView(
+                            R.assetsImagesLoginTextfieldPhone,
+                            width: 18.w,
+                            height: 18.w,
+                          ),
+                          Text(
+                            '+${controller.countryData[controller.codeIndexs.value].code}',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ).marginOnly(left: 4.w, right: 4.w),
+                          imageView(
+                            R.assetsImagesLoginTextfieldArrowBottom,
+                            width: 8.w,
+                          ).marginOnly(right: 4.w),
+                          Container(
+                            width: 2.w,
+                            height: 14.h,
+                            color: Color(0xFF37505E),
+                          ),
+                        ],
+                      ).paddingOnly(left: 16.w, right: 5.w).onTap(() {
+                        showAmBottomSheet(
+                          content: AreaPhoneBottomSheet(
+                            titles: "区域选择",
+                            countryData: controller.countryData,
+                            cuIndex: controller.codeIndexs.value ?? 0,
+                            callback: (index) {
+                              controller.codeIndexs.value = index;
+                              controller.update();
+                            },
+                          ),
+                        );
+                      }),
+                      controller: controller.phoneRegistTEC,
+                      placeholder: '请输入您的手机号码',
+                      usedInPassword: false,
+                      hintTextColor: Color(0xFF57646D),
+                      textColor: Color(0xFFFFFFFF),
+                      textFontSize: 14.sp,
+                      hintTextFontSize: 14.sp,
+                      fontFamily: MyFontFamily.miSans,
+                      fontWeight: FontWeight.w600,
+                      hintFontWeight: FontWeight.w500,
+                    ).marginSymmetric(horizontal: 16.w),
+                    CusTomTextField(
+                      keyboardType: TextInputType.number,
+                      height: 48.h,
+                      onChange: (val) {
+                        controller.setSubmitState();
+                      },
+                      maxLength: 4,
+                      boardColor: Color(0xFFF9C678),
+                      noboardColor: Color(0xFF2F4553),
+                      allRadius: 12.w,
+                      otherIcon: VerifyCodeButton(
+                        getSmsData: () {
+                          KeyboardHelper.close(Get.context);
+                          // if (phoneTEC.text.isEmpty) {
+                          //   ToastUtils.showToast(msg: "请输手机号".tr);
+                          //   return null;
+                          // }
+
+                          // if (!_phoneMatch()) {
+                          //   ToastUtils.showToast(msg: "请输入有效手机号".tr);
+                          //   return null;
+                          // }
+
+                          // bool pixAccountCheck = true;
+                          // String msg = "inputPhone2".tr;
+                          // pixAccountCheck = phoneTEC.text.isMatchReg(
+                          //   RegularUtil.DIGIT_REGEX,
+                          // );
+
+                          // if (!pixAccountCheck) {
+                          //   ToastUtils.showToast(msg: msg);
+                          //   return null;
+                          // }
+
+                          return {
+                            "telephone": '', //phoneTEC.text,
+                            'areaCode': '', //widget.areaCode,
+                          };
+                        },
+                      ),
+                      leftIcon: imageView(
+                        R.assetsImagesLoginTextfieldVerfiy,
+                        width: 18.w,
+                        height: 18.w,
+                      ).paddingOnly(left: 16.w, right: 5.w),
+                      controller: controller.phoneCodeRegistTEC,
+                      placeholder: '请输入验证码',
+                      usedInPassword: false,
+                      hintTextColor: Color(0xFF57646D),
+                      textColor: Color(0xFFFFFFFF),
+                      textFontSize: 14.sp,
+                      hintTextFontSize: 14.sp,
+                      fontFamily: MyFontFamily.miSans,
+                      fontWeight: FontWeight.w600,
+                      hintFontWeight: FontWeight.w500,
+                    ).marginSymmetric(horizontal: 16.w),
+                    _oprationBtns(
+                      callback: () {
+                        controller.regist(false);
+                      },
                     ),
-                  ),
-                ).marginOnly(top: 24.h, right: 12.w, left: 12.w),
-                _oprationBtns(text: '一键注册'),
-              ],
-    );
+                  ]
+                  : [
+                    Container(
+                      width: 364.w,
+                      height: 105.h,
+                      padding: EdgeInsets.only(
+                        top: 15.h,
+                        left: 12.w,
+                        right: 12.w,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF162530),
+                        borderRadius: BorderRadius.circular(14.w),
+                      ),
+                      child: Text(
+                        '无需填写任何信息，点击一键注册；系统自主给您生成账户。\n\n 一键生成的账户，安全且唯一; 您可放心使用',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ).marginOnly(top: 24.h, right: 12.w, left: 12.w),
+                    _oprationBtns(text: '一键注册'),
+                  ],
+        );
   }
 
-  Widget _oprationBtns({bool isLogin = false, String? text}) {
-    return Column(
+  Widget _oprationBtns({
+    bool isLogin = false,
+    String? text,
+    VoidCallback? callback,
+  }) {
+    return Stack(
       children: [
-        Container(
-          width: 400.w,
-          height: 70.h,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(R.assetsImagesLoginConfirmBtn),
-              fit: BoxFit.fill,
-            ),
-          ),
-          child: Center(
-            child: Text(
-              isLogin ? '立即登录' : text ?? '立即注册',
-              style: TextStyle(
-                fontSize: 18.sp,
-                color: Color(0xFF703E00),
-                fontWeight: FontWeight.w600,
+        Column(
+          children: [
+            Container(
+              height: 70.h,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(R.assetsImagesLoginConfirmBtn),
+                  fit: BoxFit.fill,
+                ),
               ),
-            ).marginOnly(bottom: 6.h),
-          ),
+              child: Center(
+                child: Text(
+                  isLogin ? '立即登录' : text ?? '立即注册',
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    color: Color(0xFF703E00),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ).marginOnly(bottom: 6.h),
+              ),
+            ).onTap(() {
+              if (callback != null) {
+                callback();
+              }
+            }),
+            SizedBox(height: 50.h),
+          ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -378,21 +701,34 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
             Row(
               children: [
                 Text(
-                  '已有账号？',
-                  style: TextStyle(fontSize: 12.sp, color: Color(0xFFB3BEC1)),
+                  isLogin ? '还没有账号？' : '已有账号？',
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFFB3BEC1),
+                  ),
                 ),
                 Text(
-                  isLogin ? '去登录' : '去注册',
-                  style: TextStyle(fontSize: 12.sp, color: Color(0xFFF9C678)),
+                  isLogin ? '去注册' : '去登录',
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFFF9C678),
+                  ),
                 ),
               ],
             ),
+
             Text(
               '联系客服',
-              style: TextStyle(fontSize: 12.sp, color: Color(0xFFF9C678)),
+              style: TextStyle(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFFF9C678),
+              ),
             ),
           ],
-        ).marginOnly(left: 16.w, right: 16.w),
+        ).marginOnly(left: 16.w, right: 16.w, top: 60.h),
       ],
     ).marginOnly(top: 45.h);
   }

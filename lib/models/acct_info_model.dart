@@ -185,3 +185,79 @@ class AcctInfoModel {
 //         'balance': balance,
 //       };
 // }
+
+class AppNames {
+  String? languageCode;
+  String? name;
+
+  AppNames({this.languageCode, this.name});
+
+  AppNames.fromJson(Map<String, dynamic> json) {
+    languageCode = json['languageCode'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['languageCode'] = this.languageCode;
+    data['name'] = this.name;
+    return data;
+  }
+}
+
+class AppInfo {
+  String? androidGoogleKeyUrl;
+  String? androidPackageName;
+  String? appIcon;
+  String? appLauncherImg;
+  List<AppNames>? appNames;
+  String? h5LauncherImg;
+  String? iosPackageName;
+  String? osKey;
+  String? siteId;
+
+  AppInfo({
+    this.androidGoogleKeyUrl,
+    this.androidPackageName,
+    this.appIcon,
+    this.appLauncherImg,
+    this.appNames,
+    this.h5LauncherImg,
+    this.iosPackageName,
+    this.osKey,
+    this.siteId,
+  });
+
+  AppInfo.fromJson(Map<String, dynamic> json) {
+    androidGoogleKeyUrl = json['androidGoogleKeyUrl'];
+    androidPackageName = json['androidPackageName'];
+    appIcon = json['appIcon'];
+    appLauncherImg = json['appLauncherImg'];
+    if (json['appNames'] != null) {
+      appNames = <AppNames>[];
+      json['appNames'].forEach((v) {
+        appNames!.add(new AppNames.fromJson(v));
+      });
+    }
+    h5LauncherImg = json['h5LauncherImg'];
+    iosPackageName = json['iosPackageName'];
+    osKey = json['osKey'];
+    siteId = json['siteId'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['androidGoogleKeyUrl'] = this.androidGoogleKeyUrl;
+    data['androidPackageName'] = this.androidPackageName;
+    data['appIcon'] = this.appIcon;
+    data['appLauncherImg'] = this.appLauncherImg;
+    if (this.appNames != null) {
+      data['appNames'] = this.appNames!.map((v) => v.toJson()).toList();
+    }
+    data['h5LauncherImg'] = this.h5LauncherImg;
+    data['iosPackageName'] = this.iosPackageName;
+    data['osKey'] = this.osKey;
+    data['siteId'] = this.siteId;
+    return data;
+  }
+}

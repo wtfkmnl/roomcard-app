@@ -13,6 +13,7 @@ typedef SelectareaCodeCallback = void Function(int index);
 class AreaPhoneBottomSheet extends StatefulWidget {
   final String titles;
   final List<Country> countryData;
+  final int cuIndex;
   final SelectareaCodeCallback callback;
 
   const AreaPhoneBottomSheet({
@@ -20,6 +21,7 @@ class AreaPhoneBottomSheet extends StatefulWidget {
     required this.titles,
     required this.countryData,
     required this.callback,
+    required this.cuIndex,
   });
 
   @override
@@ -42,35 +44,35 @@ class _AreaPhoneBottomSheetState extends State<AreaPhoneBottomSheet> {
           Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width: 42.w, height: 42.w).paddingLeft(42.w),
+                  SizedBox(width: 28.w, height: 28.w).paddingLeft(18.w),
                   Text(
                     widget.titles,
                     style: TextStyle(
-                      fontSize: 51.sp,
-                      color: Color(0xFF2D2D2D),
+                      fontSize: 16.sp,
+                      color: Color(0xFFFFFFFF),
                       fontFamily: MyFontFamily.miSans,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   imageView(
-                    R.assetsImagesIconAboutUsLogo,
-                    width: 42.w,
-                    height: 42.w,
-                  ).gestureTap(onTap: () => Get.back()).paddingRight(42.w),
+                    R.assetsImagesLoginAreaChoseClose,
+                    width: 28.w,
+                    height: 28.w,
+                  ).gestureTap(onTap: () => Get.back()).paddingRight(18.w),
                 ],
               )
-              .sized(height: 132.h, width: ScreenUtil().screenWidth)
-              .backgroundColor(Color(0xFFFFFFFF)),
+              .sized(height: 75.h, width: ScreenUtil().screenWidth)
+              .backgroundColor(Color(0xFF213743)),
           Column(
                 children: [
-                  SizedBox(height: 42.h),
+                  SizedBox(height: 0.h),
                   Row(
                         children: [
                           imageView(
-                            R.assetsImagesIconAboutUsLogo,
-                            width: 37.w,
-                            height: 37.w,
-                          ).paddingOnly(left: 44.w, right: 32.w),
+                            R.assetsImagesLoginTextfieldSearch,
+                            width: 24.w,
+                            height: 24.w,
+                          ).paddingOnly(left: 12.w, right: 12.w),
                           TextField(
                             style: TextStyle(
                               color: Color(0xFF2D2D2D),
@@ -127,61 +129,74 @@ class _AreaPhoneBottomSheetState extends State<AreaPhoneBottomSheet> {
                           ).paddingBottom(5).fill(),
                         ],
                       )
-                      .sized(height: 109.h)
-                      .backgroundColor(Colors.white)
-                      .cornerRadiusCircularAll(109.h)
-                      .paddingOnly(left: 42.w, right: 42.w),
-                  SizedBox(height: 42.h),
+                      .sized(height: 44.h)
+                      .withBorder(
+                        color: Color(0xFF2F4553),
+                        width: 2.w,
+                        radius: 14.h,
+                      )
+                      .backgroundColor(Color(0xFF0F212E))
+                      .cornerRadiusCircularAll(14.h)
+                      .paddingOnly(left: 16.w, right: 16.w),
+                  SizedBox(height: 12.h),
                   isSearched == true
                       ? ListView.builder(
-                        padding: EdgeInsets.zero,
+                        padding: EdgeInsets.only(left: 16.w, right: 16.w),
                         itemCount:
                             displayCountryList.isNotEmpty
                                 ? displayCountryList.length
                                 : widget.countryData.length,
                         itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "+ ${displayCountryList.isNotEmpty ? displayCountryList[index].code : widget.countryData[index].code}",
-                                        style: TextStyle(
-                                          fontSize: 42.sp,
-                                          color: Color(0xFF2D2D2D),
-                                          fontFamily: MyFontFamily.miSans,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ).sized(width: 150.w).paddingRight(78.w),
-                                      Text(
-                                        displayCountryList.isNotEmpty
-                                            ? displayCountryList[index].name
-                                            : widget.countryData[index].name,
-                                        style: TextStyle(
-                                          fontSize: 42.sp,
-                                          color: Color(0xFF2D2D2D),
-                                          fontFamily: MyFontFamily.miSans,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                  .sized(height: 137.h)
-                                  .gestureTap(
-                                    onTap: () {
-                                      widget.callback(index);
-                                      Get.back();
-                                    },
+                          return Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "+ ${displayCountryList.isNotEmpty ? displayCountryList[index].code : widget.countryData[index].code}",
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: Color(0xFFFFFFFF),
+                                      fontFamily: MyFontFamily.miSans,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ).sized(width: 44.w),
+                                  Text(
+                                    displayCountryList.isNotEmpty
+                                        ? displayCountryList[index].name
+                                        : widget.countryData[index].name,
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: Color(0xFFFFFFFF),
+                                      fontFamily: MyFontFamily.miSans,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ).fill(),
+                                  imageView(
+                                    widget.countryData[index].name ==
+                                            widget
+                                                .countryData[widget.cuIndex]
+                                                .name
+                                        ? R.assetsImagesLoginAreaChoseS
+                                        : R.assetsImagesLoginAreaChoseU,
+                                    width: 20.w,
                                   ),
-                              Divider(
-                                height: 0.5, // 分割线的高度
-                                color: Color(0xFFEBEDEF), // 分割线的颜色
-                              ),
-                            ],
-                          ).paddingOnly(left: 42.w, right: 42.w);
+                                ],
+                              )
+                              .sized(height: 40.h)
+                              .gestureTap(
+                                onTap: () {
+                                  widget.callback(index);
+                                  Get.back();
+                                },
+                              )
+                              .paddingOnly(left: 10.w, right: 12.w)
+                              .backgroundColor(
+                                widget.countryData[index].name ==
+                                        widget.countryData[widget.cuIndex].name
+                                    ? Color(0xFF375061)
+                                    : Colors.transparent,
+                              )
+                              .cornerRadiusCircularAll(8.w);
                         },
                       ).fill()
                       : Center(
@@ -195,14 +210,14 @@ class _AreaPhoneBottomSheetState extends State<AreaPhoneBottomSheet> {
                           ),
                         ),
                       ).fill(),
-                  SizedBox(height: 160.h),
+                  SizedBox(height: 30.h),
                 ],
               )
-              .backgroundColor(Color(0xFFF4F6F9))
-              .cornerRadiusCircularOnly(topLeft: 60.w, topRight: 60.w)
+              .backgroundColor(Color(0xFF213743))
+              .cornerRadiusCircularOnly(topLeft: 0.w, topRight: 0.w)
               .fill(),
         ],
-      ).sized(height: 1595.h),
+      ).sized(height: 472.h),
     ).backgroundColor(Colors.white);
   }
 }

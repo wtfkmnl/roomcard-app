@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/r.dart';
 import 'package:roomcard/utils/commonUtils.dart';
 import 'package:roomcard/utils/common_extension/common_extension.dart';
 import 'package:roomcard/utils/my_font_family.dart';
@@ -74,40 +75,48 @@ class _VerifyCodeButtonState extends State<VerifyCodeButton> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: widget.height ?? 99.h,
+      height: 34,
       // width: widget.width ?? 350.w,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.w),
-        color:
+        // borderRadius: BorderRadius.circular(10.w),
+        image: DecorationImage(
+          image: AssetImage(
             isStart == true
-                ? (widget.startBackgroundColor != null
-                    ? widget.startBackgroundColor!
-                    : widget.backgroundColor ?? Color(0xFF43BC9B).withAlpha(16))
-                : widget.backgroundColor ?? Color(0xFF43BC9B).withAlpha(16),
+                ? R.assetsImagesLoginVerifyCodeBtnU
+                : R.assetsImagesLoginVerifyCodeBtnS,
+          ),
+          fit: BoxFit.fill,
+        ),
+        // color:
+        //     isStart == true
+        //         ? (widget.startBackgroundColor != null
+        //             ? widget.startBackgroundColor!
+        //             : widget.backgroundColor ?? Color(0xFF43BC9B).withAlpha(16))
+        //         : widget.backgroundColor ?? Color(0xFF43BC9B).withAlpha(16),
       ),
       child: Text(
         textAlign: TextAlign.center,
         isStart
             ? "${_verifyCountDown}秒后可重发"
-            : (isRepeat ? "重新获取" : widget.title ?? "获取验证码"),
+            : (isRepeat ? "重新发送" : widget.title ?? "获取验证码"),
         style: TextStyle(
-          fontSize: 42.sp,
+          fontSize: 14.sp,
           color:
               widget.enterBegin == true
                   ? (isStart
-                      ? widget.titleColor ?? Color(0xFF43BC9B)
-                      : Color(0xFF43BC9B))
+                      ? widget.titleColor ?? Color(0xFFFFFFFF)
+                      : Color(0xFF703E00))
                   : ((isStart == true
                       ? (widget.startTitleColor != null
                           ? widget.startTitleColor!
-                          : (widget.titleColor ?? Color(0xFF43BC9B)))
+                          : (widget.titleColor ?? Color(0xFFFFFFFF)))
                       : isRepeat
-                      ? (widget.titleColor ?? Color(0xFF43BC9B))
-                      : (widget.titleColor ?? Color(0xFF43BC9B)))),
+                      ? (widget.titleColor ?? Color(0xFF703E00))
+                      : (widget.titleColor ?? Color(0xFF703E00)))),
           fontFamily: MyFontFamily.miSans,
           fontWeight: FontWeight.w400,
         ),
-      ).alignCenter().paddingOnly(right: isRepeat ? 45.w : 45.w, left: 45.w),
+      ).alignCenter().paddingOnly(right: isRepeat ? 12.w : 12.w, left: 12.w),
     ).gestureTap(
       onTap: () {
         printSome("-----isStart----------$isStart");

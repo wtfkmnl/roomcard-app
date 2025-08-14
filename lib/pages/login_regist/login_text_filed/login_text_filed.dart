@@ -87,13 +87,13 @@ class _LoginTextFieldState extends State<CusTomTextField> {
     _showEyesWhenInput = false;
 
     //输入框变化时
-    // widget.controller.addListener(() {
-    //   var isNotEmpty = widget.controller.text.isNotEmpty && _focusNode.hasFocus;
+    widget.controller.addListener(() {
+      var isNotEmpty = widget.controller.text.isNotEmpty && _focusNode.hasFocus;
 
-    //   setState(() {
-    //     _showClearIcon = isNotEmpty;
-    //   });
-    // });
+      setState(() {
+        _showClearIcon = isNotEmpty;
+      });
+    });
 
     //光标变化时
     _focusNode.addListener(() {
@@ -204,7 +204,7 @@ class _LoginTextFieldState extends State<CusTomTextField> {
         _buildClearIcon(),
         _buildPasswordEyeIcon(),
         widget.otherIcon ?? SizedBox(),
-        SizedBox(width: 12.w),
+        SizedBox(width: 8.w),
       ],
     );
   }
@@ -214,14 +214,14 @@ class _LoginTextFieldState extends State<CusTomTextField> {
         ? Center(
               child: imageView(
                 R.assetsImagesApokerLoginClear,
-                width: 45.w,
-                height: 45.h,
+                width: 16.w,
+                height: 16.h,
                 fit: BoxFit.fitHeight,
               ),
             )
             .paddingOnly(
-              left: widget.cleanIconleft ?? 30.w,
-              right: widget.cleanIconRight ?? 30.w,
+              left: widget.cleanIconleft ?? 4.w,
+              right: widget.cleanIconRight ?? 4.w,
             )
             .gestureTap(
               onTap: () {
