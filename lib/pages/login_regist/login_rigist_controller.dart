@@ -365,7 +365,7 @@ class LoginRigistController extends GetxController
                   countryData[codeIndexs.value].code + phoneLoginTEC.text,
               "telephone": phoneLoginTEC.text,
               "areaCode": countryData[codeIndexs.value].code,
-              "validateCode": phoneCodeLoginTEC.text,
+              "smsCode": phoneCodeLoginTEC.text,
               "requestMethod": 1,
             };
     if (validateCode != null) {

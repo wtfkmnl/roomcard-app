@@ -533,6 +533,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       textColor: Color(0xFFFFFFFF),
                       textFontSize: 14.sp,
                       hintTextFontSize: 14.sp,
+                      maxLength: 6,
                       fontFamily: MyFontFamily.miSans,
                       fontWeight: FontWeight.w600,
                       hintFontWeight: FontWeight.w500,
@@ -636,12 +637,12 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                             return null;
                           }
 
-                          // if (!CommonUtils.validPhoneNumber(
-                          //   controller.phoneRegistTEC.text,
-                          // )) {
-                          //   TopToast().show(message: "请输入正确的手机号");
-                          //   return null;
-                          // }
+                          if (!CommonUtils.validPhoneNumber(
+                            controller.phoneRegistTEC.text,
+                          )) {
+                            TopToast().show(message: "请输入正确的手机号");
+                            return null;
+                          }
 
                           bool pixAccountCheck = true;
                           String msg = "inputPhone2".tr;
