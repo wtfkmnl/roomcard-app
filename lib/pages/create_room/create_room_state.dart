@@ -5,6 +5,9 @@ class CreateRoomState extends BaseState with StateAutoManager {
   /// 当前选中的游戏模式索引 (0: 经典德州, 1: 奥马哈, 2: 德州短牌, 3: AOF)
   final selectedGameMode = 0.obs;
   
+  /// 房间名称
+  final roomName = 'DPNO2OAH的经典德州牌局'.obs;
+  
   /// 小盲/大盲索引
   final blindsIndex = 0.obs;
   

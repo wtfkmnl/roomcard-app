@@ -126,8 +126,8 @@ flutter:
     - assets/app_config/
     - assets/images/
     - assets/images/launch/
+    - assets/images/club/
     - assets/images/bottom_nav/
-    - assets/images/public/
     - assets/images/home/
     - assets/images/game/
     - assets/archive_config.json

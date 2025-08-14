@@ -1,22 +1,47 @@
 import 'package:roomcard/base/base_controller.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'create_room_state.dart';
 
 class CreateRoomLogic extends BaseController<CreateRoomState> {
+  late FocusNode roomNameFocusNode;
+  late TextEditingController roomNameController;
+
   @override
   CreateRoomState initState() {
+    // 在initState中初始化controller和focusNode
+    roomNameFocusNode = FocusNode();
+    roomNameController = TextEditingController();
     return CreateRoomState();
   }
 
   @override
   void onInit() {
     super.onInit();
+    // 初始化controller的文本
+    roomNameController.text = state.roomName.value;
+    
+    // 监听controller的文本变化
+    roomNameController.addListener(() {
+      if (state.roomName.value != roomNameController.text) {
+        state.roomName.value = roomNameController.text;
+      }
+    });
+  }
+
+  @override
+  void onClose() {
+    roomNameController.dispose();
+    roomNameFocusNode.dispose();
+    super.onClose();
   }
 
   /// 选择游戏模式
   void selectGameMode(int index) {
     state.selectedGameMode.value = index;
   }
+
+
 
   /// 设置小盲/大盲
   void setBlinds(int index) {

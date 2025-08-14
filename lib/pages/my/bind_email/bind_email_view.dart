@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../r.dart';
 import '../../../widgets/buttons/gradient_button.dart';
+import '../../../widgets/common_app_bar.dart';
 import 'bind_email_logic.dart';
 import 'bind_email_state.dart';
 
@@ -16,22 +17,10 @@ class BindEmailPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFF1C2C36),
-      appBar: AppBar(
+      appBar: CommonAppBar(
+        title: '绑定邮箱',
         backgroundColor: const Color(0xFF283D49),
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack),
-          onPressed: logic.onBackPressed,
-        ),
-        title: Text(
-          '绑定邮箱',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        onBackPressed: logic.onBackPressed,
       ),
       body: Padding(
         padding: EdgeInsets.all(16.w),
