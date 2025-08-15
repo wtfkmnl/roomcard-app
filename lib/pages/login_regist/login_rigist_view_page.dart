@@ -98,15 +98,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
         children:
             controller.tabs.map((e) {
               return _tabItem(e).onTap(() {
-                List<TabItem> tabs = controller.tabs;
-                for (var i = 0; i < tabs.length; i++) {
-                  tabs[i].isSelected = false;
-                  if (tabs[i].name == e.name) {
-                    tabs[i].isSelected = true;
-                  }
-                }
-                controller.tabs = tabs;
-                controller.update();
+                controller.clickTab(e);
               });
             }).toList(),
       ),
@@ -189,6 +181,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
   }
 
   Widget _accountTextView() {
+    if (controller.loginTitle.isEmpty) {
+      return SizedBox();
+    }
     LoginTabItem tabItem = controller.loginTitle.firstWhere(
       (e) => e.isSelected!,
     );

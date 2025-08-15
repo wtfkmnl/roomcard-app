@@ -302,7 +302,7 @@ dynamic dealResData(Response response) {
         } else {
           dealLoginAndRegisterSetting(response);
         }
-
+      } else {
         GlobalDataService.instance.isLogin = true;
       }
       if (responseData['result'] != null &&

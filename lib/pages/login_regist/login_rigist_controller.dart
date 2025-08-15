@@ -75,7 +75,7 @@ class LoginRigistController extends GetxController
 
   List<LoginTabItem> loginTitle = [
     // LoginTabItem(name: "一键注册", value: 3, isSelected: false),
-    LoginTabItem(name: "登录", value: 0, isSelected: true),
+    // LoginTabItem(name: "登录", value: 0, isSelected: true),
     // LoginTabItem(name: "注册", value: 1, isSelected: false),
   ];
 
@@ -172,6 +172,15 @@ class LoginRigistController extends GetxController
           loginTitle.add(registerTab);
         }
       }
+    });
+
+    model.loginMethod!.forEach((el) {
+      if (el == 1) {
+        loginTitle.add(LoginTabItem(name: "登录", value: 0, isSelected: true));
+      }
+    });
+
+    model.registerMethod!.forEach((el) {
       if (el == clickRegisterTab.value) {
         if (!loginTitle.contains(clickRegisterTab)) {
           loginTitle.add(clickRegisterTab);
@@ -182,6 +191,47 @@ class LoginRigistController extends GetxController
     update();
 
     return model;
+  }
+
+  void clickTab(TabItem e) {
+    List<TabItem> array = tabs;
+    for (var i = 0; i < array.length; i++) {
+      array[i].isSelected = false;
+      if (array[i].name == e.name) {
+        array[i].isSelected = true;
+      }
+    }
+    tabs = array;
+    loginTitle.clear();
+    loginRegistConfigInfos.registerMethod!.forEach((el) {
+      if (el == clickRegisterTab.value) {
+        if (!loginTitle.contains(clickRegisterTab)) {
+          loginTitle.add(clickRegisterTab);
+        }
+      }
+    });
+
+    if (tabs.firstWhere((e) => e.isSelected!).value == 0) {
+      loginRegistConfigInfos.loginMethod!.forEach((el) {
+        if (el == 1) {}
+      });
+    } else {
+      loginRegistConfigInfos.loginMethod!.forEach((el) {
+        if (el == 1) {
+          loginTitle.add(LoginTabItem(name: "登录", value: 0, isSelected: true));
+        }
+      });
+    }
+
+    loginRegistConfigInfos.registerMethod!.forEach((el) {
+      if (el == registerTab.value) {
+        if (!loginTitle.contains(registerTab)) {
+          loginTitle.add(registerTab);
+        }
+      }
+    });
+
+    update();
   }
 
   bool accountPhoneEnable() {
