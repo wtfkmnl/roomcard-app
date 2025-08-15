@@ -80,7 +80,11 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
         //   },
         // ),
         SizedBox(),
-        imageView(R.assetsImagesLoginService, width: 24.w, height: 24.w),
+        imageView(R.assetsImagesLoginService, width: 24.w, height: 24.w).onTap(
+          () {
+            TopToast().show(message: "联系客服");
+          },
+        ),
       ],
     ).marginOnly(left: 16.w, right: 16.w, top: 54.h);
   }
@@ -822,7 +826,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                 fontWeight: FontWeight.w500,
                 color: Color(0xFFF9C678),
               ),
-            ),
+            ).onTap(() {
+              TopToast().show(message: "联系客服");
+            }),
           ],
         ).marginOnly(left: 16.w, right: 16.w, top: 60.h),
       ],
