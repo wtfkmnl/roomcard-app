@@ -1,3 +1,4 @@
+import 'package:roomcard/api/app_config.dart';
 import 'package:roomcard/base/base_controller.dart';
 import 'package:roomcard/pages/main/models/nav_item.dart';
 import 'package:roomcard/pages/home/home_view.dart';
@@ -18,7 +19,7 @@ class MainLogic extends BaseController<MainState>
   @override
   void onInit() {
     super.onInit();
-
+    AppConfigApi.dlicgh();
     // 初始化底部导航栏数据
     _initBottomData();
 
