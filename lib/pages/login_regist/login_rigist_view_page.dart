@@ -273,13 +273,24 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                           controller.remberMemberAccountAndPassWord();
                         }),
                         Text(
-                          '忘记密码',
+                          '忘记密码?',
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: Color(0xFFB3BEC1),
                             fontWeight: FontWeight.w500,
                           ),
-                        ),
+                        ).onTap(() {
+                          showCustomDialog(
+                            imageView(
+                              R.assetsImagesLoginForgetPsw,
+                              width: 343.w,
+                              height: 536.h,
+                            ).marginOnly(left: 16.w, right: 16.w).onTap(() {
+                              Get.back();
+                            }),
+                            barrierDismissible: true,
+                          );
+                        }),
                       ],
                     ).marginOnly(left: 16.w, right: 16.w, top: 12.h),
                     _oprationBtns(
@@ -785,7 +796,24 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                   ),
                 ),
               ],
-            ),
+            ).onTap(() {
+              if (isLogin) {
+                for (var i = 0; i < controller.loginTitle.length; i++) {
+                  controller.loginTitle[i].isSelected = false;
+                  if (controller.loginTitle[i].value == 1) {
+                    controller.loginTitle[i].isSelected = true;
+                  }
+                }
+              } else {
+                for (var i = 0; i < controller.loginTitle.length; i++) {
+                  controller.loginTitle[i].isSelected = false;
+                  if (controller.loginTitle[i].value == 0) {
+                    controller.loginTitle[i].isSelected = true;
+                  }
+                }
+              }
+              controller.update();
+            }),
 
             Text(
               '联系客服',
@@ -914,15 +942,16 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                     ),
                   ).gestureTap(
                     onTap: () {
-                      // showCustomDialog(
-                      //   ForgetLoginPassWordPage(
-                      //     areaCode:
-                      //         controller
-                      //             .countryData[controller.codeIndexs.value]
-                      //             .code,
-                      //   ),
-                      //   barrierDismissible: true,
-                      // );
+                      showCustomDialog(
+                        imageView(
+                          R.assetsImagesLoginForgetPsw,
+                          width: 343.w,
+                          height: 536.h,
+                        ).marginOnly(left: 16.w, right: 16.w).onTap(() {
+                          Get.back();
+                        }),
+                        barrierDismissible: true,
+                      );
                     },
                   ),
                 ],

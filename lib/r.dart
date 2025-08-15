@@ -450,6 +450,10 @@ class R {
   /// assets/images/login_confirm_btn.png
   static const String assetsImagesLoginConfirmBtn = "assets/images/login_confirm_btn.png";
 
+  /// Assets for assetsImagesLoginForgetPsw
+  /// assets/images/login_forget_psw.png
+  static const String assetsImagesLoginForgetPsw = "assets/images/login_forget_psw.png";
+
   /// Assets for assetsImagesLoginPhoneIcon
   /// assets/images/login_phone_icon.png
   static const String assetsImagesLoginPhoneIcon = "assets/images/login_phone_icon.png";
