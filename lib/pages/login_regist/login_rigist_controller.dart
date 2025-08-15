@@ -656,7 +656,7 @@ class LoginRigistController extends GetxController
     GlobalDataService.instance.isLogin = true;
     AppRouter.main.offAll();
 
-    TopToast().show(message: "登录正确", icon: R.assetsImagesToastSuceessIcon);
+    TopToast().show(message: "登录成功", icon: R.assetsImagesToastSuceessIcon);
   }
 
   bool isMatchAccountValidateInput(String input) {

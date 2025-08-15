@@ -287,7 +287,12 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                         ),
                       ],
                     ).marginOnly(left: 16.w, right: 16.w, top: 12.h),
-                    _oprationBtns(isLogin: true),
+                    _oprationBtns(
+                      isLogin: true,
+                      callback: () {
+                        controller.login();
+                      },
+                    ),
                   ]
                   : tabItem.value == 1
                   ? [
@@ -375,7 +380,11 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       fontWeight: FontWeight.w600,
                       hintFontWeight: FontWeight.w500,
                     ).marginSymmetric(horizontal: 16.w),
-                    _oprationBtns(),
+                    _oprationBtns(
+                      callback: () {
+                        controller.regist(false);
+                      },
+                    ),
                   ]
                   : [
                     Container(
@@ -399,7 +408,12 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                         ),
                       ),
                     ).marginOnly(top: 24.h, right: 12.w, left: 12.w),
-                    _oprationBtns(text: '一键注册'),
+                    _oprationBtns(
+                      text: '一键注册',
+                      callback: () {
+                        controller.regist(true);
+                      },
+                    ),
                   ],
         )
         : Column(
@@ -709,7 +723,12 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                         ),
                       ),
                     ).marginOnly(top: 24.h, right: 12.w, left: 12.w),
-                    _oprationBtns(text: '一键注册'),
+                    _oprationBtns(
+                      text: '一键注册',
+                      callback: () {
+                        controller.regist(true);
+                      },
+                    ),
                   ],
         );
   }
