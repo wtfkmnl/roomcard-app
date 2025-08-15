@@ -23,7 +23,7 @@ class AboutPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack),
+          icon: Image.asset(R.assetsImagesIconTitleBack, width: 28.w),
           onPressed: () => Get.back(),
         ),
       ),
@@ -113,7 +113,10 @@ class AboutPage extends StatelessWidget {
         ),
 
         8.verticalSpace,
-        Text('此致敬礼', style: TextStyle(color: Colors.white, fontSize: 12.sp)),
+        Text(
+          '此致敬礼',
+          style: TextStyle(color: Colors.white, fontSize: 12.sp),
+        ),
         8.verticalSpace,
         Text(
           'KO Poker开发团队',

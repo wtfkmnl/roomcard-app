@@ -28,7 +28,7 @@ class SettingPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack),
+          icon: Image.asset(R.assetsImagesIconTitleBack, width: 28.w),
           onPressed: () => Get.back(),
         ),
       ),
@@ -151,10 +151,9 @@ class SettingPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        trailing:
-            showArrow
-                ? Image.asset(R.assetsImagesIconArrowNext, width: 20.w)
-                : null,
+        trailing: showArrow
+            ? Image.asset(R.assetsImagesIconArrowNext, width: 20.w)
+            : null,
         onTap: onTap,
       ),
     );

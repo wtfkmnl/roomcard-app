@@ -156,40 +156,6 @@ class MyPage extends StatelessWidget {
               Row(
                 children: [
                   GestureDetector(
-                    onTap: logic.onWithdrawTap,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFFABB9C2), Color(0xFF839197)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xFF5B6C72).withOpacity(0.3),
-                            offset: const Offset(0, 2), // 底部2像素阴影
-                            blurRadius: 4,
-                            spreadRadius: 0,
-                          ),
-                        ],
-                      ),
-                      child: Text(
-                        '提现',
-                        style: const TextStyle(
-                          color: Color(0xFF535B5F),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                  10.horizontalSpace,
-                  GestureDetector(
                     onTap: logic.onRechargeTap,
                     child: Container(
                       padding: const EdgeInsets.symmetric(

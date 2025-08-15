@@ -28,7 +28,7 @@ class LanguagePage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack),
+          icon: Image.asset(R.assetsImagesIconTitleBack, width: 28.w),
           onPressed: () => Get.back(),
         ),
       ),
@@ -78,24 +78,27 @@ class LanguagePage extends StatelessWidget {
               ),
               language.isSelected
                   ? Container(
-                    width: 16.w,
-                    height: 16.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Color(0xffF9C678), width: 3.w),
-                    ),
-                  )
-                  : Container(
-                    width: 16.w,
-                    height: 16.w,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color(0xFF395466),
-                        width: 1.w,
+                      width: 16.w,
+                      height: 16.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Color(0xffF9C678),
+                          width: 3.w,
+                        ),
                       ),
-                      shape: BoxShape.circle,
+                    )
+                  : Container(
+                      width: 16.w,
+                      height: 16.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color(0xFF395466),
+                          width: 1.w,
+                        ),
+                        shape: BoxShape.circle,
+                      ),
                     ),
-                  ),
             ],
           ),
         ),

@@ -29,7 +29,7 @@ class ProfilePage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack),
+          icon: Image.asset(R.assetsImagesIconTitleBack, width: 28.w),
           onPressed: () => Get.back(),
         ),
       ),

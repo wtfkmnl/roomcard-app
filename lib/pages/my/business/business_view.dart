@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../r.dart';
@@ -28,7 +29,7 @@ class _BusinessPageState extends State<BusinessPage> {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack),
+          icon: Image.asset(R.assetsImagesIconTitleBack, width: 28.w),
           onPressed: () => Get.back(),
         ),
       ),
