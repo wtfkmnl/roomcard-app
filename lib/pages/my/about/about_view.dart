@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../r.dart';
+import '../../../widgets/common_app_bar.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -10,23 +11,7 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF1A2332),
-      appBar: AppBar(
-        title: const Text(
-          '关于我们',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: Color(0xFF283D49),
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack, width: 28.w),
-          onPressed: () => Get.back(),
-        ),
-      ),
+      appBar: CommonAppBar(title: '关于我们'),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(22),
         child: Column(

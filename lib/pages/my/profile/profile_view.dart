@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/widgets/common_app_bar.dart';
 import '../../../global.dart';
 import '../../../r.dart';
 import '../../../utils/image_extension.dart';
@@ -16,23 +17,7 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFF1A2332),
-      appBar: AppBar(
-        title: Text(
-          '个人资料',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: Color(0xFF283D49),
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack, width: 28.w),
-          onPressed: () => Get.back(),
-        ),
-      ),
+      appBar: CommonAppBar(title: '个人资料'),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

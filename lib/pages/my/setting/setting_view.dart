@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/widgets/common_app_bar.dart';
 import '../../../r.dart';
 import '../../../widgets/custom_switch.dart';
 import 'setting_logic.dart';
@@ -15,23 +16,7 @@ class SettingPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFF1A2332),
-      appBar: AppBar(
-        title: const Text(
-          '设置',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: Color(0xFF283D49),
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack, width: 28.w),
-          onPressed: () => Get.back(),
-        ),
-      ),
+      appBar: CommonAppBar(title: '设置'),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

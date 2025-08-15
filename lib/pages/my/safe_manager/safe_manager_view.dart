@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/widgets/common_app_bar.dart';
 import '../../../r.dart';
 import '../../../widgets/custom_switch.dart';
 import 'safe_manager_logic.dart';
@@ -17,23 +18,7 @@ class SafeManagerPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFF1A2332),
-      appBar: AppBar(
-        title: Text(
-          '安全管理',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: Color(0xFF283D49),
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack, width: 28.w),
-          onPressed: () => Get.back(),
-        ),
-      ),
+      appBar: CommonAppBar(title: '安全管理'),
       body: Stack(
         children: [
           ListView(
@@ -98,10 +83,9 @@ class SafeManagerPage extends StatelessWidget {
 
           // 安全验证说明弹窗
           Obx(
-            () =>
-                state.showSecurityTipDialog.value
-                    ? _buildSecurityTipDialog(logic, _tipIconKey)
-                    : const SizedBox.shrink(),
+            () => state.showSecurityTipDialog.value
+                ? _buildSecurityTipDialog(logic, _tipIconKey)
+                : const SizedBox.shrink(),
           ),
         ],
       ),
@@ -312,10 +296,9 @@ class SafeManagerPage extends StatelessWidget {
 class TrianglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint =
-        Paint()
-          ..color = Colors.white
-          ..style = PaintingStyle.fill;
+    final paint = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.fill;
 
     final path = Path();
     path.moveTo(size.width / 2, 0); // 顶点
