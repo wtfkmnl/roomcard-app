@@ -2,6 +2,7 @@ import 'package:roomcard/pages/login_regist/login_rigist_view_page.dart';
 import 'package:roomcard/pages/main/main_binding.dart';
 import 'package:roomcard/pages/main/main_view.dart';
 import 'package:roomcard/pages/my/about/about_view.dart';
+import 'package:roomcard/pages/my/business/business_binding.dart';
 import 'package:roomcard/pages/my/business/business_view.dart';
 import 'package:roomcard/pages/my/change_account/change_account_binding.dart';
 import 'package:roomcard/pages/my/change_account/change_account_view.dart';
@@ -71,6 +72,7 @@ class AppPages {
     GetPage(
       name: AppRouter.mineBusiness.path,
       page: () => const BusinessPage(),
+      binding: BusinessBinding(),
     ),
     GetPage(
       name: AppRouter.mineSetting.path,
