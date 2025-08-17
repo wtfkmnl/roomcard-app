@@ -18,6 +18,12 @@ enum AppRouter<T> {
   ///加入俱乐部页面
   joinClub('/join-club'),
 
+  ///俱乐部详情页面
+  clubDetail('/club-detail'),
+
+  ///俱乐部主页
+  clubHome('/club-home'),
+
   ///商务合作
   mineBusiness('/mine_business'),
 

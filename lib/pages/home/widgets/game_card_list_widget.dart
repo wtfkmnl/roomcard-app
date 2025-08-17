@@ -79,7 +79,7 @@ class GameCardListWidget extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(width: 10.pxw),
+              SizedBox(width: 22.pxw),
               Text(
                 game.gameType,
                 style: TextStyle(color: AppTheme().current.textColor4, fontSize: 14.pxSp, fontWeight: FontWeight.w500),
@@ -108,7 +108,7 @@ class GameCardListWidget extends StatelessWidget {
           SizedBox(height: 8.pxh),
 
           Container(
-            padding: EdgeInsets.only(top: 20.pxh, left: 11.pxw,right: 11.pxw ),
+            padding: EdgeInsets.only(top: 20.pxh, left: 11.pxw, right: 11.pxw),
             width: 335.pxw,
             height: 130.pxh,
             decoration: BoxDecoration(
@@ -139,14 +139,14 @@ class GameCardListWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-Gap(2.pxh),
+                Gap(2.pxh),
                 // 底部信息行
                 Stack(
                   alignment: Alignment.center,
                   children: [
                     Row(
                       children: [
-                        Image.asset('assets/images/game/money_icon.png',width: 14.pxw,height:14.pxh),
+                        Container(width: 14.pxw, height: 14.pxh, child: Image.asset('assets/images/home/icon_card_logo.png')),
                         SizedBox(width: 4.pxw),
                         Text(
                           game.gameMode,
@@ -181,79 +181,77 @@ Gap(2.pxh),
   Widget _buildStatus2Content(GameCardData game) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('assets/images/home/Frame 2120044999.png'), fit: BoxFit.contain),
+        image: DecorationImage(image: AssetImage('assets/images/home/game_card_bg.png'), fit: BoxFit.contain),
       ),
       child: Column(
         children: [
-         Container(
-           alignment: Alignment.center,
-           height: 77.pxh,
-           child:  Row(
-             children: [
-               SizedBox(width: 10.pxw),
-               // 左侧游戏图标
-               Container(width: 74.pxw, height: 56.pxh, child: Image.asset('assets/images/game/game1.png')),
+          Container(
+            alignment: Alignment.center,
+            height: 77.pxh,
+            child: Row(
+              children: [
+                SizedBox(width: 10.pxw),
+                // 左侧游戏图标
+                Container(width: 74.pxw, height: 56.pxh, child: Image.asset('assets/images/game/game1.png')),
 
-               SizedBox(width: 12.pxw),
+                SizedBox(width: 12.pxw),
 
-               // 中间游戏信息
-               Expanded(
-                 child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   mainAxisAlignment: MainAxisAlignment.center,
-                   children: [
-                     Text(
-                       game.subtitle,
-                       style: TextStyle(color: Colors.white, fontSize: 14.pxSp, fontWeight: FontWeight.w600),
-                     ),
-                     SizedBox(height: 4.pxh),
-                     Text(
-                       '15min/30min',
-                       style: TextStyle(color: AppTheme().current.textColor4, fontSize: 12.pxSp, fontWeight: FontWeight.w500),
-                     ),
-                   ],
-                 ),
-               ),
+                // 中间游戏信息
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        game.subtitle,
+                        style: TextStyle(color: Colors.white, fontSize: 14.pxSp, fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(height: 4.pxh),
+                      Text(
+                        '15min/30min',
+                        style: TextStyle(color: AppTheme().current.textColor4, fontSize: 12.pxSp, fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                ),
 
-               // 右侧玩家信息
-               Container(
-                 width: 75.pxh,
-                 height: 35.pxw,
-                 alignment: Alignment.center,
-                 padding: EdgeInsets.only(left: 30.pxw),
-                 decoration: BoxDecoration(
-                   image: DecorationImage(image: AssetImage("assets/images/home/room_number.png"))
-                 ),
-                 child: Text(
-                   '${game.currentPlayers}/${game.maxPlayers}',
-                   style: TextStyle(color: AppTheme().current.textColor1, fontSize: 14.pxSp, fontWeight: FontWeight.w600),
-                 ),
-               ),
+                // 右侧玩家信息
+                Container(
+                  width: 75.pxh,
+                  height: 35.pxw,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(left: 30.pxw),
+                  decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/home/room_number.png"))),
+                  child: Text(
+                    '${game.currentPlayers}/${game.maxPlayers}',
+                    style: TextStyle(color: AppTheme().current.textColor1, fontSize: 14.pxSp, fontWeight: FontWeight.w600),
+                  ),
+                ),
 
-
-               SizedBox(width: 10.pxw),
-             ],
-           ),
-         ) ,// 底部信息
-          Expanded(child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(width: 10.pxw),
-              Container(width: 14.pxw, height: 14.pxh, child: Image.asset('assets/images/home/icon_card_logo.png')),
-              SizedBox(width: 4.pxw),
-              Text(
-                game.gameMode,
-                style: TextStyle(color: AppTheme().current.textColor4, fontSize: 12.pxSp, fontWeight: FontWeight.w500),
-              ),
-             Spacer(),
-              Text(
-                game.timeInfo,
-                style: TextStyle(color: AppTheme().current.textColor4, fontSize: 12.pxSp, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(width: 10.pxw),
-
-            ],
-          )),
+                SizedBox(width: 10.pxw),
+              ],
+            ),
+          ), // 底部信息
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(width: 10.pxw),
+                Container(width: 14.pxw, height: 14.pxh, child: Image.asset('assets/images/home/icon_card_logo.png')),
+                SizedBox(width: 4.pxw),
+                Text(
+                  game.gameMode,
+                  style: TextStyle(color: AppTheme().current.textColor4, fontSize: 12.pxSp, fontWeight: FontWeight.w500),
+                ),
+                Spacer(),
+                Text(
+                  game.timeInfo,
+                  style: TextStyle(color: AppTheme().current.textColor4, fontSize: 12.pxSp, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(width: 10.pxw),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -267,18 +265,16 @@ Gap(2.pxh),
           '$label',
           style: TextStyle(color: AppTheme().current.textColor4, fontSize: 10.pxSp, fontWeight: FontWeight.w400),
         ),
-       Row(
-         children: [
-           Image.asset('assets/images/game/money_icon.png',width: 15.pxw,height:13.pxh),
-          Gap(4.pxh),
-           Text(
-             '$value',
-             style: TextStyle(color: AppTheme().current.textColor1, fontSize: 14.pxSp, fontWeight: FontWeight.w700),
-           ),
-         ],
-       )
-
-
+        Row(
+          children: [
+            Image.asset('assets/images/game/money_icon.png', width: 15.pxw, height: 13.pxh),
+            Gap(4.pxh),
+            Text(
+              '$value',
+              style: TextStyle(color: AppTheme().current.textColor1, fontSize: 14.pxSp, fontWeight: FontWeight.w700),
+            ),
+          ],
+        ),
       ],
     );
   }

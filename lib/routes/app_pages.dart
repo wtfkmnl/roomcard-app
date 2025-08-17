@@ -28,6 +28,10 @@ import 'package:roomcard/pages/club/create_club_logic.dart';
 import 'package:roomcard/pages/club/create_club_view.dart';
 import 'package:roomcard/pages/club/join_club_logic.dart';
 import 'package:roomcard/pages/club/join_club_view.dart';
+import 'package:roomcard/pages/club/club_detail_binding.dart';
+import 'package:roomcard/pages/club/club_detail_view.dart';
+import 'package:roomcard/pages/club/club_home_view.dart';
+import 'package:roomcard/pages/club/club_home_logic.dart';
 import 'package:roomcard/routes/app_router.dart';
 
 import '../pages/my/bind_email/bind_email_binding.dart';
@@ -64,6 +68,18 @@ class AppPages {
       page: () => const JoinClubPage(),
       binding: BindingsBuilder(() {
         Get.lazyPut<JoinClubLogic>(() => JoinClubLogic());
+      }),
+    ),
+    GetPage(
+      name: AppRouter.clubDetail.path,
+      page: () => const ClubDetailPage(),
+      binding: ClubDetailBinding(),
+    ),
+    GetPage(
+      name: AppRouter.clubHome.path,
+      page: () => const ClubHomePage(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<ClubHomeLogic>(() => ClubHomeLogic());
       }),
     ),
     GetPage(

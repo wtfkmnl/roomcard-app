@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:roomcard/utils/common_extension/common_extension.dart';
 import 'package:roomcard/utils/num_px.dart';
 import 'package:roomcard/theme/app_theme.dart';
 import '../models/club_card_data.dart';
@@ -182,6 +185,9 @@ class ClubCardListWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ).onTap((){
+      Get.toNamed('/club-home');
+
+    });
   }
 }

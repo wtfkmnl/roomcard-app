@@ -20,6 +20,7 @@ class JoinClubLogic extends BaseController<JoinClubState> {
 
   /// 数字按钮按下
   void onNumberPressed(String number) {
+    // 这个方法现在在视图中直接实现
     if (state.currentFocusIndex.value < 8) {
       state.clubId[state.currentFocusIndex.value] = number;
       if (state.currentFocusIndex.value < 7) {
@@ -30,6 +31,7 @@ class JoinClubLogic extends BaseController<JoinClubState> {
 
   /// 删除按钮按下
   void onDeletePressed() {
+    // 这个方法现在在视图中直接实现
     if (state.currentFocusIndex.value > 0) {
       state.currentFocusIndex.value--;
       state.clubId[state.currentFocusIndex.value] = '';

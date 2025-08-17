@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gap/gap.dart';
+import 'package:roomcard/utils/common_extension/common_extension.dart';
 import 'package:roomcard/utils/num_px.dart';
 import 'package:roomcard/theme/app_theme.dart';
 import 'join_club_logic.dart';
@@ -21,45 +22,41 @@ class _JoinClubPageState extends State<JoinClubPage> implements NumericKeypadCal
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A1A),
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(
           children: [
-            // 头部
-            _buildHeader(),
-            
-            Gap(32.pxh),
-            
+Container(
+  width: double.infinity,
+  child: Stack(
+    alignment: Alignment.center,
+    children: [
+      Positioned(left:16.pxw,child: Image.asset('assets/images/club/back_icon.png', width: 28.pxw,height: 28.pxh,).onTap(() => Get.back())),
+      Text('加入俱乐部', style: TextStyle(
+        color: Colors.white,
+        fontSize: 18.pxSp,
+        fontWeight: FontWeight.w600,
+      )),
+    ],
+  ),
+),
             // 主要内容区域
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 18.pxw),
                 child: Column(
                   children: [
-                    // 输入提示
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(16.pxw),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF2A2A2A),
-                        borderRadius: BorderRadius.circular(8.pxw),
-                      ),
-                      child: Text(
-                        '输入俱乐部ID',
-                        style: TextStyle(
-                          color: AppTheme().current.textColor4,
-                          fontSize: 14.pxSp,
-                        ),
-                      ),
-                    ),
+                    Gap(32.pxh),
+                    
+                    // 输入提示区域
+                    _buildInputHintSection(),
                     
                     Gap(24.pxh),
                     
                     // 俱乐部ID输入框
                     _buildClubIdInput(),
-                    
-                    const Spacer(),
-                    
+
+                    Gap(24.pxh),
                     // 确认按钮
                     _buildConfirmButton(),
                     
@@ -73,48 +70,25 @@ class _JoinClubPageState extends State<JoinClubPage> implements NumericKeypadCal
       ),
     );
   }
-
-  /// 构建头部
-  Widget _buildHeader() {
+  /// 构建输入提示区域
+  Widget _buildInputHintSection() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 18.pxw, vertical: 16.pxh),
-      child: Row(
-        children: [
-          // 返回按钮
-          GestureDetector(
-            onTap: () => Get.back(),
-            child: Container(
-              width: 40.pxw,
-              height: 40.pxh,
-              decoration: BoxDecoration(
-                color: const Color(0xFF3A3A3A),
-                borderRadius: BorderRadius.circular(8.pxw),
-              ),
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-                size: 20.pxw,
-              ),
-            ),
-          ),
-          
-          const Spacer(),
-          
-          // 标题
-          Text(
-            '加入俱乐部',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18.pxSp,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          
-          const Spacer(),
-          
-          // 占位，保持标题居中
-          SizedBox(width: 40.pxw),
-        ],
+      width: 100.pxw,
+      padding: EdgeInsets.symmetric(horizontal: 6.pxw,vertical: 6.pxh),
+      decoration: BoxDecoration(
+        color: const Color(0xAB2A2A2A),
+        borderRadius: BorderRadius.circular(8.pxw),
+        border: Border.all(
+          color: const Color(0xAB3A3A3A),
+          width: 1.pxw,
+        ),
+      ),
+      child: Text(
+        '输入俱乐部ID',
+        style: TextStyle(
+          color: AppTheme().current.textColor1,
+          fontSize: 14.pxSp,
+        ),
       ),
     );
   }
@@ -124,50 +98,10 @@ class _JoinClubPageState extends State<JoinClubPage> implements NumericKeypadCal
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 标签
-        Text(
-          '俱乐部ID',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 14.pxSp,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        
-        Gap(16.pxh),
-        
         // ID输入框组
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: List.generate(8, (index) => _buildIdInputBox(index)),
-        ),
-        
-        Gap(24.pxh),
-        
-        // 点击输入提示
-        GestureDetector(
-          onTap: _showNumericKeypad,
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 12.pxh),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color(0xFF2A2A2A),
-                style: BorderStyle.solid,
-                width: 1.pxw,
-              ),
-              borderRadius: BorderRadius.circular(8.pxw),
-            ),
-            child: Center(
-              child: Text(
-                '点击输入',
-                style: TextStyle(
-                  color: AppTheme().current.textColor4,
-                  fontSize: 14.pxSp,
-                ),
-              ),
-            ),
-          ),
         ),
       ],
     );
@@ -179,24 +113,31 @@ class _JoinClubPageState extends State<JoinClubPage> implements NumericKeypadCal
       final hasValue = state.clubId[index].isNotEmpty;
       final isFocused = state.currentFocusIndex.value == index;
       
-      return Container(
-        width: 36.pxw,
-        height: 44.pxh,
-        decoration: BoxDecoration(
-          color: hasValue ? const Color(0xFF2A3F4F) : Colors.transparent,
-          border: Border.all(
-            color: isFocused ? const Color(0xFFFF6B35) : const Color(0xFF2A2A2A),
-            width: 2.pxw,
+      return GestureDetector(
+        onTap: () {
+          // 点击数字框时设置焦点并弹出键盘
+          state.currentFocusIndex.value = index;
+          _showNumericKeypad();
+        },
+        child: Container(
+          width: 36.pxw,
+          height: 44.pxh,
+          decoration: BoxDecoration(
+            color: hasValue ? const Color(0xFF2A3F4F) : Colors.transparent,
+            border: Border.all(
+              color: isFocused ? const Color(0xFFFF6B35) : const Color(0xFF2A2A2A),
+              width: 2.pxw,
+            ),
+            borderRadius: BorderRadius.circular(6.pxw),
           ),
-          borderRadius: BorderRadius.circular(6.pxw),
-        ),
-        child: Center(
-          child: Text(
-            state.clubId[index],
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18.pxSp,
-              fontWeight: FontWeight.w600,
+          child: Center(
+            child: Text(
+              state.clubId[index],
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.pxSp,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ),
@@ -211,11 +152,19 @@ class _JoinClubPageState extends State<JoinClubPage> implements NumericKeypadCal
       height: 48.pxh,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFFDAA520), Color(0xFFB8860B)],
+          colors: [Color(0xFFDAA520), Color(0xFFB8860B)], // 金色渐变
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
         borderRadius: BorderRadius.circular(8.pxw),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0x40DAA520),
+            offset: Offset(0, 4.pxh),
+            blurRadius: 8.pxw,
+            spreadRadius: 0,
+          ),
+        ],
       ),
       child: Material(
         color: Colors.transparent,
@@ -254,12 +203,25 @@ class _JoinClubPageState extends State<JoinClubPage> implements NumericKeypadCal
   // NumericKeypadCallback 实现
   @override
   void onNumberPressed(String number) {
-    logic.onNumberPressed(number);
+    // 在当前焦点位置输入数字
+    if (state.currentFocusIndex.value < 8) {
+      state.clubId[state.currentFocusIndex.value] = number;
+      // 自动移动到下一个输入框
+      if (state.currentFocusIndex.value < 7) {
+        state.currentFocusIndex.value++;
+      }
+    }
   }
 
   @override
   void onDeletePressed() {
-    logic.onDeletePressed();
+    // 删除当前焦点位置的数字
+    if (state.currentFocusIndex.value > 0) {
+      state.currentFocusIndex.value--;
+      state.clubId[state.currentFocusIndex.value] = '';
+    } else if (state.currentFocusIndex.value == 0 && state.clubId[0].isNotEmpty) {
+      state.clubId[0] = '';
+    }
   }
 
   @override
