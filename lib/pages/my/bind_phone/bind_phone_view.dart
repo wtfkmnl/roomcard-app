@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/widgets/common_app_bar.dart';
 import '../../../r.dart';
 import '../../../widgets/buttons/gradient_button.dart';
 import 'bind_phone_logic.dart';
@@ -16,23 +17,7 @@ class BindPhonePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFF1C2C36),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF283D49),
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack),
-          onPressed: logic.onBackPressed,
-        ),
-        title: Text(
-          '绑定手机',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
+      appBar: CommonAppBar(title: '绑定手机'),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -180,16 +165,16 @@ class BindPhonePage extends StatelessWidget {
                 margin: EdgeInsets.only(right: 16.w),
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                 decoration: BoxDecoration(
-                  gradient:
-                      state.canSendCode.value
-                          ? const LinearGradient(
-                            colors: [Color(0xFFBF9048), Color(0xFFF9C678)],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          )
-                          : null,
-                  color:
-                      state.canSendCode.value ? null : const Color(0xFF37505E),
+                  gradient: state.canSendCode.value
+                      ? const LinearGradient(
+                          colors: [Color(0xFFBF9048), Color(0xFFF9C678)],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        )
+                      : null,
+                  color: state.canSendCode.value
+                      ? null
+                      : const Color(0xFF37505E),
                   borderRadius: BorderRadius.circular(6.r),
                 ),
                 child: Text(
@@ -197,10 +182,9 @@ class BindPhonePage extends StatelessWidget {
                       ? '${state.countdown.value}s'
                       : '获取验证码',
                   style: TextStyle(
-                    color:
-                        state.canSendCode.value
-                            ? const Color(0xFF703E00)
-                            : Colors.white54,
+                    color: state.canSendCode.value
+                        ? const Color(0xFF703E00)
+                        : Colors.white54,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),

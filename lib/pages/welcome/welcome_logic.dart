@@ -58,7 +58,6 @@ class WelcomeLogic extends BaseController<WelcomeState> {
       state.intoMain = true;
       stopTimer();
       if (GlobalDataService.instance.isLogin) {
-        await UserApi.getMemberInfo();
         AppRouter.main.offAll();
       } else {
         AppRouter.loginRegist.offAll();
@@ -90,7 +89,9 @@ class WelcomeLogic extends BaseController<WelcomeState> {
   }
 
   // 启动APP配置
-  Future<void> onInitAppConfig() async {}
+  Future<void> onInitAppConfig() async {
+    await UserApi.getMemberInfo();
+  }
 
   @override
   void onReady() {

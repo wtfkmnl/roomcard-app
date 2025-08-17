@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:roomcard/r.dart';
+import 'package:roomcard/widgets/common_app_bar.dart';
 import 'name_edit_logic.dart';
 
 class NameEditPage extends StatelessWidget {
@@ -14,63 +15,7 @@ class NameEditPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFF1A2332),
-      appBar: AppBar(
-        title: Text(
-          '用户昵称',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: const Color(0xFF283D49),
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack),
-          onPressed: logic.goBack,
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 16.w, top: 8.h, bottom: 8.h),
-            child: Obx(
-              () => Container(
-                decoration: BoxDecoration(
-                  color:
-                      state.canSave.value
-                          ? const Color(0xFFF9C678)
-                          : const Color(0xFFB3BEC1).withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(8),
-                    onTap: state.canSave.value ? logic.saveNickname : null,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 6.h,
-                      ),
-                      child: Text(
-                        '完成',
-                        style: TextStyle(
-                          color:
-                              state.canSave.value
-                                  ? const Color(0xFF703E00)
-                                  : const Color(0xFFB3BEC1),
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+      appBar: CommonAppBar(title: '用户昵称'),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -108,14 +53,15 @@ class NameEditPage extends StatelessWidget {
                         border: InputBorder.none,
                       ),
                       maxLength: 15,
-                      buildCounter: (
-                        context, {
-                        required currentLength,
-                        required isFocused,
-                        maxLength,
-                      }) {
-                        return null; // 隐藏默认计数器
-                      },
+                      buildCounter:
+                          (
+                            context, {
+                            required currentLength,
+                            required isFocused,
+                            maxLength,
+                          }) {
+                            return null; // 隐藏默认计数器
+                          },
                     ),
                   ),
                 ],
@@ -134,19 +80,18 @@ class NameEditPage extends StatelessWidget {
             ),
 
             Obx(
-              () =>
-                  state.isSaving.value
-                      ? Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            valueColor: const AlwaysStoppedAnimation<Color>(
-                              Color(0xFFFFB800),
-                            ),
+              () => state.isSaving.value
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          valueColor: const AlwaysStoppedAnimation<Color>(
+                            Color(0xFFFFB800),
                           ),
                         ),
-                      )
-                      : const SizedBox.shrink(),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
             ),
           ],
         ),

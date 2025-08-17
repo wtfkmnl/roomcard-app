@@ -12,6 +12,8 @@ import 'package:roomcard/utils/commonUtils.dart';
 import 'package:roomcard/utils/storage_util.dart';
 import 'package:roomcard/utils/values/constants.dart';
 
+import '../models/business_model.dart';
+
 class UserApi {
   /// 发送短信
   static Future<BaseResModel?> sySms({dynamic data, Options? options}) async {
@@ -108,16 +110,14 @@ class UserApi {
     }
     var res = await AMHttpService.to.post(
       spTokenCheck ? '/gc/queryPlatformBalance' : '/acct/queryAcctInfo',
-      data:
-          spTokenCheck
-              ? {
-                "languageCode": CommonUtils.currentLanguage().languageCode,
-                "platformCode": "IM_TY",
-                "memberRowId":
-                    GlobalDataService.instance.accountInfo.memberRowId,
-                "targetCurrency": 'CNY',
-              }
-              : {},
+      data: spTokenCheck
+          ? {
+              "languageCode": CommonUtils.currentLanguage().languageCode,
+              "platformCode": "IM_TY",
+              "memberRowId": GlobalDataService.instance.accountInfo.memberRowId,
+              "targetCurrency": 'CNY',
+            }
+          : {},
     );
     if (res != null) {
       if (spTokenCheck) {
@@ -355,5 +355,17 @@ class UserApi {
       data: formData,
     );
     return responseStr;
+  }
+
+  static Future<BaseResModel?> getBusinessList() async {
+    try {
+      var res = await AMHttpService.to.post('/bc/queryList');
+      if (res != null) {
+        return BaseResModel.fromJson(res);
+      }
+      return null;
+    } catch (e) {
+      throw Exception('获取商务合作列表失败: $e');
+    }
   }
 }

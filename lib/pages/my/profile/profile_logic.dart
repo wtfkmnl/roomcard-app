@@ -18,7 +18,7 @@ class ProfileLogic extends BaseController<ProfileState> {
   @override
   void onInit() {
     super.onInit();
-    _loadUserProfile();
+    // _loadUserProfile();
   }
 
   /// 加载用户资料

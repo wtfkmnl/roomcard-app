@@ -80,7 +80,11 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
         //   },
         // ),
         SizedBox(),
-        imageView(R.assetsImagesLoginService, width: 24.w, height: 24.w),
+        imageView(R.assetsImagesLoginService, width: 24.w, height: 24.w).onTap(
+          () {
+            TopToast().show(message: "联系客服");
+          },
+        ),
       ],
     ).marginOnly(left: 16.w, right: 16.w, top: 54.h);
   }
@@ -98,15 +102,7 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
         children:
             controller.tabs.map((e) {
               return _tabItem(e).onTap(() {
-                List<TabItem> tabs = controller.tabs;
-                for (var i = 0; i < tabs.length; i++) {
-                  tabs[i].isSelected = false;
-                  if (tabs[i].name == e.name) {
-                    tabs[i].isSelected = true;
-                  }
-                }
-                controller.tabs = tabs;
-                controller.update();
+                controller.clickTab(e);
               });
             }).toList(),
       ),
@@ -189,6 +185,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
   }
 
   Widget _accountTextView() {
+    if (controller.loginTitle.isEmpty) {
+      return SizedBox();
+    }
     LoginTabItem tabItem = controller.loginTitle.firstWhere(
       (e) => e.isSelected!,
     );
@@ -278,16 +277,32 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                           controller.remberMemberAccountAndPassWord();
                         }),
                         Text(
-                          '忘记密码',
+                          '忘记密码?',
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: Color(0xFFB3BEC1),
                             fontWeight: FontWeight.w500,
                           ),
-                        ),
+                        ).onTap(() {
+                          showCustomDialog(
+                            imageView(
+                              R.assetsImagesLoginForgetPsw,
+                              width: 343.w,
+                              height: 536.h,
+                            ).marginOnly(left: 16.w, right: 16.w).onTap(() {
+                              Get.back();
+                            }),
+                            barrierDismissible: true,
+                          );
+                        }),
                       ],
                     ).marginOnly(left: 16.w, right: 16.w, top: 12.h),
-                    _oprationBtns(isLogin: true),
+                    _oprationBtns(
+                      isLogin: true,
+                      callback: () {
+                        controller.login();
+                      },
+                    ),
                   ]
                   : tabItem.value == 1
                   ? [
@@ -375,7 +390,11 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                       fontWeight: FontWeight.w600,
                       hintFontWeight: FontWeight.w500,
                     ).marginSymmetric(horizontal: 16.w),
-                    _oprationBtns(),
+                    _oprationBtns(
+                      callback: () {
+                        controller.regist(false);
+                      },
+                    ),
                   ]
                   : [
                     Container(
@@ -399,7 +418,12 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                         ),
                       ),
                     ).marginOnly(top: 24.h, right: 12.w, left: 12.w),
-                    _oprationBtns(text: '一键注册'),
+                    _oprationBtns(
+                      text: '一键注册',
+                      callback: () {
+                        controller.regist(true);
+                      },
+                    ),
                   ],
         )
         : Column(
@@ -709,7 +733,12 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                         ),
                       ),
                     ).marginOnly(top: 24.h, right: 12.w, left: 12.w),
-                    _oprationBtns(text: '一键注册'),
+                    _oprationBtns(
+                      text: '一键注册',
+                      callback: () {
+                        controller.regist(true);
+                      },
+                    ),
                   ],
         );
   }
@@ -771,7 +800,24 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                   ),
                 ),
               ],
-            ),
+            ).onTap(() {
+              if (isLogin) {
+                for (var i = 0; i < controller.loginTitle.length; i++) {
+                  controller.loginTitle[i].isSelected = false;
+                  if (controller.loginTitle[i].value == 1) {
+                    controller.loginTitle[i].isSelected = true;
+                  }
+                }
+              } else {
+                for (var i = 0; i < controller.loginTitle.length; i++) {
+                  controller.loginTitle[i].isSelected = false;
+                  if (controller.loginTitle[i].value == 0) {
+                    controller.loginTitle[i].isSelected = true;
+                  }
+                }
+              }
+              controller.update();
+            }),
 
             Text(
               '联系客服',
@@ -780,7 +826,9 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                 fontWeight: FontWeight.w500,
                 color: Color(0xFFF9C678),
               ),
-            ),
+            ).onTap(() {
+              TopToast().show(message: "联系客服");
+            }),
           ],
         ).marginOnly(left: 16.w, right: 16.w, top: 60.h),
       ],
@@ -900,15 +948,16 @@ class _LoginRigistViewPageState extends State<LoginRigistViewPage> {
                     ),
                   ).gestureTap(
                     onTap: () {
-                      // showCustomDialog(
-                      //   ForgetLoginPassWordPage(
-                      //     areaCode:
-                      //         controller
-                      //             .countryData[controller.codeIndexs.value]
-                      //             .code,
-                      //   ),
-                      //   barrierDismissible: true,
-                      // );
+                      showCustomDialog(
+                        imageView(
+                          R.assetsImagesLoginForgetPsw,
+                          width: 343.w,
+                          height: 536.h,
+                        ).marginOnly(left: 16.w, right: 16.w).onTap(() {
+                          Get.back();
+                        }),
+                        barrierDismissible: true,
+                      );
                     },
                   ),
                 ],

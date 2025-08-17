@@ -13,6 +13,7 @@ List<String> _needAuthPaths = [
   '/mc/loginMember',
   '/mc/newMember',
   '/simple/newMember',
+  '/mc/selectMember',
 ];
 
 /// 拦截

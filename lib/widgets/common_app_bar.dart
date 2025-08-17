@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../r.dart';
 
@@ -35,14 +36,16 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: titleWidget ?? Text(
-        title,
-        style: TextStyle(
-          color: titleColor,
-          fontSize: titleSize,
-          fontWeight: titleWeight,
-        ),
-      ),
+      title:
+          titleWidget ??
+          Text(
+            title,
+            style: TextStyle(
+              color: titleColor,
+              fontSize: titleSize,
+              fontWeight: titleWeight,
+            ),
+          ),
       backgroundColor: backgroundColor,
       elevation: elevation,
       centerTitle: centerTitle,
@@ -54,9 +57,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget? _buildLeading() {
     if (!automaticallyImplyLeading) return null;
-    
+
     return IconButton(
-      icon: Image.asset(R.assetsImagesIconTitleBack),
+      icon: Image.asset(R.assetsImagesIconTitleBack, width: 28.w),
       onPressed: onBackPressed ?? () => Get.back(),
     );
   }
@@ -103,21 +106,21 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: gradientColors ?? [
-            Colors.blue.shade600,
-            Colors.blue.shade800,
-          ],
+          colors:
+              gradientColors ?? [Colors.blue.shade600, Colors.blue.shade800],
         ),
       ),
       child: AppBar(
-        title: titleWidget ?? Text(
-          title,
-          style: TextStyle(
-            color: titleColor,
-            fontSize: titleSize,
-            fontWeight: titleWeight,
-          ),
-        ),
+        title:
+            titleWidget ??
+            Text(
+              title,
+              style: TextStyle(
+                color: titleColor,
+                fontSize: titleSize,
+                fontWeight: titleWeight,
+              ),
+            ),
         backgroundColor: Colors.transparent,
         elevation: elevation,
         centerTitle: centerTitle,
@@ -130,7 +133,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget? _buildLeading() {
     if (!automaticallyImplyLeading) return null;
-    
+
     return IconButton(
       icon: Image.asset(R.assetsImagesIconTitleBack),
       onPressed: onBackPressed ?? () => Get.back(),
@@ -139,4 +142,4 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-} 
+}

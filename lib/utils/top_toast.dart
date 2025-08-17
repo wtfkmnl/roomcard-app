@@ -89,3 +89,25 @@ class TopToast {
     );
   }
 }
+
+Future showCustomDialog(
+  Widget child, {
+  bool barrierDismissible = false,
+  Color? barrierColor,
+}) async {
+  return Navigator.of(Get.context!).push(
+    PageRouteBuilder(
+      opaque: false, // 让背景透明
+      barrierColor: barrierColor ?? Colors.black54, // 背景遮罩颜色
+      pageBuilder: (_, __, ___) => child,
+      transitionsBuilder: (_, animation, __, child) {
+        // 你可以自定义动画，比如缩放、滑动、旋转等
+        return ScaleTransition(
+          scale: CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+          child: child,
+        );
+      },
+      barrierDismissible: barrierDismissible,
+    ),
+  );
+}

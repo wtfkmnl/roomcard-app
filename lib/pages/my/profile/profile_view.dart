@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/widgets/common_app_bar.dart';
+import '../../../global.dart';
 import '../../../r.dart';
+import '../../../utils/image_extension.dart';
 import 'profile_logic.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -14,23 +17,7 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFF1A2332),
-      appBar: AppBar(
-        title: Text(
-          '个人资料',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: Color(0xFF283D49),
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack),
-          onPressed: () => Get.back(),
-        ),
-      ),
+      appBar: CommonAppBar(title: '个人资料'),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -81,6 +68,9 @@ class ProfilePage extends StatelessWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
+                      ),
+                      child: imageView(
+                        '${Global.instance.dicModel?.baseSiteConfig?.ossDomain}/${state.avatar}',
                       ),
                     ),
                     16.horizontalSpace,
@@ -262,19 +252,18 @@ class ProfilePage extends StatelessWidget {
               ),
               color: isSelected ? Color(0xFFFF6B9D) : Colors.transparent,
             ),
-            child:
-                isSelected
-                    ? Center(
-                      child: Container(
-                        width: 8.w,
-                        height: 8.w,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
+            child: isSelected
+                ? Center(
+                    child: Container(
+                      width: 8.w,
+                      height: 8.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
                       ),
-                    )
-                    : null,
+                    ),
+                  )
+                : null,
           ),
           8.horizontalSpace,
           Text(

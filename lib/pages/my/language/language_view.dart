@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:roomcard/widgets/common_app_bar.dart';
 import '../../../r.dart';
 import 'language_logic.dart';
 import 'language_state.dart';
@@ -15,23 +16,7 @@ class LanguagePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFF1C2C36),
-      appBar: AppBar(
-        title: Text(
-          '多语言',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: const Color(0xFF283D49),
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset(R.assetsImagesIconTitleBack),
-          onPressed: () => Get.back(),
-        ),
-      ),
+      appBar: CommonAppBar(title: '多语言'),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Container(
@@ -78,24 +63,27 @@ class LanguagePage extends StatelessWidget {
               ),
               language.isSelected
                   ? Container(
-                    width: 16.w,
-                    height: 16.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Color(0xffF9C678), width: 3.w),
-                    ),
-                  )
-                  : Container(
-                    width: 16.w,
-                    height: 16.w,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color(0xFF395466),
-                        width: 1.w,
+                      width: 16.w,
+                      height: 16.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Color(0xffF9C678),
+                          width: 3.w,
+                        ),
                       ),
-                      shape: BoxShape.circle,
+                    )
+                  : Container(
+                      width: 16.w,
+                      height: 16.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color(0xFF395466),
+                          width: 1.w,
+                        ),
+                        shape: BoxShape.circle,
+                      ),
                     ),
-                  ),
             ],
           ),
         ),
